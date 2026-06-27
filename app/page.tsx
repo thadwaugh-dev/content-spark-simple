@@ -6,7 +6,8 @@ import {
   User as UserIcon, Zap, TrendingUp, Shield 
 } from 'lucide-react';
 import { jsPDF } from 'jspdf';
-import { Toaster, toast } from 'sonner';
+import { toast } from 'sonner';
+import SonnerToaster from '@/components/sonner-toaster';
 
 import { User, Generation, AppState } from '../lib/types';
 import { generateContent } from '../lib/generator';
@@ -174,7 +175,6 @@ export default function ContentSpark() {
     if (!genId) {
       // Find or create the generation for current results
       const existing = generations.find(g => 
-        g.topic === currentResults.topic && 
         g.captions[0] === currentResults.captions[0]
       );
       
@@ -184,7 +184,6 @@ export default function ContentSpark() {
         // Save it now
         const newGen: Generation = {
           id: 'gen-' + Date.now(),
-          topic: currentResults.topic,
           createdAt: new Date().toISOString(),
           ...currentResults,
         };
@@ -465,6 +464,7 @@ ${currentResults.videoHook}
 
   return (
     <div className="min-h-screen">
+      <SonnerToaster />
       {/* Navbar */}
       <nav className="border-b border-slate-200 bg-white/90 backdrop-blur-lg sticky top-0 z-50">
         <div className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
