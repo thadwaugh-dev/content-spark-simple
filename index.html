@@ -628,10 +628,6 @@
       </div>
       <div class="header-actions">
         <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
-        <button class="btn btn-pro" id="proBtn">
-          <span aria-hidden="true">⚡</span>
-          <span class="label">Upgrade to Pro</span>
-        </button>
       </div>
     </header>
 
@@ -742,9 +738,6 @@
         <li>Competitor content analysis</li>
         <li>Priority templates &amp; trending topics</li>
       </ul>
-      <div class="modal-actions">
-        <button class="btn" id="closeProModal">Maybe later</button>
-        <button class="btn btn-pro" id="fakeUpgradeBtn">Upgrade — $12/mo</button>
       </div>
     </div>
   </div>
@@ -1251,21 +1244,7 @@
         }
       });
 
-      /* ── Pro modal ── */
-      function openProModal() { proModal.classList.add('open'); }
-      function closeProModal() { proModal.classList.remove('open'); }
-
-      proBtn.addEventListener('click', openProModal);
-      $('#closeProModal').addEventListener('click', closeProModal);
-      $('#fakeUpgradeBtn').addEventListener('click', () => {
-        closeProModal();
-        showToast('🎉 Welcome to Pro! (Just kidding — this is a demo)');
-      });
-
-      proModal.addEventListener('click', (e) => {
-        if (e.target === proModal) closeProModal();
-      });
-
+      
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeProModal();
       });
