@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContentSpark — Social Content Generator</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a0a0f;
+      --bg-elevated: #12121a;
+      --bg-card: #16161f;
+      --bg-input: #1a1a26;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --text: #f0f0f5;
+      --text-muted: #8b8b9e;
+      --text-faint: #5c5c6e;
+      --accent: #7c5cff;
+      --accent-hover: #9278ff;
+      --accent-glow: rgba(124, 92, 255, 0.35);
+      --accent-soft: rgba(124, 92, 255, 0.12);
+      --success: #34d399;
+      --success-soft: rgba(52, 211, 153, 0.12);
+      --warning: #fbbf24;
+      --pro-gradient: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+      --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+      --overlay: rgba(0, 0, 0, 0.65);
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5fa;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --bg-input: #f0f0f6;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(0, 0, 0, 0.16);
+      --text: #1a1a2e;
+      --text-muted: #5c5c6e;
+      --text-faint: #8b8b9e;
+      --accent: #6d4aff;
+      --accent-hover: #5a38e0;
+      --accent-glow: rgba(109, 74, 255, 0.25);
+      --accent-soft: rgba(109, 74, 255, 0.08);
+      --success: #059669;
+      --success-soft: rgba(5, 150, 105, 0.1);
+      --warning: #d97706;
+      --pro-gradient: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.06);
+      --overlay: rgba(0, 0, 0, 0.4);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(236, 72, 153, 0.08), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 24px 20px 64px; }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--pro-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .logo p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 50%;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-pro {
+      background: var(--pro-gradient);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+    }
+
+    .btn-pro:hover { box-shadow: 0 4px 24px rgba(245, 158, 11, 0.35); }
+
+    .btn-ghost {
+      background: transparent;
+      border-color: transparent;
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover { color: var(--text); background: var(--accent-soft); }
+
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+
+    /* Hero / Input */
+    .hero { text-align: center; margin-bottom: 40px; }
+
+    .hero h2 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero h2 span {
+      background: var(--pro-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .topic-input {
+      width: 100%;
+      padding: 20px 24px;
+      font-size: 1.1rem;
+      font-family: inherit;
+      background: var(--bg-input);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      resize: vertical;
+      min-height: 64px;
+    }
+
+    .topic-input::placeholder { color: var(--text-faint); }
+
+    .topic-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .generate-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-generate {
+      padding: 16px 40px;
+      font-size: 1.05rem;
+      border-radius: var(--radius);
+      min-width: 200px;
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-generate.loading .btn-text { opacity: 0; }
+    .btn-generate .spinner {
+      display: none;
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .btn-generate.loading .spinner { display: block; }
+    .btn-generate { position: relative; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Results */
+    .results { display: none; animation: fadeUp 0.5s ease; }
+    .results.visible { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .results-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .results-toolbar .topic-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .results-toolbar .topic-label strong { color: var(--text); }
+
+    .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .section {
+      margin-bottom: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .section-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .section-body { padding: 8px 0; }
+
+    .content-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    .content-item:last-child { border-bottom: none; }
+    .content-item:hover { background: var(--accent-soft); }
+
+    .item-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .item-text {
+      flex: 1;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .content-item:hover .item-actions { opacity: 1; }
+
+    .item-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: var(--bg-input);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      color: var(--text-muted);
+    }
+
+    .item-btn:hover { background: var(--accent); color: #fff; }
+    .item-btn.favorited { color: #f59e0b; opacity: 1; }
+
+    .hashtag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 16px 20px;
+    }
+
+    .hashtag {
+      padding: 8px 14px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .hashtag:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.04);
+    }
+
+    .thread-item .item-text { font-style: normal; }
+    .thread-item .thread-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .thread-item .thread-preview {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hook-item .item-text {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1rem;
+    }
+
+    /* Favorites panel */
+    .favorites-panel {
+      margin-top: 32px;
+      display: none;
+    }
+
+    .favorites-panel.visible { display: block; }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-muted);
+    }
+
+    .empty-state .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+
+    /* Toast */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      padding: 14px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      font-size: 0.875rem;
+      animation: toastIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.success { border-color: var(--success); }
+    .toast.success::before { content: "✓"; color: var(--success); font-weight: 700; }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.3s ease;
+      text-align: center;
+    }
+
+    .modal .pro-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--pro-gradient);
+      color: #fff;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .modal h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .modal p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    .pro-features {
+      text-align: left;
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .pro-features li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pro-features li::before {
+      content: "✦";
+      color: #f59e0b;
+      font-size: 0.75rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .modal-actions .btn { flex: 1; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-faint);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .app { padding: 16px 16px 48px; }
+      header { margin-bottom: 32px; }
+      .header-actions .btn-pro span.label { display: none; }
+      .results-toolbar { flex-direction: column; align-items: stretch; }
+      .toolbar-actions { justify-content: stretch; }
+      .toolbar-actions .btn { flex: 1; }
+      .item-actions { opacity: 1; }
+      .content-item { padding: 12px 16px; }
+      .toast-container { left: 16px; right: 16px; bottom: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="logo">
+        <div class="logo-icon" aria-hidden="true">✦</div>
+        <div>
+          <h1>ContentSpark</h1>
+          <p>Social content, instantly</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
+        <button class="btn btn-pro" id="proBtn">
+          <span aria-hidden="true">⚡</span>
+          <span class="label">Upgrade to Pro</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h2>Spark your next <span>viral post</span></h2>
+      <p>Generate captions, thread ideas, hashtags, and video hooks tailored to your niche — in seconds.</p>
+      <div class="input-group">
+        <textarea
+          class="topic-input"
+          id="topicInput"
+          rows="2"
+          placeholder="Enter a topic or niche (e.g. fitness motivation, restaurant marketing)"
+          aria-label="Topic or niche"
+        ></textarea>
+        <div class="generate-row">
+          <button class="btn btn-primary btn-generate" id="generateBtn">
+            <span class="btn-text">Generate</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="results" id="results" aria-live="polite">
+      <div class="results-toolbar">
+        <div class="topic-label">Content for: <strong id="resultTopic"></strong></div>
+        <div class="toolbar-actions">
+          <button class="btn btn-sm" id="copyAllBtn" title="Copy all content">📋 Copy All</button>
+          <button class="btn btn-sm" id="exportBtn" title="Export as text file">💾 Export</button>
+          <button class="btn btn-sm btn-ghost" id="toggleFavoritesBtn" title="View favorites">⭐ Favorites (<span id="favCount">0</span>)</button>
+        </div>
+      </div>
+
+      <div class="section" id="captionsSection">
+        <div class="section-header">
+          <div class="section-title">
+            <span>📱</span> Social Media Captions
+            <span class="section-badge">10</span>
+          </div>
+          <button class="btn btn-sm btn-ghost" data-copy-section="captions">Copy section</button>
+        </div>
+        <div class="section-body" id="captionsList"></div>
+      </div>
+
+      <div class="section" id="threadsSection">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🧵</span> X / Twitter Thread Ideas
+            <span class="section-badge">5</span>
+          </div>
+          <button class="btn btn-sm btn-ghost" data-copy-section="threads">Copy section</button>
+        </div>
+        <div class="section-body" id="threadsList"></div>
+      </div>
+
+      <div class="section" id="hashtagsSection">
+        <div class="section-header">
+          <div class="section-title">
+            <span>#️⃣</span> Hashtags
+          </div>
+          <button class="btn btn-sm btn-ghost" data-copy-section="hashtags">Copy section</button>
+        </div>
+        <div class="hashtag-cloud" id="hashtagsList"></div>
+      </div>
+
+      <div class="section" id="hooksSection">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🎬</span> Video Script Hooks
+          </div>
+          <button class="btn btn-sm btn-ghost" data-copy-section="hooks">Copy section</button>
+        </div>
+        <div class="section-body" id="hooksList"></div>
+      </div>
+    </section>
+
+    <section class="favorites-panel section" id="favoritesPanel">
+      <div class="section-header">
+        <div class="section-title">
+          <span>⭐</span> Saved Favorites
+        </div>
+        <button class="btn btn-sm btn-ghost" id="clearFavoritesBtn">Clear all</button>
+      </div>
+      <div class="section-body" id="favoritesList">
+        <div class="empty-state">
+          <div class="emoji">☆</div>
+          <p>No favorites yet. Star any item to save it here.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      ContentSpark &copy; 2026 — Built for creators, no API keys required.
+    </footer>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
+
+  <div class="modal-overlay" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proModalTitle">
+    <div class="modal">
+      <div class="pro-badge">Pro</div>
+      <h3 id="proModalTitle">Unlock ContentSpark Pro</h3>
+      <p>Supercharge your content workflow with premium features.</p>
+      <ul class="pro-features">
+        <li>Unlimited generations per day</li>
+        <li>AI tone matching &amp; brand voice</li>
+        <li>Multi-platform scheduling export</li>
+        <li>Competitor content analysis</li>
+        <li>Priority templates &amp; trending topics</li>
+      </ul>
+      <div class="modal-actions">
+        <button class="btn" id="closeProModal">Maybe later</button>
+        <button class="btn btn-pro" id="fakeUpgradeBtn">Upgrade — $12/mo</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_THEME = 'contentspark-theme';
+      const STORAGE_FAVORITES = 'contentspark-favorites';
+
+      let currentContent = null;
+      let favorites = loadFavorites();
+
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => document.querySelectorAll(sel);
+
+      const topicInput = $('#topicInput');
+      const generateBtn = $('#generateBtn');
+      const results = $('#results');
+      const resultTopic = $('#resultTopic');
+      const themeToggle = $('#themeToggle');
+      const proBtn = $('#proBtn');
+      const proModal = $('#proModal');
+      const favCount = $('#favCount');
+      const favoritesPanel = $('#favoritesPanel');
+      const favoritesList = $('#favoritesList');
+
+      /* ── Theme ── */
+      function getPreferredTheme() {
+        const saved = localStorage.getItem(STORAGE_THEME);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+        localStorage.setItem(STORAGE_THEME, theme);
+      }
+
+      setTheme(getPreferredTheme());
+
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+      });
+
+      /* ── Toast ── */
+      function showToast(message) {
+        const container = $('#toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast success';
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.3s';
+          setTimeout(() => toast.remove(), 300);
+        }, 2800);
+      }
+
+      /* ── Clipboard ── */
+      async function copyText(text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast('Copied to clipboard!');
+          return true;
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+          showToast('Copied to clipboard!');
+          return true;
+        }
+      }
+
+      /* ── Favorites ── */
+      function loadFavorites() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_FAVORITES) || '[]');
+        } catch {
+          return [];
+        }
+      }
+
+      function saveFavorites() {
+        localStorage.setItem(STORAGE_FAVORITES, JSON.stringify(favorites));
+        updateFavCount();
+        renderFavoritesPanel();
+      }
+
+      function updateFavCount() {
+        favCount.textContent = favorites.length;
+      }
+
+      function favoriteId(type, index) {
+        return `${currentContent?.topic || ''}::${type}::${index}`;
+      }
+
+      function isFavorited(type, index) {
+        return favorites.some((f) => f.id === favoriteId(type, index));
+      }
+
+      function toggleFavorite(type, index, text) {
+        const id = favoriteId(type, index);
+        const existing = favorites.findIndex((f) => f.id === id);
+        if (existing >= 0) {
+          favorites.splice(existing, 1);
+          showToast('Removed from favorites');
+        } else {
+          favorites.push({ id, type, text, topic: currentContent.topic, savedAt: Date.now() });
+          showToast('Saved to favorites!');
+        }
+        saveFavorites();
+        updateFavoriteButtons();
+      }
+
+      function updateFavoriteButtons() {
+        $$('.item-btn[data-fav]').forEach((btn) => {
+          const type = btn.dataset.fav;
+          const index = parseInt(btn.dataset.index, 10);
+          const starred = isFavorited(type, index);
+          btn.classList.toggle('favorited', starred);
+          btn.textContent = starred ? '★' : '☆';
+          btn.setAttribute('aria-label', starred ? 'Remove from favorites' : 'Save to favorites');
+        });
+      }
+
+      function renderFavoritesPanel() {
+        if (favorites.length === 0) {
+          favoritesList.innerHTML = `
+            <div class="empty-state">
+              <div class="emoji">☆</div>
+              <p>No favorites yet. Star any item to save it here.</p>
+            </div>`;
+          return;
+        }
+
+        favoritesList.innerHTML = favorites
+          .sort((a, b) => b.savedAt - a.savedAt)
+          .map((f, i) => `
+            <div class="content-item">
+              <span class="item-num">${typeEmoji(f.type)}</span>
+              <div class="item-text">
+                <div style="font-size:0.75rem;color:var(--text-faint);margin-bottom:4px">${escapeHtml(f.topic)} · ${f.type}</div>
+                ${escapeHtml(f.text)}
+              </div>
+              <div class="item-actions" style="opacity:1">
+                <button class="item-btn" data-copy-fav="${i}" title="Copy" aria-label="Copy">📋</button>
+                <button class="item-btn favorited" data-remove-fav="${i}" title="Remove" aria-label="Remove">✕</button>
+              </div>
+            </div>`)
+          .join('');
+
+        favoritesList.querySelectorAll('[data-copy-fav]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const f = favorites[parseInt(btn.dataset.copyFav, 10)];
+            if (f) copyText(f.text);
+          });
+        });
+
+        favoritesList.querySelectorAll('[data-remove-fav]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            favorites.splice(parseInt(btn.dataset.removeFav, 10), 1);
+            saveFavorites();
+            showToast('Removed from favorites');
+          });
+        });
+      }
+
+      function typeEmoji(type) {
+        return { captions: '📱', threads: '🧵', hashtags: '#', hooks: '🎬' }[type] || '✦';
+      }
+
+      /* ── Content Generation ── */
+      function slugify(topic) {
+        return topic.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim().split(/\s+/).filter(Boolean);
+      }
+
+      function capitalize(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
+
+      function pick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function generateCaptions(topic, words) {
+        const niche = capitalize(topic);
+        const w = words[0] || 'content';
+        const templates = [
+          `Stop scrolling. This ${w} tip changed everything for me. 👇\n\nHere's what nobody tells you about ${topic}...`,
+          `POV: You finally cracked the code on ${topic} 🔓\n\nSave this before it disappears from your feed.`,
+          `3 things I wish I knew about ${topic} before I started:\n\n1️⃣ Consistency beats perfection\n2️⃣ Your audience wants authenticity\n3️⃣ ${niche} is a marathon, not a sprint`,
+          `Unpopular opinion about ${topic}:\n\nThe "experts" are overcomplicating it. Keep it simple. Keep it real. ✨`,
+          `Day 47 of building in ${topic}.\n\nToday I learned that your worst post teaches you more than your best one ever will.`,
+          `Hot take on ${topic} 🔥\n\nIf you're not posting about this in 2026, you're already behind.`,
+          `"How do you stay motivated in ${topic}?"\n\nI don't. I build systems instead. Here's mine 👇`,
+          `This ${w} hack took me from 200 to 20K followers.\n\nNo paid ads. No viral luck. Just this one shift in ${topic}.`,
+          `Real talk about ${topic}:\n\nYour competition isn't other creators. It's the version of you that gave up.`,
+          `Weekend reminder for my ${topic} people ☕\n\nRest is part of the strategy. See you Monday with fresh energy.`,
+          `I asked 100 people in ${topic} one question.\n\nTheir answers surprised me — thread incoming 🧵`,
+          `The ${topic} content that performs best isn't the prettiest.\n\nIt's the most honest. Be honest today.`,
+          `Plot twist: ${niche} isn't saturated.\n\nYour unique voice isn't out there yet. That's your opening. 🚀`,
+          `Before vs. After getting serious about ${topic}.\n\nSame person. Different systems. Wild difference.`,
+          `Comment "GUIDE" if you want my free ${topic} starter checklist 📋\n\n(Dropping it in replies!)`,
+        ];
+        return shuffle(templates).slice(0, 10);
+      }
+
+      function generateThreads(topic, words) {
+        const w = words[0] || 'growth';
+        const threads = [
+          {
+            title: `The ${topic} playbook nobody talks about`,
+            preview: `Tweet 1: I've spent 2 years in ${topic}. Here's the thread I wish existed when I started... (7 tweets)`
+          },
+          {
+            title: `5 mistakes killing your ${w} (and how to fix them)`,
+            preview: `Tweet 1: I made every mistake in ${topic} so you don't have to. Let's fix them one by one 🧵`
+          },
+          {
+            title: `How I grew from 0 to 10K in ${topic}`,
+            preview: `Tweet 1: No fluff. No "just post more." Here's the actual ${topic} strategy that worked for me.`
+          },
+          {
+            title: `Tools & resources for ${topic} beginners`,
+            preview: `Tweet 1: Starting ${topic} and feeling overwhelmed? Bookmark this thread. Free tools inside.`
+          },
+          {
+            title: `Debunking ${topic} myths`,
+            preview: `Tweet 1: "You need a big budget for ${topic}." Wrong. Let me break down 5 myths holding you back.`
+          },
+          {
+            title: `A day in the life: ${topic} creator edition`,
+            preview: `Tweet 1: People ask what my ${topic} routine looks like. Here's an honest hour-by-hour breakdown.`
+          },
+          {
+            title: `${capitalize(topic)} trends to watch in 2026`,
+            preview: `Tweet 1: The ${topic} landscape is shifting fast. These 6 trends will define the next 12 months.`
+          },
+        ];
+        return shuffle(threads).slice(0, 5);
+      }
+
+      function generateHashtags(topic, words) {
+        const base = words.map((w) => `#${w.replace(/[^a-z0-9]/g, '')}`);
+        const generic = [
+          '#ContentCreator', '#SocialMediaTips', '#GrowYourBrand', '#DigitalMarketing',
+          '#CreatorEconomy', '#ViralContent', '#MarketingTips', '#SmallBusiness',
+          '#Entrepreneur', '#BuildInPublic', '#ContentStrategy', '#TrendingNow',
+          '#InstaGrowth', '#TikTokTips', '#BrandBuilding', '#CreativeContent',
+        ];
+        const niche = words.flatMap((w) => [
+          `#${w}Tips`, `#${w}Life`, `#${w}Community`, `#${w}Goals`,
+        ]);
+        const combined = [...new Set([...base, ...niche, ...generic])]
+          .filter((h) => h.length > 2 && h.length < 30);
+        return shuffle(combined).slice(0, 18);
+      }
+
+      function generateHooks(topic, words) {
+        const w = words[0] || 'this';
+        const hooks = [
+          `"Wait— you're still doing ${topic} the old way?"`,
+          `[Open on you looking directly at camera]\n"Okay so nobody in ${topic} wants to admit this, but..."`,
+          `"I lost $3,000 learning ${topic} the hard way. Here's the 30-second version."`,
+          `[Text on screen: "POV: You just discovered ${topic}"]\n*Dramatic zoom*`,
+          `"Stop. Before you post another ${w} video, watch this."`,
+          `"The ${topic} industry doesn't want you to know this one thing..."`,
+          `[Split screen: left = struggling, right = thriving]\n"Same niche. Same ${topic}. Different approach."`,
+          `"Give me 15 seconds and I'll change how you think about ${topic} forever."`,
+          `"I asked 50 ${topic} experts one question. Only 3 got it right."`,
+          `"This is the ${topic} content that got me banned from a Facebook group (and I'm not sorry)."`,
+          `[Hook: unexpected sound + text overlay]\n"Why 90% of ${topic} advice is wrong"`,
+          `"If I had to start ${topic} from zero today, I'd do ONLY these 3 things."`,
+        ];
+        return shuffle(hooks).slice(0, 6);
+      }
+
+      function generateContent(topic) {
+        const words = slugify(topic);
+        const displayTopic = topic.trim() || 'your niche';
+        return {
+          topic: displayTopic,
+          captions: generateCaptions(displayTopic, words),
+          threads: generateThreads(displayTopic, words),
+          hashtags: generateHashtags(displayTopic, words),
+          hooks: generateHooks(displayTopic, words),
+        };
+      }
+
+      /* ── Render ── */
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function renderItem(text, index, type, extraClass = '') {
+        const starred = currentContent && isFavorited(type, index);
+        return `
+          <div class="content-item ${extraClass}">
+            <span class="item-num">${index + 1}</span>
+            <div class="item-text">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
+            <div class="item-actions">
+              <button class="item-btn" data-copy="${type}" data-index="${index}" title="Copy" aria-label="Copy">📋</button>
+              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="${type}" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? '★' : '☆'}</button>
+            </div>
+          </div>`;
+      }
+
+      function renderThread(thread, index) {
+        const starred = currentContent && isFavorited('threads', index);
+        return `
+          <div class="content-item thread-item">
+            <span class="item-num">${index + 1}</span>
+            <div class="item-text">
+              <div class="thread-title">${escapeHtml(thread.title)}</div>
+              <div class="thread-preview">${escapeHtml(thread.preview)}</div>
+            </div>
+            <div class="item-actions">
+              <button class="item-btn" data-copy="threads" data-index="${index}" title="Copy" aria-label="Copy">📋</button>
+              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="threads" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? '★' : '☆'}</button>
+            </div>
+          </div>`;
+      }
+
+      function getItemText(type, index) {
+        if (!currentContent) return '';
+        if (type === 'threads') {
+          const t = currentContent.threads[index];
+          return `${t.title}\n${t.preview}`;
+        }
+        if (type === 'hashtags') return currentContent.hashtags[index];
+        return currentContent[type][index];
+      }
+
+      function renderResults(content) {
+        currentContent = content;
+        resultTopic.textContent = content.topic;
+
+        $('#captionsList').innerHTML = content.captions
+          .map((c, i) => renderItem(c, i, 'captions'))
+          .join('');
+
+        $('#threadsList').innerHTML = content.threads
+          .map((t, i) => renderThread(t, i))
+          .join('');
+
+        $('#hashtagsList').innerHTML = content.hashtags
+          .map((h, i) => `<span class="hashtag" data-hashtag-index="${i}" title="Click to copy">${escapeHtml(h)}</span>`)
+          .join('');
+
+        $('#hooksList').innerHTML = content.hooks
+          .map((h, i) => renderItem(h, i, 'hooks', 'hook-item'))
+          .join('');
+
+        results.classList.add('visible');
+        bindItemEvents();
+      }
+
+      function bindItemEvents() {
+        $$('[data-copy]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const text = getItemText(btn.dataset.copy, parseInt(btn.dataset.index, 10));
+            copyText(text);
+          });
+        });
+
+        $$('[data-fav]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const type = btn.dataset.fav;
+            const index = parseInt(btn.dataset.index, 10);
+            const text = getItemText(type, index);
+            toggleFavorite(type, index, text);
+          });
+        });
+
+        $$('[data-hashtag-index]').forEach((tag) => {
+          tag.addEventListener('click', () => {
+            const index = parseInt(tag.dataset.hashtagIndex, 10);
+            copyText(currentContent.hashtags[index]);
+          });
+        });
+      }
+
+      function getSectionText(section) {
+        if (!currentContent) return '';
+        const c = currentContent;
+        const lines = [`ContentSpark — ${c.topic}`, ''];
+
+        if (section === 'captions' || section === 'all') {
+          lines.push('=== SOCIAL MEDIA CAPTIONS ===', '');
+          c.captions.forEach((cap, i) => lines.push(`${i + 1}. ${cap}`, ''));
+        }
+        if (section === 'threads' || section === 'all') {
+          lines.push('=== X / TWITTER THREAD IDEAS ===', '');
+          c.threads.forEach((t, i) => lines.push(`${i + 1}. ${t.title}`, t.preview, ''));
+        }
+        if (section === 'hashtags' || section === 'all') {
+          lines.push('=== HASHTAGS ===', '');
+          lines.push(c.hashtags.join(' '), '', '');
+        }
+        if (section === 'hooks' || section === 'all') {
+          lines.push('=== VIDEO SCRIPT HOOKS ===', '');
+          c.hooks.forEach((h, i) => lines.push(`${i + 1}. ${h}`, ''));
+        }
+
+        return lines.join('\n').trim();
+      }
+
+      function exportAsText() {
+        if (!currentContent) return;
+        const text = getSectionText('all');
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const slug = currentContent.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
+        a.href = url;
+        a.download = `contentspark-${slug || 'content'}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Exported as text file!');
+      }
+
+      /* ── Generate flow ── */
+      async function handleGenerate() {
+        const topic = topicInput.value.trim();
+        if (!topic) {
+          topicInput.focus();
+          topicInput.style.borderColor = '#ef4444';
+          setTimeout(() => { topicInput.style.borderColor = ''; }, 1500);
+          showToast('Please enter a topic or niche');
+          return;
+        }
+
+        generateBtn.disabled = true;
+        generateBtn.classList.add('loading');
+
+        await new Promise((r) => setTimeout(r, 900 + Math.random() * 600));
+
+        const content = generateContent(topic);
+        renderResults(content);
+
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('loading');
+
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      generateBtn.addEventListener('click', handleGenerate);
+
+      topicInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleGenerate();
+        }
+      });
+
+      $('#copyAllBtn').addEventListener('click', () => {
+        if (!currentContent) return;
+        copyText(getSectionText('all'));
+      });
+
+      $('#exportBtn').addEventListener('click', exportAsText);
+
+      $$('[data-copy-section]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!currentContent) return;
+          copyText(getSectionText(btn.dataset.copySection));
+        });
+      });
+
+      let favoritesVisible = false;
+      $('#toggleFavoritesBtn').addEventListener('click', () => {
+        favoritesVisible = !favoritesVisible;
+        favoritesPanel.classList.toggle('visible', favoritesVisible);
+        if (favoritesVisible) favoritesPanel.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      $('#clearFavoritesBtn').addEventListener('click', () => {
+        if (favorites.length === 0) return;
+        if (confirm('Clear all favorites?')) {
+          favorites = [];
+          saveFavorites();
+          updateFavoriteButtons();
+          showToast('Favorites cleared');
+        }
+      });
+
+      /* ── Pro modal ── */
+      function openProModal() { proModal.classList.add('open'); }
+      function closeProModal() { proModal.classList.remove('open'); }
+
+      proBtn.addEventListener('click', openProModal);
+      $('#closeProModal').addEventListener('click', closeProModal);
+      $('#fakeUpgradeBtn').addEventListener('click', () => {
+        closeProModal();
+        showToast('🎉 Welcome to Pro! (Just kidding — this is a demo)');
+      });
+
+      proModal.addEventListener('click', (e) => {
+        if (e.target === proModal) closeProModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeProModal();
+      });
+
+      /* ── Init ── */
+      updateFavCount();
+      renderFavoritesPanel();
+    })();
+  </script>
+</body>
+</html>
