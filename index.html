@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ContentSpark â€” Social Content Generator</title>
+  <title>ContentSpark GÇö Social Content Generator</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -496,7 +496,7 @@
     }
 
     .toast.success { border-color: var(--success); }
-    .toast.success::before { content: "âœ“"; color: var(--success); font-weight: 700; }
+    .toast.success::before { content: "G£ô"; color: var(--success); font-weight: 700; }
 
     @keyframes toastIn {
       from { opacity: 0; transform: translateX(20px); }
@@ -572,7 +572,7 @@
     }
 
     .pro-features li::before {
-      content: "âœ¦";
+      content: "G£ª";
       color: #f59e0b;
       font-size: 0.75rem;
     }
@@ -620,20 +620,20 @@
   <div class="app">
     <header>
       <div class="logo">
-        <div class="logo-icon" aria-hidden="true">âœ¦</div>
+        <div class="logo-icon" aria-hidden="true">G£ª</div>
         <div>
           <h1>ContentSpark</h1>
           <p>Social content, instantly</p>
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">ğŸŒ™</button>
+        <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">=ƒîÖ</button>
       </div>
     </header>
 
     <section class="hero">
       <h2>Spark your next <span>viral post</span></h2>
-      <p>Generate captions, thread ideas, hashtags, and video hooks tailored to your niche â€” in seconds.</p>
+      <p>Generate captions, thread ideas, hashtags, and video hooks tailored to your niche GÇö in seconds.</p>
       <div class="input-group">
         <textarea
           class="topic-input"
@@ -655,16 +655,16 @@
       <div class="results-toolbar">
         <div class="topic-label">Content for: <strong id="resultTopic"></strong></div>
         <div class="toolbar-actions">
-          <button class="btn btn-sm" id="copyAllBtn" title="Copy all content">ğŸ“‹ Copy All</button>
-          <button class="btn btn-sm" id="exportBtn" title="Export as text file">ğŸ’¾ Export</button>
-          <button class="btn btn-sm btn-ghost" id="toggleFavoritesBtn" title="View favorites">â­ Favorites (<span id="favCount">0</span>)</button>
+          <button class="btn btn-sm" id="copyAllBtn" title="Copy all content">=ƒôï Copy All</button>
+          <button class="btn btn-sm" id="exportBtn" title="Export as text file">=ƒÆ+ Export</button>
+          <button class="btn btn-sm btn-ghost" id="toggleFavoritesBtn" title="View favorites">G¡É Favorites (<span id="favCount">0</span>)</button>
         </div>
       </div>
 
       <div class="section" id="captionsSection">
         <div class="section-header">
           <div class="section-title">
-            <span>ğŸ“±</span> Social Media Captions
+            <span>=ƒô¦</span> Social Media Captions
             <span class="section-badge">10</span>
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="captions">Copy section</button>
@@ -675,7 +675,7 @@
       <div class="section" id="threadsSection">
         <div class="section-header">
           <div class="section-title">
-            <span>ğŸ§µ</span> X / Twitter Thread Ideas
+            <span>=ƒº¦</span> X / Twitter Thread Ideas
             <span class="section-badge">5</span>
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="threads">Copy section</button>
@@ -686,7 +686,7 @@
       <div class="section" id="hashtagsSection">
         <div class="section-header">
           <div class="section-title">
-            <span>#ï¸âƒ£</span> Hashtags
+            <span>#n+ÅGâú</span> Hashtags
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="hashtags">Copy section</button>
         </div>
@@ -696,7 +696,7 @@
       <div class="section" id="hooksSection">
         <div class="section-header">
           <div class="section-title">
-            <span>ğŸ¬</span> Video Script Hooks
+            <span>=ƒÄ¼</span> Video Script Hooks
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="hooks">Copy section</button>
         </div>
@@ -707,20 +707,20 @@
     <section class="favorites-panel section" id="favoritesPanel">
       <div class="section-header">
         <div class="section-title">
-          <span>â­</span> Saved Favorites
+          <span>G¡É</span> Saved Favorites
         </div>
         <button class="btn btn-sm btn-ghost" id="clearFavoritesBtn">Clear all</button>
       </div>
       <div class="section-body" id="favoritesList">
         <div class="empty-state">
-          <div class="emoji">â˜†</div>
+          <div class="emoji">Gÿå</div>
           <p>No favorites yet. Star any item to save it here.</p>
         </div>
       </div>
     </section>
 
     <footer>
-      ContentSpark &copy; 2026 â€” Built for creators, no API keys required.
+      ContentSpark &copy; 2026 GÇö Built for creators, no API keys required.
     </footer>
   </div>
 
@@ -766,7 +766,7 @@
       const favoritesPanel = $('#favoritesPanel');
       const favoritesList = $('#favoritesList');
 
-      /* â”€â”€ Theme â”€â”€ */
+      /* GöÇGöÇ Theme GöÇGöÇ */
       function getPreferredTheme() {
         const saved = localStorage.getItem(STORAGE_THEME);
         if (saved) return saved;
@@ -775,7 +775,7 @@
 
       function setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        themeToggle.textContent = theme === 'dark' ? 'ğŸŒ™' : 'â˜€ï¸';
+        themeToggle.textContent = theme === 'dark' ? '=ƒîÖ' : 'GÿÇn+Å';
         localStorage.setItem(STORAGE_THEME, theme);
       }
 
@@ -786,7 +786,7 @@
         setTheme(next);
       });
 
-      /* â”€â”€ Toast â”€â”€ */
+      /* GöÇGöÇ Toast GöÇGöÇ */
       function showToast(message) {
         const container = $('#toastContainer');
         const toast = document.createElement('div');
@@ -800,7 +800,7 @@
         }, 2800);
       }
 
-      /* â”€â”€ Clipboard â”€â”€ */
+      /* GöÇGöÇ Clipboard GöÇGöÇ */
       async function copyText(text) {
         try {
           await navigator.clipboard.writeText(text);
@@ -820,7 +820,7 @@
         }
       }
 
-      /* â”€â”€ Favorites â”€â”€ */
+      /* GöÇGöÇ Favorites GöÇGöÇ */
       function loadFavorites() {
         try {
           return JSON.parse(localStorage.getItem(STORAGE_FAVORITES) || '[]');
@@ -867,7 +867,7 @@
           const index = parseInt(btn.dataset.index, 10);
           const starred = isFavorited(type, index);
           btn.classList.toggle('favorited', starred);
-          btn.textContent = starred ? 'â˜…' : 'â˜†';
+          btn.textContent = starred ? 'Gÿà' : 'Gÿå';
           btn.setAttribute('aria-label', starred ? 'Remove from favorites' : 'Save to favorites');
         });
       }
@@ -876,7 +876,7 @@
         if (favorites.length === 0) {
           favoritesList.innerHTML = `
             <div class="empty-state">
-              <div class="emoji">â˜†</div>
+              <div class="emoji">Gÿå</div>
               <p>No favorites yet. Star any item to save it here.</p>
             </div>`;
           return;
@@ -888,12 +888,12 @@
             <div class="content-item">
               <span class="item-num">${typeEmoji(f.type)}</span>
               <div class="item-text">
-                <div style="font-size:0.75rem;color:var(--text-faint);margin-bottom:4px">${escapeHtml(f.topic)} Â· ${f.type}</div>
+                <div style="font-size:0.75rem;color:var(--text-faint);margin-bottom:4px">${escapeHtml(f.topic)} -+ ${f.type}</div>
                 ${escapeHtml(f.text)}
               </div>
               <div class="item-actions" style="opacity:1">
-                <button class="item-btn" data-copy-fav="${i}" title="Copy" aria-label="Copy">ğŸ“‹</button>
-                <button class="item-btn favorited" data-remove-fav="${i}" title="Remove" aria-label="Remove">âœ•</button>
+                <button class="item-btn" data-copy-fav="${i}" title="Copy" aria-label="Copy">=ƒôï</button>
+                <button class="item-btn favorited" data-remove-fav="${i}" title="Remove" aria-label="Remove">G£ò</button>
               </div>
             </div>`)
           .join('');
@@ -915,15 +915,33 @@
       }
 
       function typeEmoji(type) {
-        return { captions: 'ğŸ“±', threads: 'ğŸ§µ', hashtags: '#', hooks: 'ğŸ¬' }[type] || 'âœ¦';
+        return { captions: '=ƒô¦', threads: '=ƒº¦', hashtags: '#', hooks: '=ƒÄ¼' }[type] || 'G£ª';
       }
 
-      /* â”€â”€ Content Generation â”€â”€ */
+      /* GöÇGöÇ Content Generation GöÇGöÇ */
+      const STOP_WORDS = new Set([
+        'a', 'an', 'the', 'and', 'or', 'of', 'for', 'to', 'in', 'on', 'with',
+        'how', 'what', 'why', 'your', 'my', 'our', 'about', 'into', 'from',
+        'vs', 'vs.', 'best', 'top', 'new', 'get', 'make', 'using', 'use',
+        'that', 'this', 'some', 'any', 'all', 'more', 'most', 'very',
+      ]);
+
+      // Words that are topic "packaging" GÇö not the subject itself
+      const NOISE_WORDS = new Set([
+        'recipes', 'recipe', 'tips', 'ideas', 'guides', 'guide', 'hacks', 'secrets',
+        'tricks', 'tutorial', 'tutorials', 'examples', 'list', 'checklist', 'plan',
+        'plans', 'content', 'posts', 'post', 'video', 'videos', 'blog', 'article',
+        'strategy', 'strategies', 'marketing', 'business', '101', 'basics', 'beginner',
+        'beginners', 'advanced', 'ultimate', 'complete', 'free', 'easy', 'simple',
+        'healthy', 'best', 'top', 'new', 'daily', 'weekly', 'online', 'digital',
+      ]);
+
       function slugify(topic) {
         return topic.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim().split(/\s+/).filter(Boolean);
       }
 
       function capitalize(s) {
+        if (!s) return '';
         return s.charAt(0).toUpperCase() + s.slice(1);
       }
 
@@ -940,112 +958,1000 @@
         return a;
       }
 
-      function generateCaptions(topic, words) {
-        const niche = capitalize(topic);
-        const w = words[0] || 'content';
-        const templates = [
-          `Stop scrolling. This ${w} tip changed everything for me. ğŸ‘‡\n\nHere's what nobody tells you about ${topic}...`,
-          `POV: You finally cracked the code on ${topic} ğŸ”“\n\nSave this before it disappears from your feed.`,
-          `3 things I wish I knew about ${topic} before I started:\n\n1ï¸âƒ£ Consistency beats perfection\n2ï¸âƒ£ Your audience wants authenticity\n3ï¸âƒ£ ${niche} is a marathon, not a sprint`,
-          `Unpopular opinion about ${topic}:\n\nThe "experts" are overcomplicating it. Keep it simple. Keep it real. âœ¨`,
-          `Day 47 of building in ${topic}.\n\nToday I learned that your worst post teaches you more than your best one ever will.`,
-          `Hot take on ${topic} ğŸ”¥\n\nIf you're not posting about this in 2026, you're already behind.`,
-          `"How do you stay motivated in ${topic}?"\n\nI don't. I build systems instead. Here's mine ğŸ‘‡`,
-          `This ${w} hack took me from 200 to 20K followers.\n\nNo paid ads. No viral luck. Just this one shift in ${topic}.`,
-          `Real talk about ${topic}:\n\nYour competition isn't other creators. It's the version of you that gave up.`,
-          `Weekend reminder for my ${topic} people â˜•\n\nRest is part of the strategy. See you Monday with fresh energy.`,
-          `I asked 100 people in ${topic} one question.\n\nTheir answers surprised me â€” thread incoming ğŸ§µ`,
-          `The ${topic} content that performs best isn't the prettiest.\n\nIt's the most honest. Be honest today.`,
-          `Plot twist: ${niche} isn't saturated.\n\nYour unique voice isn't out there yet. That's your opening. ğŸš€`,
-          `Before vs. After getting serious about ${topic}.\n\nSame person. Different systems. Wild difference.`,
-          `Comment "GUIDE" if you want my free ${topic} starter checklist ğŸ“‹\n\n(Dropping it in replies!)`,
-        ];
-        return shuffle(templates).slice(0, 10);
+      function fill(template, vars) {
+        return template.replace(/\{(\w+)\}/g, (_, key) => (vars[key] != null ? vars[key] : ''));
       }
 
-      function generateThreads(topic, words) {
-        const w = words[0] || 'growth';
-        const threads = [
-          {
-            title: `The ${topic} playbook nobody talks about`,
-            preview: `Tweet 1: I've spent 2 years in ${topic}. Here's the thread I wish existed when I started... (7 tweets)`
-          },
-          {
-            title: `5 mistakes killing your ${w} (and how to fix them)`,
-            preview: `Tweet 1: I made every mistake in ${topic} so you don't have to. Let's fix them one by one ğŸ§µ`
-          },
-          {
-            title: `How I grew from 0 to 10K in ${topic}`,
-            preview: `Tweet 1: No fluff. No "just post more." Here's the actual ${topic} strategy that worked for me.`
-          },
-          {
-            title: `Tools & resources for ${topic} beginners`,
-            preview: `Tweet 1: Starting ${topic} and feeling overwhelmed? Bookmark this thread. Free tools inside.`
-          },
-          {
-            title: `Debunking ${topic} myths`,
-            preview: `Tweet 1: "You need a big budget for ${topic}." Wrong. Let me break down 5 myths holding you back.`
-          },
-          {
-            title: `A day in the life: ${topic} creator edition`,
-            preview: `Tweet 1: People ask what my ${topic} routine looks like. Here's an honest hour-by-hour breakdown.`
-          },
-          {
-            title: `${capitalize(topic)} trends to watch in 2026`,
-            preview: `Tweet 1: The ${topic} landscape is shifting fast. These 6 trends will define the next 12 months.`
-          },
-        ];
-        return shuffle(threads).slice(0, 5);
+      function toHashtagToken(str) {
+        return String(str).replace(/[^a-z0-9]/gi, '');
       }
 
-      function generateHashtags(topic, words) {
-        const base = words.map((w) => `#${w.replace(/[^a-z0-9]/g, '')}`);
-        const generic = [
-          '#ContentCreator', '#SocialMediaTips', '#GrowYourBrand', '#DigitalMarketing',
-          '#CreatorEconomy', '#ViralContent', '#MarketingTips', '#SmallBusiness',
-          '#Entrepreneur', '#BuildInPublic', '#ContentStrategy', '#TrendingNow',
-          '#InstaGrowth', '#TikTokTips', '#BrandBuilding', '#CreativeContent',
-        ];
-        const niche = words.flatMap((w) => [
-          `#${w}Tips`, `#${w}Life`, `#${w}Community`, `#${w}Goals`,
-        ]);
-        const combined = [...new Set([...base, ...niche, ...generic])]
-          .filter((h) => h.length > 2 && h.length < 30);
-        return shuffle(combined).slice(0, 18);
+      function camelHashtag(words) {
+        const clean = words.map((w) => toHashtagToken(w)).filter(Boolean);
+        if (!clean.length) return '';
+        const camel = clean[0].toLowerCase() + clean.slice(1).map(capitalize).join('');
+        return `#${camel}`;
       }
 
-      function generateHooks(topic, words) {
-        const w = words[0] || 'this';
-        const hooks = [
-          `"Waitâ€” you're still doing ${topic} the old way?"`,
-          `[Open on you looking directly at camera]\n"Okay so nobody in ${topic} wants to admit this, but..."`,
-          `"I lost $3,000 learning ${topic} the hard way. Here's the 30-second version."`,
-          `[Text on screen: "POV: You just discovered ${topic}"]\n*Dramatic zoom*`,
-          `"Stop. Before you post another ${w} video, watch this."`,
-          `"The ${topic} industry doesn't want you to know this one thing..."`,
-          `[Split screen: left = struggling, right = thriving]\n"Same niche. Same ${topic}. Different approach."`,
-          `"Give me 15 seconds and I'll change how you think about ${topic} forever."`,
-          `"I asked 50 ${topic} experts one question. Only 3 got it right."`,
-          `"This is the ${topic} content that got me banned from a Facebook group (and I'm not sorry)."`,
-          `[Hook: unexpected sound + text overlay]\n"Why 90% of ${topic} advice is wrong"`,
-          `"If I had to start ${topic} from zero today, I'd do ONLY these 3 things."`,
-        ];
-        return shuffle(hooks).slice(0, 6);
+      /**
+       * Domain packs: useful topic-area content, not generic creator advice.
+       * {term} = one distinctive word (carnivore, yoga) used sparingly when natural.
+       * Most lines never insert the full user phrase.
+       */
+      const DOMAIN_PACKS = {
+        food: {
+          match: [
+            'recipe', 'recipes', 'cook', 'cooking', 'food', 'meal', 'meals', 'diet', 'diets',
+            'nutrition', 'carnivore', 'keto', 'vegan', 'vegetarian', 'paleo', 'baking',
+            'kitchen', 'eat', 'eating', 'protein', 'smoothie', 'dessert', 'lunch', 'dinner',
+            'breakfast', 'snack', 'snacks', 'chef', 'ingredient', 'ingredients', 'macros',
+            'intermittent', 'fasting', 'whole30', 'gluten', 'dairy', 'organic', 'mealprep',
+          ],
+          captions: [
+            'Ribeye, salt, and a hot pan. Dinner in 15 minutes GÇö no fancy techniques required. =ƒÑ¬',
+            'Meal prep that actually lasts the week:\n\nGÇó batch-cook protein once\nGÇó pre-portion fats\nGÇó keep seasoning simple\n\nFuture-you will be grateful.',
+            'Bored of the same plate every night? Rotate your cooking fats GÇö butter, tallow, ghee, olive oil. Same cut, new flavor.',
+            'Grocery list rule I live by: if it needs a long label, it stays on the shelf. Whole food first.',
+            'The underrated kitchen skill: resting meat. Pull it early, tent it, wait. Juicier every time.',
+            'Three weeknight wins under 20 minutes:\n\n1. Pan-seared steaks\n2. Scrambled eggs in leftover drippings\n3. Bone broth + leftover roast\n\nSave this for busy nights.',
+            'Unpopular kitchen opinion: you do not need 12 spices. Salt, pepper, and good heat do most of the work. G£¿',
+            'If your energy crashes mid-afternoon, look at lunch before you look at willpower. More protein, fewer empty carbs.',
+            'Sunday reset plate: protein-heavy, simple sides, zero stress. This is how consistency sticks.',
+            'Stop overcomplicating dinner. One protein, one fat, one optional side. That is a complete meal.',
+            'What I wish someone told me earlier: buy the best quality meat you can afford, then cook it simply. Quality beats complexity.',
+            'Leftovers strategy: cook once, reheat smart. Slice cold roast thin, re-sear in butter GÇö tastes new again.',
+            'Hydration matters as much as the plate. Salt your food, drink water, notice how much better you feel by day three.',
+            'POV: you open the fridge and everything is already cooked. That is the real flex. =ƒöô',
+            'Comment GÇ£LISTGÇ¥ if you want my simple weekly shopping list GÇö protein, pantry staples, nothing weird. =ƒôï',
+          ],
+          threads: [
+            {
+              title: 'A simple week of dinners (no overwhelm)',
+              preview: 'Tweet 1: Here is a 7-day dinner rotation that stays interesting without a 40-ingredient shopping list. Bookmark this =ƒº¦',
+            },
+            {
+              title: 'Mistakes that ruin a good piece of meat',
+              preview: 'Tweet 1: Crowding the pan, skipping the rest, fear of salt GÇö fix these three and your steaks jump a level.',
+            },
+            {
+              title: 'Pantry staples that make cooking effortless',
+              preview: 'Tweet 1: If these 8 things are always in your kitchen, dinner decisions get easy. Free list inside.',
+            },
+            {
+              title: 'How I batch-cook protein for the whole week',
+              preview: 'Tweet 1: One afternoon, multiple meals. Exact order of operations so nothing dries out or goes to waste.',
+            },
+            {
+              title: 'Myths about this way of eating that waste your time',
+              preview: 'Tweet 1: GÇ£You need endless variety or you will fail.GÇ¥ Not true. Here are 5 myths and what to do instead.',
+            },
+            {
+              title: 'Flavor without complicated recipes',
+              preview: 'Tweet 1: Char, fat, acid, salt. Master these four and you stop needing 20-step recipes.',
+            },
+            {
+              title: 'What I would do if I was starting over tomorrow',
+              preview: 'Tweet 1: Three habits only GÇö shopping, batch cooking, and a default emergency meal. That is the whole system.',
+            },
+          ],
+          hooks: [
+            '[Close-up of sizzling pan]\n"You have been overcomplicating dinner. Watch this."',
+            '"Stop boiling flavor out of your food. Here is the 20-second fix."',
+            '[Text on screen: "3 meals. 5 ingredients. Full week."]\n*Quick cuts of plated food*',
+            '"If your steak is dry, it is probably one of these three mistakes."',
+            '[Open fridge GåÆ fully prepped containers]\n"This is what actually makes healthy eating stick."',
+            '"Nobody told me this about salt until year two. Game changer."',
+            '[Cold open, no music]\n"Throw out half your spice rack. Keep these four."',
+            '"15-minute dinner that tastes like you tried. Full details in the caption."',
+          ],
+          hashtags: [
+            '#HomeCooking', '#MealPrep', '#EasyRecipes', '#HealthyEating', '#FoodIdeas',
+            '#WeeknightDinner', '#HighProtein', '#CleanEating', '#CookingTips', '#RealFood',
+            '#DinnerIdeas', '#FoodTok', '#KitchenHacks', '#NutritionTips', '#EatWell',
+          ],
+          termCaptions: [
+            'If you are exploring {term} meals, start boring on purpose: one protein, salt, heat. Master that, then get creative.',
+            'What a solid {term} plate looks like for me: generous protein, enough fat to stay full, zero guilt about simplicity.',
+            'New to {term}? Your first two weeks are about consistency, not Instagram-worthy plating.',
+          ],
+          termThreads: [
+            {
+              title: 'Getting started without the overwhelm',
+              preview: 'Tweet 1: If {term} eating feels complicated online, ignore the noise. Here is a plain-English starter framework.',
+            },
+          ],
+          termHooks: [
+            '"Thinking about trying {term}? Watch this before you buy a cart full of random stuff."',
+            '[Direct to camera]\n"The {term} tip that saved me when I was about to quit."',
+          ],
+          termTags: ['{Term}Life', '{Term}Diet', '{Term}Meals', '{Term}Recipes', '{Term}Food'],
+        },
+
+        fitness: {
+          match: [
+            'fitness', 'workout', 'workouts', 'gym', 'exercise', 'training', 'lift', 'lifting',
+            'cardio', 'strength', 'muscle', 'bodybuilding', 'crossfit', 'running', 'run',
+            'yoga', 'pilates', 'hiit', 'athlete', 'sports', 'weightloss', 'weight', 'gains',
+            'mobility', 'stretch', 'calisthenics', 'marathon', 'physique',
+          ],
+          captions: [
+            'Progress is rarely dramatic in the mirror day to day. It shows up in the weights you no longer fear. =ƒÆ¬',
+            'Warm-up that actually helps:\n\nGÇó 5 min easy movement\nGÇó 2 activation drills\nGÇó first set light on purpose\n\nSkip ego. Keep joints.',
+            'If you miss a session, the win is coming back GÇö not punishing yourself with a double workout.',
+            'Three form cues that fix most lifts: brace, control the eccentric, full range you can own.',
+            'Sleep is a training variable. Chase PRs while sleeping 5 hours and you are training with the handbrake on.',
+            'Unpopular gym opinion: walking more days per week beats one heroic cardio session you dread. G£¿',
+            'Deload week is not weakness. It is how strong people stay in the game for years.',
+            'POV: you finally track workouts and realize you were not progressive overloading GÇö you were improvising. =ƒöô',
+            'Protein target first. Steps second. Fancy programs third. Order matters.',
+            'Sunday reminder: rest days build the body too. Show up fresher Monday. Gÿò',
+            'The best program is the one you can repeat when life gets messy GÇö not the one that looks elite on paper.',
+            'Stop adding exercises. Get better at the big ones. Squat, hinge, push, pull, carry.',
+            'Soreness is not a scoreboard. Performance and recovery are.',
+            'Comment GÇ£PLANGÇ¥ for a simple 3-day full-body outline you can start this week. =ƒôï',
+            'Before vs. after 90 days of boring consistency. Same gym. Different standards.',
+          ],
+          threads: [
+            {
+              title: 'A no-fluff beginner strength template',
+              preview: 'Tweet 1: Three days a week, compound lifts, clear progression. Steal this structure if you are tired of random workouts =ƒº¦',
+            },
+            {
+              title: 'Form mistakes I see every week (and quick fixes)',
+              preview: 'Tweet 1: Rounded backs, half reps, rushing rest GÇö here is how to clean each one up.',
+            },
+            {
+              title: 'How to progress when the scale will not move',
+              preview: 'Tweet 1: Strength, steps, sleep, photos, measurements. Five signals that matter more than daily weight.',
+            },
+            {
+              title: 'Recovery checklist that actually works',
+              preview: 'Tweet 1: You cannot out-train a broken recovery routine. Here is the short list I use with clients.',
+            },
+            {
+              title: 'What I would do with only 3 hours a week',
+              preview: 'Tweet 1: Limited time is not an excuse GÇö it is a filter. Here is the exact priority order.',
+            },
+            {
+              title: 'Myths that keep people stuck in the gym',
+              preview: 'Tweet 1: GÇ£No pain, no gain.GÇ¥ GÇ£Cardio kills gains.GÇ¥ Five myths, five better defaults.',
+            },
+          ],
+          hooks: [
+            '"Stop doing random workouts. Here is a structure that actually builds strength."',
+            '[Gym floor, mid-set]\n"If your lower back always hurts after deadlifts, watch this."',
+            '[Text: "Form fix in 10 seconds"]\n*Side-by-side bad vs. good rep*',
+            '"You do not need a new program. You need progressive overload. Here is how."',
+            '[Direct to camera, slightly out of breath]\n"The recovery tip nobody posts about because it is boring GÇö and it works."',
+            '"Three exercises. Full body. Busy-week proof."',
+            '[Cold open]\n"Throw out the scale for 30 days. Track these instead."',
+            '"Warm up wrong and you are leaving strength on the table."',
+          ],
+          hashtags: [
+            '#FitnessTips', '#StrengthTraining', '#GymLife', '#WorkoutMotivation', '#FitLife',
+            '#HomeWorkout', '#TrainHard', '#MuscleBuilding', '#Cardio', '#HealthyLifestyle',
+            '#FitnessJourney', '#LiftHeavy', '#Mobility', '#AthleteLife', '#GetStrong',
+          ],
+          termCaptions: [
+            'Building a {term} habit beats hunting for the perfect routine. Show up, log it, improve one variable next time.',
+            'If {term} is your focus right now, protect sleep and protein like they are part of the workout GÇö because they are.',
+          ],
+          termThreads: [
+            {
+              title: 'A practical {term} starter plan',
+              preview: 'Tweet 1: Clear weekly structure for {term} without living in the gym. Save this if you want simple.',
+            },
+          ],
+          termHooks: [
+            '"Want better results with {term}? Fix this one thing first."',
+          ],
+          termTags: ['{Term}Training', '{Term}Fitness', '{Term}Workout', '{Term}Life', '{Term}Goals'],
+        },
+
+        business: {
+          match: [
+            'business', 'marketing', 'startup', 'entrepreneur', 'sales', 'brand', 'branding',
+            'agency', 'client', 'clients', 'ecommerce', 'shopify', 'saas', 'b2b', 'b2c',
+            'lead', 'leads', 'funnel', 'revenue', 'profit', 'freelance', 'freelancing',
+            'sidehustle', 'hustle', 'store', 'retail', 'restaurant', 'hospitality',
+          ],
+          captions: [
+            'Clarity converts. If a stranger cannot explain what you sell in one sentence, fix that before you buy more ads.',
+            'Offer stack that works:\n\nGÇó clear problem\nGÇó specific outcome\nGÇó proof\nGÇó simple next step\n\nPretty branding comes second.',
+            'Unpopular take: more features rarely fix a weak offer. A tighter promise does. G£¿',
+            'This weekGÇÖs growth lever is not a new tool. It is 10 honest conversations with people who already bought.',
+            'Price is a story about value. Raise the outcome you deliver before you obsess over the number on the page.',
+            'POV: you stopped posting random tips and started showing real customer results. Inquiries change overnight. =ƒöô',
+            'If your calendar is full but revenue is flat, you do not have a hustle problem GÇö you have an offer problem.',
+            'Simple weekly operating rhythm: sell MonGÇôWed, deliver ThuGÇôFri, review Saturday, rest Sunday.',
+            'Cold outreach that does not feel gross: research, one sharp observation, one soft ask. No novel-length pitches.',
+            'Systems beat motivation when client work piles up. Document once, delegate next, automate last.',
+            'Your competition is not GÇ£everyone in the industry.GÇ¥ It is the status quo your customer already lives with.',
+            'Ship the MVP page. Collect replies. Improve from real objections GÇö not from your imagination.',
+            'Comment GÇ£OFFERGÇ¥ for the 5-question checklist I use before launching anything new. =ƒôï',
+            'Weekend note for builders: rest is part of the strategy. Sharp judgment needs sleep. Gÿò',
+            'Before vs. after tightening the offer. Same traffic. Different close rate.',
+          ],
+          threads: [
+            {
+              title: 'How to write an offer people actually understand',
+              preview: 'Tweet 1: Problem, promise, proof, path. Four lines that outperform a 12-section sales page. LetGÇÖs break each down =ƒº¦',
+            },
+            {
+              title: 'Where early-stage founders waste money',
+              preview: 'Tweet 1: Brand films, fancy CRMs, and ads before message-market fit. Here is the order that actually works.',
+            },
+            {
+              title: 'A weekly sales cadence you can keep',
+              preview: 'Tweet 1: Prospecting, follow-ups, demos, debriefs GÇö a realistic schedule for solo operators.',
+            },
+            {
+              title: 'Pricing mistakes that quietly kill profit',
+              preview: 'Tweet 1: Discounting too early, charging for effort instead of outcomes, and three other traps.',
+            },
+            {
+              title: 'Customer research in one afternoon',
+              preview: 'Tweet 1: Five questions, ten conversations, one sharper offer. Exact script inside.',
+            },
+            {
+              title: 'What I would do with $0 ad budget this month',
+              preview: 'Tweet 1: Partnerships, referral loops, and content that sells without feeling salesy.',
+            },
+          ],
+          hooks: [
+            '"Your offer is confusing. Here is how to fix it in 60 seconds."',
+            '[Whiteboard]\n"Stop buying ads until you can fill in these four blanks."',
+            '"I raised prices and got more yeses. Here is why that happens."',
+            '[Split screen: busy vs. profitable]\n"Same hours. Different offer design."',
+            '"Cold email that gets replies GÇö without sounding desperate."',
+            '[Direct to camera]\n"If clients ghost after the proposal, it is usually this."',
+            '"Three numbers every small business should know by heart."',
+            '[Cold open]\n"Delete half your services. Watch what happens to profit."',
+          ],
+          hashtags: [
+            '#SmallBusiness', '#Entrepreneur', '#MarketingTips', '#StartupLife', '#SalesTips',
+            '#BusinessGrowth', '#BrandStrategy', '#Ecommerce', '#Leadership', '#Solopreneur',
+            '#ClientWork', '#BusinessOwner', '#GrowthMarketing', '#OfferDesign', '#B2B',
+          ],
+          termCaptions: [
+            'If you work in {term}, lead with outcomes your buyer already wants GÇö not with industry jargon they have to decode.',
+            'A strong {term} business makes the next step obvious. Confusion is the real competitor.',
+          ],
+          termThreads: [
+            {
+              title: 'Practical growth ideas for {term} operators',
+              preview: 'Tweet 1: Tactics that fit real calendars GÇö not theory. Starting with the highest-leverage move first.',
+            },
+          ],
+          termHooks: [
+            '"In {term}, this one positioning shift changes who shows up ready to buy."',
+          ],
+          termTags: ['{Term}Business', '{Term}Marketing', '{Term}Tips', '{Term}Life', '{Term}Success'],
+        },
+
+        tech: {
+          match: [
+            'tech', 'ai', 'software', 'code', 'coding', 'developer', 'programming', 'app',
+            'apps', 'saas', 'api', 'python', 'javascript', 'react', 'data', 'machine',
+            'learning', 'automation', 'devops', 'cloud', 'cyber', 'security', 'product',
+            'ux', 'ui', 'chatgpt', 'llm', 'blockchain', 'web3', 'nocode',
+          ],
+          captions: [
+            'Ship smaller. A narrow tool people finish using beats a platform nobody adopts.',
+            'Debugging mindset: reproduce, isolate, fix, prove. Skipping GÇ£reproduceGÇ¥ is how you lose an afternoon.',
+            'Unpopular eng take: documentation is a product feature. Future-you is a user. G£¿',
+            'AI tip that actually saves time: give the model constraints, examples, and a definition of done GÇö not a vague wish.',
+            'POV: you deleted half the backlog and velocity went up. Focus is a performance feature. =ƒöô',
+            'Read the error message fully before you Google. It is right more often than your first guess.',
+            'Good PR description: what changed, why, how to test. Reviewers should not need a s+¬ance.',
+            'Automation rule: if you did it three times manually this week, script it or template it.',
+            'Security basics still win: least privilege, dependency updates, and not pasting secrets into tickets.',
+            'Weekend project idea: solve one annoying workflow for yourself. Dogfood it for a week. Then decide if it is real.',
+            'Product lesson: users do not want more settings. They want the default path to work.',
+            'Comment GÇ£STACKGÇ¥ for a lean starter tool list for indie builders (no enterprise bloat). =ƒôï',
+            'Latency, clarity, reliability GÇö pick the order that matches your users. Pretty UI cannot save a broken core loop.',
+            'Before vs. after adding observability. Same bugs. Much faster fixes.',
+            'If onboarding needs a call every time, the product is incomplete GÇö not the user.',
+          ],
+          threads: [
+            {
+              title: 'How I scope an MVP that can actually ship',
+              preview: 'Tweet 1: Cut features until the core loop is undeniable. Here is the checklist I use before writing code =ƒº¦',
+            },
+            {
+              title: 'Prompt patterns that produce usable output',
+              preview: 'Tweet 1: Role, context, constraints, examples, output format. Steal this structure.',
+            },
+            {
+              title: 'Debugging workflow that saves weekends',
+              preview: 'Tweet 1: Logging, bisecting, rubber-ducking, and knowing when to walk away for 10 minutes.',
+            },
+            {
+              title: 'Tools worth paying for (and which to skip)',
+              preview: 'Tweet 1: A practical indie stack for building and shipping without drowning in subscriptions.',
+            },
+            {
+              title: 'Common architecture mistakes in early products',
+              preview: 'Tweet 1: Premature microservices, no metrics, and three other traps I keep seeing.',
+            },
+            {
+              title: 'What I would learn first as a new builder in 2026',
+              preview: 'Tweet 1: Fundamentals over framework FOMO. A short curriculum with reasons.',
+            },
+          ],
+          hooks: [
+            '"Stop building features. Fix the core loop first."',
+            '[Screen recording]\n"This prompt structure 10xGÇÖd how useful the modelGÇÖs answers got."',
+            '"If your app needs a tutorial video to be usable, watch this."',
+            '[Terminal + coffee]\n"The debugging step everyone skips GÇö and regrets."',
+            '"Three automations every solo developer should set up this week."',
+            '[Cold open]\n"Delete half your backlog. Here is how to choose what stays."',
+            '"Your onboarding is leaking users. One fix."',
+            '[Split screen: chaos vs. clean PR]\n"Same feature. Different review experience."',
+          ],
+          hashtags: [
+            '#BuildInPublic', '#SoftwareDev', '#TechTips', '#AITools', '#CodingLife',
+            '#ProductDesign', '#DevCommunity', '#SaaS', '#Automation', '#MachineLearning',
+            '#WebDev', '#IndieHacker', '#Programming', '#DataScience', '#NoCode',
+          ],
+          termCaptions: [
+            'Working with {term}? Optimize for a clear user outcome first GÇö clever implementation second.',
+            'A practical {term} workflow beats a theoretical perfect architecture every time.',
+          ],
+          termThreads: [
+            {
+              title: 'A practical intro path for {term}',
+              preview: 'Tweet 1: What to learn first, what to ignore, and a tiny project that proves you understand it.',
+            },
+          ],
+          termHooks: [
+            '"New to {term}? Avoid this expensive wrong turn."',
+          ],
+          termTags: ['{Term}Tips', '{Term}Tools', '{Term}Dev', '{Term}Tech', '{Term}Life'],
+        },
+
+        finance: {
+          match: [
+            'finance', 'money', 'investing', 'investor', 'stock', 'stocks', 'crypto', 'budget',
+            'budgeting', 'wealth', 'saving', 'savings', 'debt', 'retirement', 'trading',
+            'bitcoin', 'realestate', 'mortgage', 'tax', 'taxes', 'income', 'fire',
+          ],
+          captions: [
+            'Pay yourself first is not a slogan GÇö it is an automatic transfer on payday. Systems beat good intentions.',
+            'Budget that survives real life:\n\nGÇó fixed costs\nGÇó true expenses sinking funds\nGÇó fun money without guilt\n\nRestriction without a pressure valve fails.',
+            'Unpopular money take: a boring index portfolio outperforms most GÇ£hot tipsGÇ¥ you will hear at dinner. G£¿',
+            'High income does not fix lifestyle creep. Track the gap between earn and keep.',
+            'Debt order of operations: list balances, pick a method (avalanche or snowball), automate the attack, celebrate milestones.',
+            'POV: you finally know your monthly number GÇö the true cost of your life. Decisions get easier. =ƒöô',
+            'Emergency fund first, optimization later. Fancy strategies on a fragile base are cosplay.',
+            'Investing lesson: time in the market usually beats timing the market. Behavior is the edge.',
+            'Before a big purchase, wait 72 hours and calculate hours-of-work cost. Emotion cools; clarity rises.',
+            'Sunday money date: 20 minutes, same checklist, every week. Calm compounds. Gÿò',
+            'Tax-aware is not tax-obsessed. Use the accounts available to you; avoid scams promising miracles.',
+            'Comment GÇ£STACKGÇ¥ for a simple account setup order (emergency GåÆ retirement GåÆ taxable). =ƒôï',
+            'If your plan only works when markets are up, it is not a plan GÇö it is a hope.',
+            'Teach kids one money habit early: separate spend / save / give jars. Identity forms young.',
+            'Wealth is options. Build a life where a bad month does not become a crisis.',
+          ],
+          threads: [
+            {
+              title: 'A simple money system for busy people',
+              preview: 'Tweet 1: Four accounts, three automatic transfers, one weekly review. Steal this if spreadsheets stress you out =ƒº¦',
+            },
+            {
+              title: 'Investing basics without the noise',
+              preview: 'Tweet 1: Risk, diversification, fees, horizon. Four ideas that matter more than ticker gossip.',
+            },
+            {
+              title: 'How to kill high-interest debt faster',
+              preview: 'Tweet 1: Math plus psychology. Pick a method, then remove friction so you do not stall.',
+            },
+            {
+              title: 'Lifestyle creep checkpoints',
+              preview: 'Tweet 1: Raises, windfalls, and moving cities GÇö the moments people quietly get poorer.',
+            },
+            {
+              title: 'What I would do with my first $1,000 to invest',
+              preview: 'Tweet 1: No heroics. A plain sequence that builds the right habits early.',
+            },
+            {
+              title: 'Money myths that keep people stuck',
+              preview: 'Tweet 1: GÇ£I need a high income first.GÇ¥ GÇ£Investing is gambling.GÇ¥ Five myths, five better frames.',
+            },
+          ],
+          hooks: [
+            '"Stop budgeting in a way that makes you quit by week two."',
+            '[Whiteboard]\n"The only money system I still recommend after years of trying gimmicks."',
+            '"If you got a raise and still feel broke, watch this."',
+            '[Text: "Emergency fund math"]\n*Simple calculator walkthrough*',
+            '"Debt payoff that does not require becoming a monk."',
+            '[Direct to camera]\n"Index funds are boring. That is the point."',
+            '"Three numbers that tell you if your finances are healthy."',
+            '[Cold open]\n"Cancel this subscription category first GÇö biggest quiet leak."',
+          ],
+          hashtags: [
+            '#PersonalFinance', '#MoneyTips', '#Investing', '#Budgeting', '#WealthBuilding',
+            '#FinancialFreedom', '#DebtFree', '#SaveMoney', '#MoneyMindset', '#FireMovement',
+            '#SmartMoney', '#Investing101', '#FinancialLiteracy', '#BuildWealth', '#CashFlow',
+          ],
+          termCaptions: [
+            'Curious about {term}? Learn the risks and time horizon before you learn the hype cycle.',
+            'A calm approach to {term} starts with an emergency buffer and a written rule set GÇö not vibes.',
+          ],
+          termThreads: [
+            {
+              title: 'A grounded intro to {term}',
+              preview: 'Tweet 1: Definitions, risks, and a starter checklist GÇö no hype, no guru energy.',
+            },
+          ],
+          termHooks: [
+            '"Before you dive into {term}, hear this 20-second warning."',
+          ],
+          termTags: ['{Term}Tips', '{Term}Life', '{Term}Education', '{Term}Community', '{Term}101'],
+        },
+
+        wellness: {
+          match: [
+            'wellness', 'mental', 'health', 'mindfulness', 'meditation', 'anxiety', 'stress',
+            'sleep', 'selfcare', 'therapy', 'habits', 'habit', 'journal', 'journaling',
+            'mindset', 'motivation', 'productivity', 'focus', 'burnout', 'balance',
+          ],
+          captions: [
+            'A calm morning is usually built the night before: phone outside the bedroom, clothes ready, one clear first task.',
+            'Nervous system tip: longer exhales than inhales for two minutes. Simple, free, surprisingly effective.',
+            'Unpopular take: you do not need a perfect morning routine. You need one anchor habit that survives bad days. G£¿',
+            'If everything is urgent, nothing is. Pick three priorities. Let the rest be tomorrowGÇÖs problem.',
+            'POV: you stopped treating rest like a reward and started treating it like maintenance. Energy returns. =ƒöô',
+            'Journaling prompt when your head is loud: GÇ£What is mine to do today GÇö and what is not?GÇ¥',
+            'Sleep consistency beats sleep duration hacks. Same wind-down, same window, most nights.',
+            'Boundaries are not walls; they are doors with locks you control. Practice a short, kind no.',
+            'Walk outside without headphones once this week. Let your brain unsupervised for 20 minutes.',
+            'Sunday reset: tidy one surface, prep one meal, write three priorities. That is enough. Gÿò',
+            'Burnout prevention looks boring: sleep, protein, sunlight, fewer tabs, real breaks.',
+            'Comment GÇ£RESETGÇ¥ for a 15-minute evening shutdown checklist. =ƒôï',
+            'Motivation follows action more often than it leads it. Start tiny; let momentum argue for you.',
+            'Compare less. Measure your week against last monthGÇÖs you GÇö not a strangerGÇÖs highlight reel.',
+            'Hydrate, move, message one person you care about. A surprisingly complete baseline day.',
+          ],
+          threads: [
+            {
+              title: 'A realistic anti-burnout checklist',
+              preview: 'Tweet 1: Not a 30-step guru routine GÇö seven levers that actually move energy and mood =ƒº¦',
+            },
+            {
+              title: 'Focus system for distracted brains',
+              preview: 'Tweet 1: One list, timed blocks, phone in another room. Here is the exact setup.',
+            },
+            {
+              title: 'Sleep improvements that compound',
+              preview: 'Tweet 1: Light, caffeine timing, wind-down, and temperature GÇö small knobs, big results.',
+            },
+            {
+              title: 'How to rebuild a habit after falling off',
+              preview: 'Tweet 1: Skip shame. Restart smaller than you think. Identity first, intensity later.',
+            },
+            {
+              title: 'Boundaries scripts you can steal',
+              preview: 'Tweet 1: Kind, clear, short. Use these when work or family overreaches.',
+            },
+            {
+              title: 'What I would do if my stress felt unmanageable',
+              preview: 'Tweet 1: Safety first, basics second, support third. A plain sequence GÇö not toxic positivity.',
+            },
+          ],
+          hooks: [
+            '"Your morning routine is too complicated. Try this instead."',
+            '[Quiet room, natural light]\n"The 2-minute breathing pattern that takes the edge off fast."',
+            '"If you wake up already behind, watch this."',
+            '[Text: "Shutdown ritual"]\n*Simple desk reset*',
+            '"Rest is not laziness. Here is the plain-English version of why it matters."',
+            '[Direct to camera]\n"The habit restart rule that ends all-or-nothing spirals."',
+            '"Three priorities. That is the whole productivity system."',
+            '[Cold open]\n"Put the phone in another room tonight. Report back tomorrow."',
+          ],
+          hashtags: [
+            '#MentalHealth', '#Mindfulness', '#SelfCare', '#HealthyHabits', '#WellnessJourney',
+            '#StressRelief', '#SleepTips', '#Productivity', '#Mindset', '#Balance',
+            '#DailyHabits', '#CalmMind', '#PersonalGrowth', '#Wellbeing', '#Focus',
+          ],
+          termCaptions: [
+            'If {term} is on your mind lately, start with basics you control today: sleep window, one walk, one honest check-in.',
+            'Improving {term} is rarely one breakthrough GÇö it is a pile of small, repeatable choices.',
+          ],
+          termThreads: [
+            {
+              title: 'Small experiments for better {term}',
+              preview: 'Tweet 1: Low-pressure trials you can run this week GÇö measure how you feel, keep what works.',
+            },
+          ],
+          termHooks: [
+            '"Struggling with {term}? Start here, not with a 20-step overhaul."',
+          ],
+          termTags: ['{Term}Tips', '{Term}Journey', '{Term}Matters', '{Term}Support', '{Term}Daily'],
+        },
+
+        beauty: {
+          match: [
+            'beauty', 'skincare', 'skin', 'makeup', 'hair', 'haircare', 'cosmetic', 'glow',
+            'acne', 'antiaging', 'fashion', 'style', 'outfit', 'wardrobe', 'nails',
+          ],
+          captions: [
+            'Skincare order that prevents most product pile-ups: cleanse, treat, moisturize, SPF. Master that before you collect serums.',
+            'Patch test new actives. Your face is not a clearance rack.',
+            'Unpopular beauty take: sleep and SPF outperform most miracle jars. G£¿',
+            'Capsule wardrobe tip: if it does not work with three things you already own, it is a maybe GÇö not a yes.',
+            'POV: you simplified to fewer, better products and your skin finally calmed down. =ƒöô',
+            'Makeup that lasts: prep skin, set strategically, blot mid-day instead of piling on more product.',
+            'Hair health is mostly gentle handling GÇö less heat, softer ties, trims before the split-travel tour.',
+            'Sunday reset: clean brushes, check expirations, restock the one SPF you actually finish. Gÿò',
+            'Ingredient literacy beats brand hype. Learn what retinol, acids, and niacinamide do before stacking them.',
+            'Comment GÇ£ROUTINEGÇ¥ for a minimal AM/PM template you can personalize. =ƒôï',
+            'Glow is often hydration and light GÇö not seventeen layers.',
+            'Style shortcut: one strong silhouette, neutral base, one point of interest. Camera-ready without chaos.',
+            'If it stings and burns every time, that is not GÇ£workingGÇ¥ GÇö that is irritation. Pause and reassess.',
+            'Before vs. after consistent SPF for a season. Quiet change, loud difference in photos.',
+            'Shop your stash month: use what you own before the next haul. Your shelf (and budget) will thank you.',
+          ],
+          threads: [
+            {
+              title: 'A minimal routine that still works',
+              preview: 'Tweet 1: Four steps, clear order, room for one active. Steal this if your shelf is overcrowded =ƒº¦',
+            },
+            {
+              title: 'How to introduce actives without wrecking your barrier',
+              preview: 'Tweet 1: Go slow, buffer, moisturize, and know the difference between purge and damage.',
+            },
+            {
+              title: 'Building outfits from a small closet',
+              preview: 'Tweet 1: Color story, repeatable formulas, and the GÇ£three-pairGÇ¥ rule for shoes.',
+            },
+            {
+              title: 'Product myths that waste money',
+              preview: 'Tweet 1: GÇ£Natural means safe.GÇ¥ GÇ£More steps means better skin.GÇ¥ Five myths, five better defaults.',
+            },
+            {
+              title: 'Travel beauty kit that is actually light',
+              preview: 'Tweet 1: Decant sizes, multi-use products, and what to leave at home.',
+            },
+            {
+              title: 'What I would buy first with a tight budget',
+              preview: 'Tweet 1: SPF, moisturizer, gentle cleanser GÇö then stop until those are habits.',
+            },
+          ],
+          hooks: [
+            '"Your routine has too many steps. Here is the edit."',
+            '[Bathroom shelf]\n"If your skin barrier is angry, do this for two weeks."',
+            '"SPF mistakes that quietly age you faster."',
+            '[GRWM pace, honest]\n"Minimal makeup that still looks finished on camera."',
+            '"Stop layering acids like that. Watch this order instead."',
+            '[Cold open]\n"Three products. That is the whole starter routine."',
+            '"The capsule wardrobe rule that ends regret purchases."',
+            '[Before/after lighting]\n"Same face. Better prep. Huge difference."',
+          ],
+          hashtags: [
+            '#SkincareTips', '#BeautyRoutine', '#GlowUp', '#MakeupTips', '#SkinHealth',
+            '#CleanBeauty', '#HairCare', '#StyleInspo', '#BeautyCommunity', '#SelfCare',
+            '#MinimalRoutine', '#FashionTips', '#HealthySkin', '#BeautyHacks', '#Skincare',
+          ],
+          termCaptions: [
+            'Into {term}? Consistency with gentle basics beats a chaotic shelf of almost-empty bottles.',
+          ],
+          termThreads: [
+            {
+              title: 'A sensible starter path for {term}',
+              preview: 'Tweet 1: What matters first, what can wait, and how to avoid the hype spiral.',
+            },
+          ],
+          termHooks: [
+            '"Obsessed with {term}? Avoid this common expensive mistake."',
+          ],
+          termTags: ['{Term}Tips', '{Term}Routine', '{Term}Community', '{Term}Love', '{Term}Daily'],
+        },
+
+        travel: {
+          match: [
+            'travel', 'traveling', 'travelling', 'trip', 'vacation', 'tourism', 'backpacking',
+            'flight', 'flights', 'hotel', 'airbnb', 'destination', 'wanderlust', 'passport',
+            'digitalnomad', 'nomad', 'adventure', 'cruise', 'roadtrip',
+          ],
+          captions: [
+            'Packing rule: if you hesitate, it stays home. Laundry exists; sore shoulders do not need extra jackets.',
+            'Trip planning that reduces stress: book the first night and the airport transfer first. Momentum beats perfect itineraries.',
+            'Unpopular travel take: fewer cities, more days each. Depth over passport stamps. G£¿',
+            'POV: you built buffer time between connections and actually enjoyed the journey. =ƒöô',
+            'Local food tip: follow lunch crowds, not only influencer maps. Busy kitchens turn tables for a reason.',
+            'Money on the road: notify your bank, carry a backup card separately, keep a small cash float.',
+            'Photo tip: wake up for one early morning in each place. Empty streets change everything.',
+            'Sunday before departure: download offline maps, confirm check-in, charge power bank. Future-you relaxes. Gÿò',
+            'Souvenirs worth buying: things you will use weekly at home GÇö not things that live in a drawer.',
+            'Comment GÇ£PACKGÇ¥ for my carry-on checklist (clothing formula + tech + documents). =ƒôï',
+            'Slow travel is a luxury you can create: one neighborhood caf+¬, repeat visits, learn two streets well.',
+            'Jet lag softener: light exposure, hydrate, align meals to local time on day one.',
+            'Safety baseline: share live location with one person, know the local emergency number, trust discomfort.',
+            'Before vs. after planning rest days into the itinerary. Same trip, better memories.',
+            'Travel insurance is boring until the day it is not. Buy it.',
+          ],
+          threads: [
+            {
+              title: 'How I plan a trip without spreadsheet hell',
+              preview: 'Tweet 1: Anchors first (sleep + arrival), then 1GÇô2 priorities per day. Flexible beats fragile =ƒº¦',
+            },
+            {
+              title: 'Carry-on only for a week (really)',
+              preview: 'Tweet 1: Capsule clothing math, laundry strategy, and the three items people overpack.',
+            },
+            {
+              title: 'Money and safety basics for new travelers',
+              preview: 'Tweet 1: Cards, cash, scams to know, and a simple daily budget method.',
+            },
+            {
+              title: 'Finding great food without wasting half the day',
+              preview: 'Tweet 1: Timing, neighborhoods, and how to use reviews without getting paralyzed.',
+            },
+            {
+              title: 'What I would do differently on my first big trip',
+              preview: 'Tweet 1: Fewer bookings, more buffers, one local experience that was not a tour bus.',
+            },
+            {
+              title: 'Solo travel comfort checklist',
+              preview: 'Tweet 1: Arrival daylight, first-night plan, and small habits that lower anxiety.',
+            },
+          ],
+          hooks: [
+            '"Stop overpacking. Here is the one-week carry-on formula."',
+            '[Airport walkway]\n"The first thing I book on every trip GÇö and why."',
+            '"Jet lag hack that is free and actually helps."',
+            '[Map + notebook]\n"How to plan a day that does not exhaust you."',
+            '"Tourist-trap food vs. where locals actually eat."',
+            '[Cold open]\n"Three apps. That is the whole travel stack."',
+            '"If you only optimize photos, you will hate your vacation. Do this instead."',
+            '[Hotel room, packing cube]\n"The packing mistake that ruins day three."',
+          ],
+          hashtags: [
+            '#TravelTips', '#Wanderlust', '#TravelGram', '#TripPlanning', '#SoloTravel',
+            '#BudgetTravel', '#Adventure', '#TravelHacks', '#VacationMode', '#ExploreMore',
+            '#DigitalNomad', '#TravelBlog', '#RoadTrip', '#TravelLife', '#SeeTheWorld',
+          ],
+          termCaptions: [
+            'Dreaming about {term}? Start with dates, budget ceiling, and one non-negotiable experience GÇö then plan around those.',
+          ],
+          termThreads: [
+            {
+              title: 'Planning notes for a {term} trip',
+              preview: 'Tweet 1: Timing, neighborhoods, and pacing so you come home tired in a good way GÇö not wrecked.',
+            },
+          ],
+          termHooks: [
+            '"Planning {term}? Do not skip this pre-trip step."',
+          ],
+          termTags: ['{Term}Travel', '{Term}Trip', '{Term}Adventure', '{Term}Diaries', '{Term}Guide'],
+        },
+
+        education: {
+          match: [
+            'education', 'teaching', 'teacher', 'student', 'students', 'learn', 'learning',
+            'study', 'studying', 'school', 'college', 'university', 'course', 'courses',
+            'exam', 'exams', 'tutoring', 'homeschool', 'parenting', 'parents', 'kids', 'child',
+          ],
+          captions: [
+            'Learning stickiness: teach it back in plain words within 24 hours. If you cannot explain it, you do not own it yet.',
+            'Study block that works: 25GÇô40 minutes focus, 5 minute break, one sentence summary. Repeat.',
+            'Unpopular education take: more highlights are not more learning. Retrieval practice is. G£¿',
+            'POV: you closed every extra tab and suddenly the chapter made sense. =ƒöô',
+            'For parents: curiosity questions beat quiz-show questions. GÇ£What surprised you?GÇ¥ opens more doors than GÇ£What is the capital?GÇ¥',
+            'Notes upgrade: questions in the margin, not only transcribed slides.',
+            'Sleep after studying is part of studying. Memory consolidation is not optional biology.',
+            'Sunday plan: three outcomes for the week, not seventeen. Ambition without triage is anxiety. Gÿò',
+            'Comment GÇ£METHODGÇ¥ for a simple weekly study planner template. =ƒôï',
+            'If a course feels overwhelming, shrink the next action to ten minutes. Start creates momentum.',
+            'Feedback loop: attempt, check, correct, re-attempt. Skipping GÇ£re-attemptGÇ¥ freezes mistakes in place.',
+            'Teachers and creators: examples first, jargon second. Understanding is the product.',
+            'Before vs. after active recall. Same hours, better exam nerves.',
+            'Phone in another room is the highest-ROI study tool you already own.',
+            'Celebrate process goals (sessions completed) more than outcome goals (scores) while building the habit.',
+          ],
+          threads: [
+            {
+              title: 'How to study so it actually sticks',
+              preview: 'Tweet 1: Retrieval, spacing, interleaving GÇö plain English, no academic fog =ƒº¦',
+            },
+            {
+              title: 'A weekly learning plan for busy people',
+              preview: 'Tweet 1: Three sessions, one review, one teach-back. That is the whole cadence.',
+            },
+            {
+              title: 'Notes systems that do not collapse by week three',
+              preview: 'Tweet 1: Capture, distill, question. A lightweight flow you will still use in month two.',
+            },
+            {
+              title: 'Helping kids learn without power struggles',
+              preview: 'Tweet 1: Routines, short bursts, and questions that invite thinking instead of shutdown.',
+            },
+            {
+              title: 'Exam week without panic spirals',
+              preview: 'Tweet 1: Prioritization matrix, sleep rules, and a realistic revision order.',
+            },
+            {
+              title: 'What I would do if I had to learn a hard skill from zero',
+              preview: 'Tweet 1: Project first, resources second, community third. A sequence that prevents tutorial hell.',
+            },
+          ],
+          hooks: [
+            '"Highlighting is not studying. Try this instead."',
+            '[Desk setup]\n"The 40-minute focus block that finally worked for me."',
+            '"If you reread chapters and still forget them, watch this."',
+            '[Text: "Active recall in 20 seconds"]\n*Card flip demo*',
+            '"Phone in another room. Grades and calm both improve."',
+            '[Cold open]\n"Three outcomes for the week. That is the whole plan."',
+            '"Teach it to a friend GÇö or a rubber duck. Retention jumps."',
+            '"Parents: swap quiz questions for curiosity questions."',
+          ],
+          hashtags: [
+            '#StudyTips', '#Learning', '#Education', '#StudentLife', '#StudyMotivation',
+            '#Teach', '#OnlineLearning', '#StudyGram', '#EdTech', '#LifelongLearning',
+            '#ParentingTips', '#ExamPrep', '#StudyWithMe', '#TeachersOfInstagram', '#GrowthMindset',
+          ],
+          termCaptions: [
+            'Working on {term}? Short, repeated practice sessions beat occasional marathon cram nights.',
+          ],
+          termThreads: [
+            {
+              title: 'A clear learning path for {term}',
+              preview: 'Tweet 1: Foundations, practice loops, and how to know you are actually improving.',
+            },
+          ],
+          termHooks: [
+            '"Learning {term}? Avoid tutorial hell with this approach."',
+          ],
+          termTags: ['{Term}Learning', '{Term}Tips', '{Term}Education', '{Term}Study', '{Term}Class'],
+        },
+
+        general: {
+          match: [],
+          captions: [
+            'Start before you feel ready. Readiness is often a story you tell to delay the first messy attempt.',
+            'One useful improvement beats five vague intentions. Pick a single lever for this week.',
+            'Unpopular opinion: consistency looks boring from the outside GÇö and that is why it works. G£¿',
+            'POV: you removed one friction point and suddenly the habit stuck. Design beats willpower. =ƒöô',
+            'Write the steps down. Future-you under stress should not have to reinvent the plan.',
+            'Ask better questions: GÇ£What would make this 10% easier tomorrow?GÇ¥ Small edges compound.',
+            'Share the real version, not only the highlight. People trust process more than polish.',
+            'Sunday note: rest is part of doing hard things well. Show up Monday with a full battery. Gÿò',
+            'If you are stuck, shrink the next action until it is almost laughably small GÇö then do it.',
+            'Comment GÇ£CHECKLISTGÇ¥ if you want a simple weekly review template (wins, lessons, next steps). =ƒôï',
+            'Protect deep work like a meeting with someone important GÇö because it is.',
+            'Before vs. after tracking the basics for 30 days. Awareness alone changes behavior.',
+            'You do not need a new personality. You need a clearer default for the next hour.',
+            'Celebrate finished over perfect. Shipping teaches what planning only guesses.',
+            'When advice conflicts, run a two-week experiment. Data from your life beats internet arguments.',
+          ],
+          threads: [
+            {
+              title: 'A simple weekly system that keeps you moving',
+              preview: 'Tweet 1: Plan on Sunday, execute in short blocks, review on Friday. Here is the exact template =ƒº¦',
+            },
+            {
+              title: 'How to start when you feel overwhelmed',
+              preview: 'Tweet 1: Capture everything, choose three, define the next physical action. That is the whole emergency protocol.',
+            },
+            {
+              title: 'Habits that survive busy seasons',
+              preview: 'Tweet 1: Minimum versions, environment design, and tracking that does not become a second job.',
+            },
+            {
+              title: 'Decision fatigue fixes',
+              preview: 'Tweet 1: Defaults, batches, and GÇ£good enoughGÇ¥ rules so your brain stops renegotiating every hour.',
+            },
+            {
+              title: 'What I would do with a clean-slate week',
+              preview: 'Tweet 1: Sleep, one deep project, one relationship, one admin block. Ruthless simplicity.',
+            },
+            {
+              title: 'Myths about GÇ£disciplineGÇ¥ that do more harm than good',
+              preview: 'Tweet 1: Shame is not a strategy. Here are five reframes that actually change behavior.',
+            },
+          ],
+          hooks: [
+            '"You do not need more motivation. You need a smaller first step."',
+            '[Desk, natural light]\n"The weekly review that keeps me from drifting."',
+            '"If you keep quitting habits by day six, watch this."',
+            '[Text: "Shrink the task"]\n*Example of a tiny next action*',
+            '"Stop collecting advice. Run a two-week experiment."',
+            '[Cold open]\n"Three priorities. Everything else is optional this week."',
+            '"Design your environment so the good choice is the easy choice."',
+            '"Finished beats perfect. Here is why that is not lazy GÇö it is smart."',
+          ],
+          hashtags: [
+            '#DailyInspiration', '#LifeTips', '#PersonalGrowth', '#Mindset', '#Motivation',
+            '#Habits', '#SelfImprovement', '#Goals', '#Lifestyle', '#Growth',
+            '#Inspiration', '#SuccessHabits', '#LevelUp', '#StayConsistent', '#Progress',
+          ],
+          termCaptions: [
+            'Interested in {term}? Ignore the noise and define what GÇ£betterGÇ¥ means for you in one sentence GÇö then act on that.',
+            'A practical way into {term}: learn one idea, apply it the same day, note what changed.',
+            'People exploring {term} often overcomplicate step one. Make step one obvious and small.',
+            'If {term} matters to you this season, schedule it like an appointment GÇö not like a wish.',
+          ],
+          termThreads: [
+            {
+              title: 'A plain-English starter guide',
+              preview: 'Tweet 1: What {term} actually involves day to day, common pitfalls, and a first-week plan that is doable.',
+            },
+            {
+              title: 'Questions to ask before you go deeper',
+              preview: 'Tweet 1: Goals, constraints, and success metrics GÇö so {term} does not become an expensive hobby by accident.',
+            },
+          ],
+          termHooks: [
+            '"Curious about {term}? Here is the honest first step."',
+            '[Direct to camera]\n"What I wish I knew before diving into {term}."',
+            '"Three mistakes beginners make with {term} GÇö and what to do instead."',
+          ],
+          termTags: ['{Term}Tips', '{Term}Life', '{Term}Community', '{Term}Goals', '{Term}Daily'],
+        },
+      };
+
+      function detectDomain(keywords, fullLower) {
+        let best = 'general';
+        let bestScore = 0;
+        for (const [id, pack] of Object.entries(DOMAIN_PACKS)) {
+          if (id === 'general') continue;
+          let score = 0;
+          for (const m of pack.match) {
+            if (keywords.includes(m)) score += 3;
+            else if (fullLower.includes(m)) score += 1;
+          }
+          if (score > bestScore) {
+            bestScore = score;
+            best = id;
+          }
+        }
+        return bestScore > 0 ? best : 'general';
+      }
+
+      /** One distinctive word for rare natural mentions GÇö never the full multi-word dump. */
+      function pickTerm(keywords, pack) {
+        const match = (pack && pack.match) || [];
+        // Prefer keywords that define the domain (fitness over motivation, restaurant over marketing)
+        const domainHits = keywords.filter(
+          (w) => match.includes(w) && !NOISE_WORDS.has(w) && w.length > 1
+        );
+        if (domainHits.length) {
+          return [...domainHits].sort((a, b) => b.length - a.length)[0];
+        }
+        const distinctive = keywords.filter((w) => !NOISE_WORDS.has(w) && !STOP_WORDS.has(w) && w.length > 2);
+        if (!distinctive.length) {
+          const fallback = keywords.filter((w) => !STOP_WORDS.has(w));
+          return fallback[0] || '';
+        }
+        return [...distinctive].sort((a, b) => b.length - a.length)[0];
+      }
+
+      function parseTopic(raw) {
+        const full = (raw || '').trim() || 'your topic';
+        const words = slugify(full);
+        const keywords = words.filter((w) => !STOP_WORDS.has(w) && w.length > 1);
+        const core = keywords.length ? keywords : words.length ? words : ['topic'];
+        const fullLower = full.toLowerCase();
+        const domain = detectDomain(core, fullLower);
+        const pack = DOMAIN_PACKS[domain] || DOMAIN_PACKS.general;
+        const term = pickTerm(core, pack);
+        const Term = capitalize(term);
+        return { full, words, keywords: core, domain, term, Term, pack };
+      }
+
+      function applyTerm(str, ctx) {
+        if (!str) return str;
+        return fill(str, { term: ctx.term || 'this', Term: ctx.Term || 'This' });
+      }
+
+      function generateCaptions(ctx) {
+        const pack = ctx.pack;
+        const pure = shuffle(pack.captions.map((c) => applyTerm(c, ctx)));
+        const withTerm =
+          ctx.term
+            ? shuffle((pack.termCaptions || []).map((c) => applyTerm(c, ctx)))
+            : [];
+        const mixed = [];
+        // Mostly domain-specific lines; sprinkle a few natural term mentions
+        while (mixed.length < 10) {
+          if (mixed.length % 4 === 3 && withTerm.length) {
+            mixed.push(withTerm.pop());
+          } else if (pure.length) {
+            mixed.push(pure.pop());
+          } else if (withTerm.length) {
+            mixed.push(withTerm.pop());
+          } else {
+            break;
+          }
+        }
+        return mixed.slice(0, 10);
+      }
+
+      function generateThreads(ctx) {
+        const pack = ctx.pack;
+        const base = pack.threads.map((t) => ({
+          title: applyTerm(t.title, ctx),
+          preview: applyTerm(t.preview, ctx),
+        }));
+        const withTerm = ctx.term
+          ? (pack.termThreads || []).map((t) => ({
+              title: applyTerm(t.title, ctx),
+              preview: applyTerm(t.preview, ctx),
+            }))
+          : [];
+        return shuffle([...base, ...withTerm]).slice(0, 5);
+      }
+
+      function generateHooks(ctx) {
+        const pack = ctx.pack;
+        const pure = shuffle(pack.hooks.map((h) => applyTerm(h, ctx)));
+        const withTerm = ctx.term
+          ? shuffle((pack.termHooks || []).map((h) => applyTerm(h, ctx)))
+          : [];
+        const mixed = [];
+        while (mixed.length < 6) {
+          if (mixed.length === 2 && withTerm.length) {
+            mixed.push(withTerm.pop());
+          } else if (pure.length) {
+            mixed.push(pure.pop());
+          } else if (withTerm.length) {
+            mixed.push(withTerm.pop());
+          } else {
+            break;
+          }
+        }
+        return mixed.slice(0, 6);
+      }
+
+      function generateHashtags(ctx) {
+        const tags = new Set();
+        const pack = ctx.pack;
+        const words = ctx.keywords;
+
+        words.forEach((w) => {
+          if (NOISE_WORDS.has(w) && words.length > 1) return;
+          const clean = toHashtagToken(w);
+          if (clean.length > 2) tags.add(`#${clean}`);
+        });
+
+        const distinctive = words.filter((w) => !NOISE_WORDS.has(w) && w.length > 2);
+        if (distinctive.length >= 2) {
+          tags.add(camelHashtag(distinctive.slice(0, 2)));
+          tags.add(camelHashtag(distinctive.slice(-2)));
+        }
+        if (distinctive.length >= 3) {
+          tags.add(camelHashtag(distinctive.slice(0, 3)));
+        }
+
+        (pack.hashtags || []).forEach((h) => tags.add(h));
+
+        if (ctx.term) {
+          (pack.termTags || []).forEach((pattern) => {
+            const tag = applyTerm(pattern, ctx);
+            tags.add(tag.startsWith('#') ? tag : `#${tag}`);
+          });
+        }
+
+        const combined = [...tags].filter((h) => h.length > 2 && h.length < 32);
+        const domainSet = new Set(pack.hashtags || []);
+        const niche = combined.filter((h) => !domainSet.has(h));
+        const domain = combined.filter((h) => domainSet.has(h));
+        return [...shuffle(niche), ...shuffle(domain)].slice(0, 18);
       }
 
       function generateContent(topic) {
-        const words = slugify(topic);
-        const displayTopic = topic.trim() || 'your niche';
+        const ctx = parseTopic(topic);
         return {
-          topic: displayTopic,
-          captions: generateCaptions(displayTopic, words),
-          threads: generateThreads(displayTopic, words),
-          hashtags: generateHashtags(displayTopic, words),
-          hooks: generateHooks(displayTopic, words),
+          topic: ctx.full,
+          captions: generateCaptions(ctx),
+          threads: generateThreads(ctx),
+          hashtags: generateHashtags(ctx),
+          hooks: generateHooks(ctx),
         };
       }
 
-      /* â”€â”€ Render â”€â”€ */
+      /* GöÇGöÇ Render GöÇGöÇ */
       function escapeHtml(str) {
         const div = document.createElement('div');
         div.textContent = str;
@@ -1059,8 +1965,8 @@
             <span class="item-num">${index + 1}</span>
             <div class="item-text">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
             <div class="item-actions">
-              <button class="item-btn" data-copy="${type}" data-index="${index}" title="Copy" aria-label="Copy">ğŸ“‹</button>
-              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="${type}" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'â˜…' : 'â˜†'}</button>
+              <button class="item-btn" data-copy="${type}" data-index="${index}" title="Copy" aria-label="Copy">=ƒôï</button>
+              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="${type}" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'Gÿà' : 'Gÿå'}</button>
             </div>
           </div>`;
       }
@@ -1075,8 +1981,8 @@
               <div class="thread-preview">${escapeHtml(thread.preview)}</div>
             </div>
             <div class="item-actions">
-              <button class="item-btn" data-copy="threads" data-index="${index}" title="Copy" aria-label="Copy">ğŸ“‹</button>
-              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="threads" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'â˜…' : 'â˜†'}</button>
+              <button class="item-btn" data-copy="threads" data-index="${index}" title="Copy" aria-label="Copy">=ƒôï</button>
+              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="threads" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'Gÿà' : 'Gÿå'}</button>
             </div>
           </div>`;
       }
@@ -1143,7 +2049,7 @@
       function getSectionText(section) {
         if (!currentContent) return '';
         const c = currentContent;
-        const lines = [`ContentSpark â€” ${c.topic}`, ''];
+        const lines = [`ContentSpark GÇö ${c.topic}`, ''];
 
         if (section === 'captions' || section === 'all') {
           lines.push('=== SOCIAL MEDIA CAPTIONS ===', '');
@@ -1179,7 +2085,7 @@
         showToast('Exported as text file!');
       }
 
-      /* â”€â”€ Generate flow â”€â”€ */
+      /* GöÇGöÇ Generate flow GöÇGöÇ */
       async function handleGenerate() {
         const topic = topicInput.value.trim();
         if (!topic) {
@@ -1249,19 +2155,19 @@
         if (e.key === 'Escape') closeProModal();
       });
 
-      /* â”€â”€ Init â”€â”€ */
+      /* GöÇGöÇ Init GöÇGöÇ */
       updateFavCount();
       renderFavoritesPanel();
     })();
   </script>
 <div style="text-align: center; margin: 40px 0; padding: 24px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; color: white;">
   <p style="font-size: 1.1rem; margin-bottom: 16px;"><strong>Ready for unlimited generations?</strong></p>
-  <a href="https://thadventure8.gumroad.com/l/tfoikx" target="_blank" style="background: #22c55e; color: #0f172a; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block;">Get ContentSpark Pro â†’</a>
+  <a href="https://thadventure8.gumroad.com/l/tfoikx" target="_blank" style="background: #22c55e; color: #0f172a; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block;">Get ContentSpark Pro ?</a>
   
   <p style="margin-top: 20px; font-size: 0.95rem;">
     Also in the suite: 
-<a href="https://thadwaugh-dev.github.io/dailyboost_new2/" target="_blank" style="color: #6366f1;">DailyBoost</a> Â· 
-<a href="https://thadwaugh-dev.github.io/cateringquote/" target="_blank" style="color: #6366f1;">CateringQuote</a> Â· 
+<a href="https://thadwaugh-dev.github.io/dailyboost_new2/" target="_blank" style="color: #6366f1;">DailyBoost</a> · 
+<a href="https://thadwaugh-dev.github.io/cateringquote/" target="_blank" style="color: #6366f1;">CateringQuote</a> · 
 <a href="https://thadwaugh-dev.github.io/quickinvoice/" target="_blank" style="color: #6366f1;">QuickInvoice</a>
   </p>
 </div>
