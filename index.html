@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ContentSpark GÇö Social Content Generator</title>
+  <title>ContentSpark â€” Social Content Generator</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -496,7 +496,7 @@
     }
 
     .toast.success { border-color: var(--success); }
-    .toast.success::before { content: "G£ô"; color: var(--success); font-weight: 700; }
+    .toast.success::before { content: "âœ“"; color: var(--success); font-weight: 700; }
 
     @keyframes toastIn {
       from { opacity: 0; transform: translateX(20px); }
@@ -572,7 +572,7 @@
     }
 
     .pro-features li::before {
-      content: "G£ª";
+      content: "âœ¦";
       color: #f59e0b;
       font-size: 0.75rem;
     }
@@ -620,20 +620,20 @@
   <div class="app">
     <header>
       <div class="logo">
-        <div class="logo-icon" aria-hidden="true">G£ª</div>
+        <div class="logo-icon" aria-hidden="true">âœ¦</div>
         <div>
           <h1>ContentSpark</h1>
           <p>Social content, instantly</p>
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">=ƒîÖ</button>
+        <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">ğŸŒ™</button>
       </div>
     </header>
 
     <section class="hero">
       <h2>Spark your next <span>viral post</span></h2>
-      <p>Generate captions, thread ideas, hashtags, and video hooks tailored to your niche GÇö in seconds.</p>
+      <p>Generate captions, thread ideas, hashtags, and video hooks tailored to your niche â€” in seconds.</p>
       <div class="input-group">
         <textarea
           class="topic-input"
@@ -655,16 +655,16 @@
       <div class="results-toolbar">
         <div class="topic-label">Content for: <strong id="resultTopic"></strong></div>
         <div class="toolbar-actions">
-          <button class="btn btn-sm" id="copyAllBtn" title="Copy all content">=ƒôï Copy All</button>
-          <button class="btn btn-sm" id="exportBtn" title="Export as text file">=ƒÆ+ Export</button>
-          <button class="btn btn-sm btn-ghost" id="toggleFavoritesBtn" title="View favorites">G¡É Favorites (<span id="favCount">0</span>)</button>
+          <button class="btn btn-sm" id="copyAllBtn" title="Copy all content">ğŸ“‹ Copy All</button>
+          <button class="btn btn-sm" id="exportBtn" title="Export as text file">ğŸ’¾ Export</button>
+          <button class="btn btn-sm btn-ghost" id="toggleFavoritesBtn" title="View favorites">â­ Favorites (<span id="favCount">0</span>)</button>
         </div>
       </div>
 
       <div class="section" id="captionsSection">
         <div class="section-header">
           <div class="section-title">
-            <span>=ƒô¦</span> Social Media Captions
+            <span>ğŸ“±</span> Social Media Captions
             <span class="section-badge">10</span>
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="captions">Copy section</button>
@@ -675,7 +675,7 @@
       <div class="section" id="threadsSection">
         <div class="section-header">
           <div class="section-title">
-            <span>=ƒº¦</span> X / Twitter Thread Ideas
+            <span>ğŸ§µ</span> X / Twitter Thread Ideas
             <span class="section-badge">5</span>
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="threads">Copy section</button>
@@ -686,7 +686,7 @@
       <div class="section" id="hashtagsSection">
         <div class="section-header">
           <div class="section-title">
-            <span>#n+ÅGâú</span> Hashtags
+            <span>#ï¸âƒ£</span> Hashtags
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="hashtags">Copy section</button>
         </div>
@@ -696,7 +696,7 @@
       <div class="section" id="hooksSection">
         <div class="section-header">
           <div class="section-title">
-            <span>=ƒÄ¼</span> Video Script Hooks
+            <span>ğŸ¬</span> Video Script Hooks
           </div>
           <button class="btn btn-sm btn-ghost" data-copy-section="hooks">Copy section</button>
         </div>
@@ -707,20 +707,20 @@
     <section class="favorites-panel section" id="favoritesPanel">
       <div class="section-header">
         <div class="section-title">
-          <span>G¡É</span> Saved Favorites
+          <span>â­</span> Saved Favorites
         </div>
         <button class="btn btn-sm btn-ghost" id="clearFavoritesBtn">Clear all</button>
       </div>
       <div class="section-body" id="favoritesList">
         <div class="empty-state">
-          <div class="emoji">Gÿå</div>
+          <div class="emoji">â˜†</div>
           <p>No favorites yet. Star any item to save it here.</p>
         </div>
       </div>
     </section>
 
     <footer>
-      ContentSpark &copy; 2026 GÇö Built for creators, no API keys required.
+      ContentSpark &copy; 2026 â€” Built for creators, no API keys required.
     </footer>
   </div>
 
@@ -766,7 +766,7 @@
       const favoritesPanel = $('#favoritesPanel');
       const favoritesList = $('#favoritesList');
 
-      /* GöÇGöÇ Theme GöÇGöÇ */
+      /* â”€â”€ Theme â”€â”€ */
       function getPreferredTheme() {
         const saved = localStorage.getItem(STORAGE_THEME);
         if (saved) return saved;
@@ -775,7 +775,7 @@
 
       function setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        themeToggle.textContent = theme === 'dark' ? '=ƒîÖ' : 'GÿÇn+Å';
+        themeToggle.textContent = theme === 'dark' ? 'ğŸŒ™' : 'â˜€ï¸';
         localStorage.setItem(STORAGE_THEME, theme);
       }
 
@@ -786,7 +786,7 @@
         setTheme(next);
       });
 
-      /* GöÇGöÇ Toast GöÇGöÇ */
+      /* â”€â”€ Toast â”€â”€ */
       function showToast(message) {
         const container = $('#toastContainer');
         const toast = document.createElement('div');
@@ -800,7 +800,7 @@
         }, 2800);
       }
 
-      /* GöÇGöÇ Clipboard GöÇGöÇ */
+      /* â”€â”€ Clipboard â”€â”€ */
       async function copyText(text) {
         try {
           await navigator.clipboard.writeText(text);
@@ -820,7 +820,7 @@
         }
       }
 
-      /* GöÇGöÇ Favorites GöÇGöÇ */
+      /* â”€â”€ Favorites â”€â”€ */
       function loadFavorites() {
         try {
           return JSON.parse(localStorage.getItem(STORAGE_FAVORITES) || '[]');
@@ -867,7 +867,7 @@
           const index = parseInt(btn.dataset.index, 10);
           const starred = isFavorited(type, index);
           btn.classList.toggle('favorited', starred);
-          btn.textContent = starred ? 'Gÿà' : 'Gÿå';
+          btn.textContent = starred ? 'â˜…' : 'â˜†';
           btn.setAttribute('aria-label', starred ? 'Remove from favorites' : 'Save to favorites');
         });
       }
@@ -876,7 +876,7 @@
         if (favorites.length === 0) {
           favoritesList.innerHTML = `
             <div class="empty-state">
-              <div class="emoji">Gÿå</div>
+              <div class="emoji">â˜†</div>
               <p>No favorites yet. Star any item to save it here.</p>
             </div>`;
           return;
@@ -888,12 +888,12 @@
             <div class="content-item">
               <span class="item-num">${typeEmoji(f.type)}</span>
               <div class="item-text">
-                <div style="font-size:0.75rem;color:var(--text-faint);margin-bottom:4px">${escapeHtml(f.topic)} -+ ${f.type}</div>
+                <div style="font-size:0.75rem;color:var(--text-faint);margin-bottom:4px">${escapeHtml(f.topic)} Â· ${f.type}</div>
                 ${escapeHtml(f.text)}
               </div>
               <div class="item-actions" style="opacity:1">
-                <button class="item-btn" data-copy-fav="${i}" title="Copy" aria-label="Copy">=ƒôï</button>
-                <button class="item-btn favorited" data-remove-fav="${i}" title="Remove" aria-label="Remove">G£ò</button>
+                <button class="item-btn" data-copy-fav="${i}" title="Copy" aria-label="Copy">ğŸ“‹</button>
+                <button class="item-btn favorited" data-remove-fav="${i}" title="Remove" aria-label="Remove">âœ•</button>
               </div>
             </div>`)
           .join('');
@@ -915,10 +915,10 @@
       }
 
       function typeEmoji(type) {
-        return { captions: '=ƒô¦', threads: '=ƒº¦', hashtags: '#', hooks: '=ƒÄ¼' }[type] || 'G£ª';
+        return { captions: 'ğŸ“±', threads: 'ğŸ§µ', hashtags: '#', hooks: 'ğŸ¬' }[type] || 'âœ¦';
       }
 
-      /* GöÇGöÇ Content Generation GöÇGöÇ */
+      /* â”€â”€ Content Generation â”€â”€ */
       const STOP_WORDS = new Set([
         'a', 'an', 'the', 'and', 'or', 'of', 'for', 'to', 'in', 'on', 'with',
         'how', 'what', 'why', 'your', 'my', 'our', 'about', 'into', 'from',
@@ -926,7 +926,7 @@
         'that', 'this', 'some', 'any', 'all', 'more', 'most', 'very',
       ]);
 
-      // Words that are topic "packaging" GÇö not the subject itself
+      // Words that are topic "packaging" â€” not the subject itself
       const NOISE_WORDS = new Set([
         'recipes', 'recipe', 'tips', 'ideas', 'guides', 'guide', 'hacks', 'secrets',
         'tricks', 'tutorial', 'tutorials', 'examples', 'list', 'checklist', 'plan',
@@ -988,30 +988,30 @@
             'intermittent', 'fasting', 'whole30', 'gluten', 'dairy', 'organic', 'mealprep',
           ],
           captions: [
-            'Ribeye, salt, and a hot pan. Dinner in 15 minutes GÇö no fancy techniques required. =ƒÑ¬',
-            'Meal prep that actually lasts the week:\n\nGÇó batch-cook protein once\nGÇó pre-portion fats\nGÇó keep seasoning simple\n\nFuture-you will be grateful.',
-            'Bored of the same plate every night? Rotate your cooking fats GÇö butter, tallow, ghee, olive oil. Same cut, new flavor.',
+            'Ribeye, salt, and a hot pan. Dinner in 15 minutes â€” no fancy techniques required. ğŸ”¥',
+            'Meal prep that actually lasts the week:\n\nâ€¢ batch-cook protein once\nâ€¢ pre-portion fats\nâ€¢ keep seasoning simple\n\nFuture-you will be grateful.',
+            'Bored of the same plate every night? Rotate your cooking fats â€” butter, tallow, ghee, olive oil. Same cut, new flavor.',
             'Grocery list rule I live by: if it needs a long label, it stays on the shelf. Whole food first.',
             'The underrated kitchen skill: resting meat. Pull it early, tent it, wait. Juicier every time.',
             'Three weeknight wins under 20 minutes:\n\n1. Pan-seared steaks\n2. Scrambled eggs in leftover drippings\n3. Bone broth + leftover roast\n\nSave this for busy nights.',
-            'Unpopular kitchen opinion: you do not need 12 spices. Salt, pepper, and good heat do most of the work. G£¿',
+            'Unpopular kitchen opinion: you do not need 12 spices. Salt, pepper, and good heat do most of the work. âœ¨',
             'If your energy crashes mid-afternoon, look at lunch before you look at willpower. More protein, fewer empty carbs.',
             'Sunday reset plate: protein-heavy, simple sides, zero stress. This is how consistency sticks.',
             'Stop overcomplicating dinner. One protein, one fat, one optional side. That is a complete meal.',
             'What I wish someone told me earlier: buy the best quality meat you can afford, then cook it simply. Quality beats complexity.',
-            'Leftovers strategy: cook once, reheat smart. Slice cold roast thin, re-sear in butter GÇö tastes new again.',
+            'Leftovers strategy: cook once, reheat smart. Slice cold roast thin, re-sear in butter â€” tastes new again.',
             'Hydration matters as much as the plate. Salt your food, drink water, notice how much better you feel by day three.',
-            'POV: you open the fridge and everything is already cooked. That is the real flex. =ƒöô',
-            'Comment GÇ£LISTGÇ¥ if you want my simple weekly shopping list GÇö protein, pantry staples, nothing weird. =ƒôï',
+            'POV: you open the fridge and everything is already cooked. That is the real flex. ğŸ‘‡',
+            'Comment â€œLISTâ€ if you want my simple weekly shopping list â€” protein, pantry staples, nothing weird. ğŸ‘‡',
           ],
           threads: [
             {
               title: 'A simple week of dinners (no overwhelm)',
-              preview: 'Tweet 1: Here is a 7-day dinner rotation that stays interesting without a 40-ingredient shopping list. Bookmark this =ƒº¦',
+              preview: 'Tweet 1: Here is a 7-day dinner rotation that stays interesting without a 40-ingredient shopping list. Bookmark this ğŸ‘‡',
             },
             {
               title: 'Mistakes that ruin a good piece of meat',
-              preview: 'Tweet 1: Crowding the pan, skipping the rest, fear of salt GÇö fix these three and your steaks jump a level.',
+              preview: 'Tweet 1: Crowding the pan, skipping the rest, fear of salt â€” fix these three and your steaks jump a level.',
             },
             {
               title: 'Pantry staples that make cooking effortless',
@@ -1023,7 +1023,7 @@
             },
             {
               title: 'Myths about this way of eating that waste your time',
-              preview: 'Tweet 1: GÇ£You need endless variety or you will fail.GÇ¥ Not true. Here are 5 myths and what to do instead.',
+              preview: 'Tweet 1: â€œYou need endless variety or you will fail.â€ Not true. Here are 5 myths and what to do instead.',
             },
             {
               title: 'Flavor without complicated recipes',
@@ -1031,7 +1031,7 @@
             },
             {
               title: 'What I would do if I was starting over tomorrow',
-              preview: 'Tweet 1: Three habits only GÇö shopping, batch cooking, and a default emergency meal. That is the whole system.',
+              preview: 'Tweet 1: Three habits only â€” shopping, batch cooking, and a default emergency meal. That is the whole system.',
             },
           ],
           hooks: [
@@ -1039,7 +1039,7 @@
             '"Stop boiling flavor out of your food. Here is the 20-second fix."',
             '[Text on screen: "3 meals. 5 ingredients. Full week."]\n*Quick cuts of plated food*',
             '"If your steak is dry, it is probably one of these three mistakes."',
-            '[Open fridge GåÆ fully prepped containers]\n"This is what actually makes healthy eating stick."',
+            '[Open fridge â€” fully prepped containers]\n"This is what actually makes healthy eating stick."',
             '"Nobody told me this about salt until year two. Game changer."',
             '[Cold open, no music]\n"Throw out half your spice rack. Keep these four."',
             '"15-minute dinner that tastes like you tried. Full details in the caption."',
@@ -1075,30 +1075,30 @@
             'mobility', 'stretch', 'calisthenics', 'marathon', 'physique',
           ],
           captions: [
-            'Progress is rarely dramatic in the mirror day to day. It shows up in the weights you no longer fear. =ƒÆ¬',
-            'Warm-up that actually helps:\n\nGÇó 5 min easy movement\nGÇó 2 activation drills\nGÇó first set light on purpose\n\nSkip ego. Keep joints.',
-            'If you miss a session, the win is coming back GÇö not punishing yourself with a double workout.',
+            'Progress is rarely dramatic in the mirror day to day. It shows up in the weights you no longer fear. ğŸ’ª',
+            'Warm-up that actually helps:\n\nâ€¢ 5 min easy movement\nâ€¢ 2 activation drills\nâ€¢ first set light on purpose\n\nSkip ego. Keep joints.',
+            'If you miss a session, the win is coming back â€” not punishing yourself with a double workout.',
             'Three form cues that fix most lifts: brace, control the eccentric, full range you can own.',
             'Sleep is a training variable. Chase PRs while sleeping 5 hours and you are training with the handbrake on.',
-            'Unpopular gym opinion: walking more days per week beats one heroic cardio session you dread. G£¿',
+            'Unpopular gym opinion: walking more days per week beats one heroic cardio session you dread. âœ¨',
             'Deload week is not weakness. It is how strong people stay in the game for years.',
-            'POV: you finally track workouts and realize you were not progressive overloading GÇö you were improvising. =ƒöô',
+            'POV: you finally track workouts and realize you were not progressive overloading â€” you were improvising. ğŸ‘‡',
             'Protein target first. Steps second. Fancy programs third. Order matters.',
-            'Sunday reminder: rest days build the body too. Show up fresher Monday. Gÿò',
-            'The best program is the one you can repeat when life gets messy GÇö not the one that looks elite on paper.',
+            'Sunday reminder: rest days build the body too. Show up fresher Monday. âœ¨',
+            'The best program is the one you can repeat when life gets messy â€” not the one that looks elite on paper.',
             'Stop adding exercises. Get better at the big ones. Squat, hinge, push, pull, carry.',
             'Soreness is not a scoreboard. Performance and recovery are.',
-            'Comment GÇ£PLANGÇ¥ for a simple 3-day full-body outline you can start this week. =ƒôï',
+            'Comment â€œPLANâ€ for a simple 3-day full-body outline you can start this week. ğŸ‘‡',
             'Before vs. after 90 days of boring consistency. Same gym. Different standards.',
           ],
           threads: [
             {
               title: 'A no-fluff beginner strength template',
-              preview: 'Tweet 1: Three days a week, compound lifts, clear progression. Steal this structure if you are tired of random workouts =ƒº¦',
+              preview: 'Tweet 1: Three days a week, compound lifts, clear progression. Steal this structure if you are tired of random workouts ğŸ‘‡',
             },
             {
               title: 'Form mistakes I see every week (and quick fixes)',
-              preview: 'Tweet 1: Rounded backs, half reps, rushing rest GÇö here is how to clean each one up.',
+              preview: 'Tweet 1: Rounded backs, half reps, rushing rest â€” here is how to clean each one up.',
             },
             {
               title: 'How to progress when the scale will not move',
@@ -1110,11 +1110,11 @@
             },
             {
               title: 'What I would do with only 3 hours a week',
-              preview: 'Tweet 1: Limited time is not an excuse GÇö it is a filter. Here is the exact priority order.',
+              preview: 'Tweet 1: Limited time is not an excuse â€” it is a filter. Here is the exact priority order.',
             },
             {
               title: 'Myths that keep people stuck in the gym',
-              preview: 'Tweet 1: GÇ£No pain, no gain.GÇ¥ GÇ£Cardio kills gains.GÇ¥ Five myths, five better defaults.',
+              preview: 'Tweet 1: â€œNo pain, no gain.â€ â€œCardio kills gains.â€ Five myths, five better defaults.',
             },
           ],
           hooks: [
@@ -1122,7 +1122,7 @@
             '[Gym floor, mid-set]\n"If your lower back always hurts after deadlifts, watch this."',
             '[Text: "Form fix in 10 seconds"]\n*Side-by-side bad vs. good rep*',
             '"You do not need a new program. You need progressive overload. Here is how."',
-            '[Direct to camera, slightly out of breath]\n"The recovery tip nobody posts about because it is boring GÇö and it works."',
+            '[Direct to camera, slightly out of breath]\n"The recovery tip nobody posts about because it is boring â€” and it works."',
             '"Three exercises. Full body. Busy-week proof."',
             '[Cold open]\n"Throw out the scale for 30 days. Track these instead."',
             '"Warm up wrong and you are leaving strength on the table."',
@@ -1134,7 +1134,7 @@
           ],
           termCaptions: [
             'Building a {term} habit beats hunting for the perfect routine. Show up, log it, improve one variable next time.',
-            'If {term} is your focus right now, protect sleep and protein like they are part of the workout GÇö because they are.',
+            'If {term} is your focus right now, protect sleep and protein like they are part of the workout â€” because they are.',
           ],
           termThreads: [
             {
@@ -1157,25 +1157,25 @@
           ],
           captions: [
             'Clarity converts. If a stranger cannot explain what you sell in one sentence, fix that before you buy more ads.',
-            'Offer stack that works:\n\nGÇó clear problem\nGÇó specific outcome\nGÇó proof\nGÇó simple next step\n\nPretty branding comes second.',
-            'Unpopular take: more features rarely fix a weak offer. A tighter promise does. G£¿',
-            'This weekGÇÖs growth lever is not a new tool. It is 10 honest conversations with people who already bought.',
+            'Offer stack that works:\n\nâ€¢ clear problem\nâ€¢ specific outcome\nâ€¢ proof\nâ€¢ simple next step\n\nPretty branding comes second.',
+            'Unpopular take: more features rarely fix a weak offer. A tighter promise does. âœ¨',
+            'This weekâ€™s growth lever is not a new tool. It is 10 honest conversations with people who already bought.',
             'Price is a story about value. Raise the outcome you deliver before you obsess over the number on the page.',
-            'POV: you stopped posting random tips and started showing real customer results. Inquiries change overnight. =ƒöô',
-            'If your calendar is full but revenue is flat, you do not have a hustle problem GÇö you have an offer problem.',
-            'Simple weekly operating rhythm: sell MonGÇôWed, deliver ThuGÇôFri, review Saturday, rest Sunday.',
+            'POV: you stopped posting random tips and started showing real customer results. Inquiries change overnight. ğŸ‘‡',
+            'If your calendar is full but revenue is flat, you do not have a hustle problem â€” you have an offer problem.',
+            'Simple weekly operating rhythm: sell Monâ€“Wed, deliver Thuâ€“Fri, review Saturday, rest Sunday.',
             'Cold outreach that does not feel gross: research, one sharp observation, one soft ask. No novel-length pitches.',
             'Systems beat motivation when client work piles up. Document once, delegate next, automate last.',
-            'Your competition is not GÇ£everyone in the industry.GÇ¥ It is the status quo your customer already lives with.',
-            'Ship the MVP page. Collect replies. Improve from real objections GÇö not from your imagination.',
-            'Comment GÇ£OFFERGÇ¥ for the 5-question checklist I use before launching anything new. =ƒôï',
-            'Weekend note for builders: rest is part of the strategy. Sharp judgment needs sleep. Gÿò',
+            'Your competition is not â€œeveryone in the industry.â€ It is the status quo your customer already lives with.',
+            'Ship the MVP page. Collect replies. Improve from real objections â€” not from your imagination.',
+            'Comment â€œOFFERâ€ for the 5-question checklist I use before launching anything new. ğŸ‘‡',
+            'Weekend note for builders: rest is part of the strategy. Sharp judgment needs sleep. âœ¨',
             'Before vs. after tightening the offer. Same traffic. Different close rate.',
           ],
           threads: [
             {
               title: 'How to write an offer people actually understand',
-              preview: 'Tweet 1: Problem, promise, proof, path. Four lines that outperform a 12-section sales page. LetGÇÖs break each down =ƒº¦',
+              preview: 'Tweet 1: Problem, promise, proof, path. Four lines that outperform a 12-section sales page. Letâ€™s break each down ğŸ‘‡',
             },
             {
               title: 'Where early-stage founders waste money',
@@ -1183,7 +1183,7 @@
             },
             {
               title: 'A weekly sales cadence you can keep',
-              preview: 'Tweet 1: Prospecting, follow-ups, demos, debriefs GÇö a realistic schedule for solo operators.',
+              preview: 'Tweet 1: Prospecting, follow-ups, demos, debriefs â€” a realistic schedule for solo operators.',
             },
             {
               title: 'Pricing mistakes that quietly kill profit',
@@ -1203,7 +1203,7 @@
             '[Whiteboard]\n"Stop buying ads until you can fill in these four blanks."',
             '"I raised prices and got more yeses. Here is why that happens."',
             '[Split screen: busy vs. profitable]\n"Same hours. Different offer design."',
-            '"Cold email that gets replies GÇö without sounding desperate."',
+            '"Cold email that gets replies â€” without sounding desperate."',
             '[Direct to camera]\n"If clients ghost after the proposal, it is usually this."',
             '"Three numbers every small business should know by heart."',
             '[Cold open]\n"Delete half your services. Watch what happens to profit."',
@@ -1214,13 +1214,13 @@
             '#ClientWork', '#BusinessOwner', '#GrowthMarketing', '#OfferDesign', '#B2B',
           ],
           termCaptions: [
-            'If you work in {term}, lead with outcomes your buyer already wants GÇö not with industry jargon they have to decode.',
+            'If you work in {term}, lead with outcomes your buyer already wants â€” not with industry jargon they have to decode.',
             'A strong {term} business makes the next step obvious. Confusion is the real competitor.',
           ],
           termThreads: [
             {
               title: 'Practical growth ideas for {term} operators',
-              preview: 'Tweet 1: Tactics that fit real calendars GÇö not theory. Starting with the highest-leverage move first.',
+              preview: 'Tweet 1: Tactics that fit real calendars â€” not theory. Starting with the highest-leverage move first.',
             },
           ],
           termHooks: [
@@ -1238,25 +1238,25 @@
           ],
           captions: [
             'Ship smaller. A narrow tool people finish using beats a platform nobody adopts.',
-            'Debugging mindset: reproduce, isolate, fix, prove. Skipping GÇ£reproduceGÇ¥ is how you lose an afternoon.',
-            'Unpopular eng take: documentation is a product feature. Future-you is a user. G£¿',
-            'AI tip that actually saves time: give the model constraints, examples, and a definition of done GÇö not a vague wish.',
-            'POV: you deleted half the backlog and velocity went up. Focus is a performance feature. =ƒöô',
+            'Debugging mindset: reproduce, isolate, fix, prove. Skipping â€œreproduceâ€ is how you lose an afternoon.',
+            'Unpopular eng take: documentation is a product feature. Future-you is a user. âœ¨',
+            'AI tip that actually saves time: give the model constraints, examples, and a definition of done â€” not a vague wish.',
+            'POV: you deleted half the backlog and velocity went up. Focus is a performance feature. ğŸ‘‡',
             'Read the error message fully before you Google. It is right more often than your first guess.',
-            'Good PR description: what changed, why, how to test. Reviewers should not need a s+¬ance.',
+            'Good PR description: what changed, why, how to test. Reviewers should not need a seance.',
             'Automation rule: if you did it three times manually this week, script it or template it.',
             'Security basics still win: least privilege, dependency updates, and not pasting secrets into tickets.',
             'Weekend project idea: solve one annoying workflow for yourself. Dogfood it for a week. Then decide if it is real.',
             'Product lesson: users do not want more settings. They want the default path to work.',
-            'Comment GÇ£STACKGÇ¥ for a lean starter tool list for indie builders (no enterprise bloat). =ƒôï',
-            'Latency, clarity, reliability GÇö pick the order that matches your users. Pretty UI cannot save a broken core loop.',
+            'Comment â€œSTACKâ€ for a lean starter tool list for indie builders (no enterprise bloat). ğŸ‘‡',
+            'Latency, clarity, reliability â€” pick the order that matches your users. Pretty UI cannot save a broken core loop.',
             'Before vs. after adding observability. Same bugs. Much faster fixes.',
-            'If onboarding needs a call every time, the product is incomplete GÇö not the user.',
+            'If onboarding needs a call every time, the product is incomplete â€” not the user.',
           ],
           threads: [
             {
               title: 'How I scope an MVP that can actually ship',
-              preview: 'Tweet 1: Cut features until the core loop is undeniable. Here is the checklist I use before writing code =ƒº¦',
+              preview: 'Tweet 1: Cut features until the core loop is undeniable. Here is the checklist I use before writing code ğŸ‘‡',
             },
             {
               title: 'Prompt patterns that produce usable output',
@@ -1281,9 +1281,9 @@
           ],
           hooks: [
             '"Stop building features. Fix the core loop first."',
-            '[Screen recording]\n"This prompt structure 10xGÇÖd how useful the modelGÇÖs answers got."',
+            '[Screen recording]\n"This prompt structure 10xâ€™d how useful the modelâ€™s answers got."',
             '"If your app needs a tutorial video to be usable, watch this."',
-            '[Terminal + coffee]\n"The debugging step everyone skips GÇö and regrets."',
+            '[Terminal + coffee]\n"The debugging step everyone skips â€” and regrets."',
             '"Three automations every solo developer should set up this week."',
             '[Cold open]\n"Delete half your backlog. Here is how to choose what stays."',
             '"Your onboarding is leaking users. One fix."',
@@ -1295,7 +1295,7 @@
             '#WebDev', '#IndieHacker', '#Programming', '#DataScience', '#NoCode',
           ],
           termCaptions: [
-            'Working with {term}? Optimize for a clear user outcome first GÇö clever implementation second.',
+            'Working with {term}? Optimize for a clear user outcome first â€” clever implementation second.',
             'A practical {term} workflow beats a theoretical perfect architecture every time.',
           ],
           termThreads: [
@@ -1317,26 +1317,26 @@
             'bitcoin', 'realestate', 'mortgage', 'tax', 'taxes', 'income', 'fire',
           ],
           captions: [
-            'Pay yourself first is not a slogan GÇö it is an automatic transfer on payday. Systems beat good intentions.',
-            'Budget that survives real life:\n\nGÇó fixed costs\nGÇó true expenses sinking funds\nGÇó fun money without guilt\n\nRestriction without a pressure valve fails.',
-            'Unpopular money take: a boring index portfolio outperforms most GÇ£hot tipsGÇ¥ you will hear at dinner. G£¿',
+            'Pay yourself first is not a slogan â€” it is an automatic transfer on payday. Systems beat good intentions.',
+            'Budget that survives real life:\n\nâ€¢ fixed costs\nâ€¢ true expenses sinking funds\nâ€¢ fun money without guilt\n\nRestriction without a pressure valve fails.',
+            'Unpopular money take: a boring index portfolio outperforms most â€œhot tipsâ€ you will hear at dinner. âœ¨',
             'High income does not fix lifestyle creep. Track the gap between earn and keep.',
             'Debt order of operations: list balances, pick a method (avalanche or snowball), automate the attack, celebrate milestones.',
-            'POV: you finally know your monthly number GÇö the true cost of your life. Decisions get easier. =ƒöô',
+            'POV: you finally know your monthly number â€” the true cost of your life. Decisions get easier. ğŸ‘‡',
             'Emergency fund first, optimization later. Fancy strategies on a fragile base are cosplay.',
             'Investing lesson: time in the market usually beats timing the market. Behavior is the edge.',
             'Before a big purchase, wait 72 hours and calculate hours-of-work cost. Emotion cools; clarity rises.',
-            'Sunday money date: 20 minutes, same checklist, every week. Calm compounds. Gÿò',
+            'Sunday money date: 20 minutes, same checklist, every week. Calm compounds. âœ¨',
             'Tax-aware is not tax-obsessed. Use the accounts available to you; avoid scams promising miracles.',
-            'Comment GÇ£STACKGÇ¥ for a simple account setup order (emergency GåÆ retirement GåÆ taxable). =ƒôï',
-            'If your plan only works when markets are up, it is not a plan GÇö it is a hope.',
+            'Comment â€œSTACKâ€ for a simple account setup order (emergency â€” retirement â€” taxable). ğŸ‘‡',
+            'If your plan only works when markets are up, it is not a plan â€” it is a hope.',
             'Teach kids one money habit early: separate spend / save / give jars. Identity forms young.',
             'Wealth is options. Build a life where a bad month does not become a crisis.',
           ],
           threads: [
             {
               title: 'A simple money system for busy people',
-              preview: 'Tweet 1: Four accounts, three automatic transfers, one weekly review. Steal this if spreadsheets stress you out =ƒº¦',
+              preview: 'Tweet 1: Four accounts, three automatic transfers, one weekly review. Steal this if spreadsheets stress you out ğŸ‘‡',
             },
             {
               title: 'Investing basics without the noise',
@@ -1348,7 +1348,7 @@
             },
             {
               title: 'Lifestyle creep checkpoints',
-              preview: 'Tweet 1: Raises, windfalls, and moving cities GÇö the moments people quietly get poorer.',
+              preview: 'Tweet 1: Raises, windfalls, and moving cities â€” the moments people quietly get poorer.',
             },
             {
               title: 'What I would do with my first $1,000 to invest',
@@ -1356,7 +1356,7 @@
             },
             {
               title: 'Money myths that keep people stuck',
-              preview: 'Tweet 1: GÇ£I need a high income first.GÇ¥ GÇ£Investing is gambling.GÇ¥ Five myths, five better frames.',
+              preview: 'Tweet 1: â€œI need a high income first.â€ â€œInvesting is gambling.â€ Five myths, five better frames.',
             },
           ],
           hooks: [
@@ -1367,7 +1367,7 @@
             '"Debt payoff that does not require becoming a monk."',
             '[Direct to camera]\n"Index funds are boring. That is the point."',
             '"Three numbers that tell you if your finances are healthy."',
-            '[Cold open]\n"Cancel this subscription category first GÇö biggest quiet leak."',
+            '[Cold open]\n"Cancel this subscription category first â€” biggest quiet leak."',
           ],
           hashtags: [
             '#PersonalFinance', '#MoneyTips', '#Investing', '#Budgeting', '#WealthBuilding',
@@ -1376,12 +1376,12 @@
           ],
           termCaptions: [
             'Curious about {term}? Learn the risks and time horizon before you learn the hype cycle.',
-            'A calm approach to {term} starts with an emergency buffer and a written rule set GÇö not vibes.',
+            'A calm approach to {term} starts with an emergency buffer and a written rule set â€” not vibes.',
           ],
           termThreads: [
             {
               title: 'A grounded intro to {term}',
-              preview: 'Tweet 1: Definitions, risks, and a starter checklist GÇö no hype, no guru energy.',
+              preview: 'Tweet 1: Definitions, risks, and a starter checklist â€” no hype, no guru energy.',
             },
           ],
           termHooks: [
@@ -1399,24 +1399,24 @@
           captions: [
             'A calm morning is usually built the night before: phone outside the bedroom, clothes ready, one clear first task.',
             'Nervous system tip: longer exhales than inhales for two minutes. Simple, free, surprisingly effective.',
-            'Unpopular take: you do not need a perfect morning routine. You need one anchor habit that survives bad days. G£¿',
-            'If everything is urgent, nothing is. Pick three priorities. Let the rest be tomorrowGÇÖs problem.',
-            'POV: you stopped treating rest like a reward and started treating it like maintenance. Energy returns. =ƒöô',
-            'Journaling prompt when your head is loud: GÇ£What is mine to do today GÇö and what is not?GÇ¥',
+            'Unpopular take: you do not need a perfect morning routine. You need one anchor habit that survives bad days. âœ¨',
+            'If everything is urgent, nothing is. Pick three priorities. Let the rest be tomorrowâ€™s problem.',
+            'POV: you stopped treating rest like a reward and started treating it like maintenance. Energy returns. ğŸ‘‡',
+            'Journaling prompt when your head is loud: â€œWhat is mine to do today â€” and what is not?â€',
             'Sleep consistency beats sleep duration hacks. Same wind-down, same window, most nights.',
             'Boundaries are not walls; they are doors with locks you control. Practice a short, kind no.',
             'Walk outside without headphones once this week. Let your brain unsupervised for 20 minutes.',
-            'Sunday reset: tidy one surface, prep one meal, write three priorities. That is enough. Gÿò',
+            'Sunday reset: tidy one surface, prep one meal, write three priorities. That is enough. âœ¨',
             'Burnout prevention looks boring: sleep, protein, sunlight, fewer tabs, real breaks.',
-            'Comment GÇ£RESETGÇ¥ for a 15-minute evening shutdown checklist. =ƒôï',
+            'Comment â€œRESETâ€ for a 15-minute evening shutdown checklist. ğŸ‘‡',
             'Motivation follows action more often than it leads it. Start tiny; let momentum argue for you.',
-            'Compare less. Measure your week against last monthGÇÖs you GÇö not a strangerGÇÖs highlight reel.',
+            'Compare less. Measure your week against last monthâ€™s you â€” not a strangerâ€™s highlight reel.',
             'Hydrate, move, message one person you care about. A surprisingly complete baseline day.',
           ],
           threads: [
             {
               title: 'A realistic anti-burnout checklist',
-              preview: 'Tweet 1: Not a 30-step guru routine GÇö seven levers that actually move energy and mood =ƒº¦',
+              preview: 'Tweet 1: Not a 30-step guru routine â€” seven levers that actually move energy and mood ğŸ‘‡',
             },
             {
               title: 'Focus system for distracted brains',
@@ -1424,7 +1424,7 @@
             },
             {
               title: 'Sleep improvements that compound',
-              preview: 'Tweet 1: Light, caffeine timing, wind-down, and temperature GÇö small knobs, big results.',
+              preview: 'Tweet 1: Light, caffeine timing, wind-down, and temperature â€” small knobs, big results.',
             },
             {
               title: 'How to rebuild a habit after falling off',
@@ -1436,7 +1436,7 @@
             },
             {
               title: 'What I would do if my stress felt unmanageable',
-              preview: 'Tweet 1: Safety first, basics second, support third. A plain sequence GÇö not toxic positivity.',
+              preview: 'Tweet 1: Safety first, basics second, support third. A plain sequence â€” not toxic positivity.',
             },
           ],
           hooks: [
@@ -1456,12 +1456,12 @@
           ],
           termCaptions: [
             'If {term} is on your mind lately, start with basics you control today: sleep window, one walk, one honest check-in.',
-            'Improving {term} is rarely one breakthrough GÇö it is a pile of small, repeatable choices.',
+            'Improving {term} is rarely one breakthrough â€” it is a pile of small, repeatable choices.',
           ],
           termThreads: [
             {
               title: 'Small experiments for better {term}',
-              preview: 'Tweet 1: Low-pressure trials you can run this week GÇö measure how you feel, keep what works.',
+              preview: 'Tweet 1: Low-pressure trials you can run this week â€” measure how you feel, keep what works.',
             },
           ],
           termHooks: [
@@ -1478,24 +1478,24 @@
           captions: [
             'Skincare order that prevents most product pile-ups: cleanse, treat, moisturize, SPF. Master that before you collect serums.',
             'Patch test new actives. Your face is not a clearance rack.',
-            'Unpopular beauty take: sleep and SPF outperform most miracle jars. G£¿',
-            'Capsule wardrobe tip: if it does not work with three things you already own, it is a maybe GÇö not a yes.',
-            'POV: you simplified to fewer, better products and your skin finally calmed down. =ƒöô',
+            'Unpopular beauty take: sleep and SPF outperform most miracle jars. âœ¨',
+            'Capsule wardrobe tip: if it does not work with three things you already own, it is a maybe â€” not a yes.',
+            'POV: you simplified to fewer, better products and your skin finally calmed down. ğŸ‘‡',
             'Makeup that lasts: prep skin, set strategically, blot mid-day instead of piling on more product.',
-            'Hair health is mostly gentle handling GÇö less heat, softer ties, trims before the split-travel tour.',
-            'Sunday reset: clean brushes, check expirations, restock the one SPF you actually finish. Gÿò',
+            'Hair health is mostly gentle handling â€” less heat, softer ties, trims before the split-travel tour.',
+            'Sunday reset: clean brushes, check expirations, restock the one SPF you actually finish. âœ¨',
             'Ingredient literacy beats brand hype. Learn what retinol, acids, and niacinamide do before stacking them.',
-            'Comment GÇ£ROUTINEGÇ¥ for a minimal AM/PM template you can personalize. =ƒôï',
-            'Glow is often hydration and light GÇö not seventeen layers.',
+            'Comment â€œROUTINEâ€ for a minimal AM/PM template you can personalize. ğŸ‘‡',
+            'Glow is often hydration and light â€” not seventeen layers.',
             'Style shortcut: one strong silhouette, neutral base, one point of interest. Camera-ready without chaos.',
-            'If it stings and burns every time, that is not GÇ£workingGÇ¥ GÇö that is irritation. Pause and reassess.',
+            'If it stings and burns every time, that is not â€œworkingâ€ â€” that is irritation. Pause and reassess.',
             'Before vs. after consistent SPF for a season. Quiet change, loud difference in photos.',
             'Shop your stash month: use what you own before the next haul. Your shelf (and budget) will thank you.',
           ],
           threads: [
             {
               title: 'A minimal routine that still works',
-              preview: 'Tweet 1: Four steps, clear order, room for one active. Steal this if your shelf is overcrowded =ƒº¦',
+              preview: 'Tweet 1: Four steps, clear order, room for one active. Steal this if your shelf is overcrowded ğŸ‘‡',
             },
             {
               title: 'How to introduce actives without wrecking your barrier',
@@ -1503,11 +1503,11 @@
             },
             {
               title: 'Building outfits from a small closet',
-              preview: 'Tweet 1: Color story, repeatable formulas, and the GÇ£three-pairGÇ¥ rule for shoes.',
+              preview: 'Tweet 1: Color story, repeatable formulas, and the â€œthree-pairâ€ rule for shoes.',
             },
             {
               title: 'Product myths that waste money',
-              preview: 'Tweet 1: GÇ£Natural means safe.GÇ¥ GÇ£More steps means better skin.GÇ¥ Five myths, five better defaults.',
+              preview: 'Tweet 1: â€œNatural means safe.â€ â€œMore steps means better skin.â€ Five myths, five better defaults.',
             },
             {
               title: 'Travel beauty kit that is actually light',
@@ -1515,7 +1515,7 @@
             },
             {
               title: 'What I would buy first with a tight budget',
-              preview: 'Tweet 1: SPF, moisturizer, gentle cleanser GÇö then stop until those are habits.',
+              preview: 'Tweet 1: SPF, moisturizer, gentle cleanser â€” then stop until those are habits.',
             },
           ],
           hooks: [
@@ -1557,15 +1557,15 @@
           captions: [
             'Packing rule: if you hesitate, it stays home. Laundry exists; sore shoulders do not need extra jackets.',
             'Trip planning that reduces stress: book the first night and the airport transfer first. Momentum beats perfect itineraries.',
-            'Unpopular travel take: fewer cities, more days each. Depth over passport stamps. G£¿',
-            'POV: you built buffer time between connections and actually enjoyed the journey. =ƒöô',
+            'Unpopular travel take: fewer cities, more days each. Depth over passport stamps. âœ¨',
+            'POV: you built buffer time between connections and actually enjoyed the journey. ğŸ‘‡',
             'Local food tip: follow lunch crowds, not only influencer maps. Busy kitchens turn tables for a reason.',
             'Money on the road: notify your bank, carry a backup card separately, keep a small cash float.',
             'Photo tip: wake up for one early morning in each place. Empty streets change everything.',
-            'Sunday before departure: download offline maps, confirm check-in, charge power bank. Future-you relaxes. Gÿò',
-            'Souvenirs worth buying: things you will use weekly at home GÇö not things that live in a drawer.',
-            'Comment GÇ£PACKGÇ¥ for my carry-on checklist (clothing formula + tech + documents). =ƒôï',
-            'Slow travel is a luxury you can create: one neighborhood caf+¬, repeat visits, learn two streets well.',
+            'Sunday before departure: download offline maps, confirm check-in, charge power bank. Future-you relaxes. âœ¨',
+            'Souvenirs worth buying: things you will use weekly at home â€” not things that live in a drawer.',
+            'Comment â€œPACKâ€ for my carry-on checklist (clothing formula + tech + documents). ğŸ‘‡',
+            'Slow travel is a luxury you can create: one neighborhood cafe, repeat visits, learn two streets well.',
             'Jet lag softener: light exposure, hydrate, align meals to local time on day one.',
             'Safety baseline: share live location with one person, know the local emergency number, trust discomfort.',
             'Before vs. after planning rest days into the itinerary. Same trip, better memories.',
@@ -1574,7 +1574,7 @@
           threads: [
             {
               title: 'How I plan a trip without spreadsheet hell',
-              preview: 'Tweet 1: Anchors first (sleep + arrival), then 1GÇô2 priorities per day. Flexible beats fragile =ƒº¦',
+              preview: 'Tweet 1: Anchors first (sleep + arrival), then 1â€“2 priorities per day. Flexible beats fragile ğŸ‘‡',
             },
             {
               title: 'Carry-on only for a week (really)',
@@ -1599,7 +1599,7 @@
           ],
           hooks: [
             '"Stop overpacking. Here is the one-week carry-on formula."',
-            '[Airport walkway]\n"The first thing I book on every trip GÇö and why."',
+            '[Airport walkway]\n"The first thing I book on every trip â€” and why."',
             '"Jet lag hack that is free and actually helps."',
             '[Map + notebook]\n"How to plan a day that does not exhaust you."',
             '"Tourist-trap food vs. where locals actually eat."',
@@ -1613,12 +1613,12 @@
             '#DigitalNomad', '#TravelBlog', '#RoadTrip', '#TravelLife', '#SeeTheWorld',
           ],
           termCaptions: [
-            'Dreaming about {term}? Start with dates, budget ceiling, and one non-negotiable experience GÇö then plan around those.',
+            'Dreaming about {term}? Start with dates, budget ceiling, and one non-negotiable experience â€” then plan around those.',
           ],
           termThreads: [
             {
               title: 'Planning notes for a {term} trip',
-              preview: 'Tweet 1: Timing, neighborhoods, and pacing so you come home tired in a good way GÇö not wrecked.',
+              preview: 'Tweet 1: Timing, neighborhoods, and pacing so you come home tired in a good way â€” not wrecked.',
             },
           ],
           termHooks: [
@@ -1635,16 +1635,16 @@
           ],
           captions: [
             'Learning stickiness: teach it back in plain words within 24 hours. If you cannot explain it, you do not own it yet.',
-            'Study block that works: 25GÇô40 minutes focus, 5 minute break, one sentence summary. Repeat.',
-            'Unpopular education take: more highlights are not more learning. Retrieval practice is. G£¿',
-            'POV: you closed every extra tab and suddenly the chapter made sense. =ƒöô',
-            'For parents: curiosity questions beat quiz-show questions. GÇ£What surprised you?GÇ¥ opens more doors than GÇ£What is the capital?GÇ¥',
+            'Study block that works: 25â€“40 minutes focus, 5 minute break, one sentence summary. Repeat.',
+            'Unpopular education take: more highlights are not more learning. Retrieval practice is. âœ¨',
+            'POV: you closed every extra tab and suddenly the chapter made sense. ğŸ‘‡',
+            'For parents: curiosity questions beat quiz-show questions. â€œWhat surprised you?â€ opens more doors than â€œWhat is the capital?â€',
             'Notes upgrade: questions in the margin, not only transcribed slides.',
             'Sleep after studying is part of studying. Memory consolidation is not optional biology.',
-            'Sunday plan: three outcomes for the week, not seventeen. Ambition without triage is anxiety. Gÿò',
-            'Comment GÇ£METHODGÇ¥ for a simple weekly study planner template. =ƒôï',
+            'Sunday plan: three outcomes for the week, not seventeen. Ambition without triage is anxiety. âœ¨',
+            'Comment â€œMETHODâ€ for a simple weekly study planner template. ğŸ‘‡',
             'If a course feels overwhelming, shrink the next action to ten minutes. Start creates momentum.',
-            'Feedback loop: attempt, check, correct, re-attempt. Skipping GÇ£re-attemptGÇ¥ freezes mistakes in place.',
+            'Feedback loop: attempt, check, correct, re-attempt. Skipping â€œre-attemptâ€ freezes mistakes in place.',
             'Teachers and creators: examples first, jargon second. Understanding is the product.',
             'Before vs. after active recall. Same hours, better exam nerves.',
             'Phone in another room is the highest-ROI study tool you already own.',
@@ -1653,7 +1653,7 @@
           threads: [
             {
               title: 'How to study so it actually sticks',
-              preview: 'Tweet 1: Retrieval, spacing, interleaving GÇö plain English, no academic fog =ƒº¦',
+              preview: 'Tweet 1: Retrieval, spacing, interleaving â€” plain English, no academic fog ğŸ‘‡',
             },
             {
               title: 'A weekly learning plan for busy people',
@@ -1683,7 +1683,7 @@
             '[Text: "Active recall in 20 seconds"]\n*Card flip demo*',
             '"Phone in another room. Grades and calm both improve."',
             '[Cold open]\n"Three outcomes for the week. That is the whole plan."',
-            '"Teach it to a friend GÇö or a rubber duck. Retention jumps."',
+            '"Teach it to a friend â€” or a rubber duck. Retention jumps."',
             '"Parents: swap quiz questions for curiosity questions."',
           ],
           hashtags: [
@@ -1711,15 +1711,15 @@
           captions: [
             'Start before you feel ready. Readiness is often a story you tell to delay the first messy attempt.',
             'One useful improvement beats five vague intentions. Pick a single lever for this week.',
-            'Unpopular opinion: consistency looks boring from the outside GÇö and that is why it works. G£¿',
-            'POV: you removed one friction point and suddenly the habit stuck. Design beats willpower. =ƒöô',
+            'Unpopular opinion: consistency looks boring from the outside â€” and that is why it works. âœ¨',
+            'POV: you removed one friction point and suddenly the habit stuck. Design beats willpower. ğŸ‘‡',
             'Write the steps down. Future-you under stress should not have to reinvent the plan.',
-            'Ask better questions: GÇ£What would make this 10% easier tomorrow?GÇ¥ Small edges compound.',
+            'Ask better questions: â€œWhat would make this 10% easier tomorrow?â€ Small edges compound.',
             'Share the real version, not only the highlight. People trust process more than polish.',
-            'Sunday note: rest is part of doing hard things well. Show up Monday with a full battery. Gÿò',
-            'If you are stuck, shrink the next action until it is almost laughably small GÇö then do it.',
-            'Comment GÇ£CHECKLISTGÇ¥ if you want a simple weekly review template (wins, lessons, next steps). =ƒôï',
-            'Protect deep work like a meeting with someone important GÇö because it is.',
+            'Sunday note: rest is part of doing hard things well. Show up Monday with a full battery. âœ¨',
+            'If you are stuck, shrink the next action until it is almost laughably small â€” then do it.',
+            'Comment â€œCHECKLISTâ€ if you want a simple weekly review template (wins, lessons, next steps). ğŸ‘‡',
+            'Protect deep work like a meeting with someone important â€” because it is.',
             'Before vs. after tracking the basics for 30 days. Awareness alone changes behavior.',
             'You do not need a new personality. You need a clearer default for the next hour.',
             'Celebrate finished over perfect. Shipping teaches what planning only guesses.',
@@ -1728,7 +1728,7 @@
           threads: [
             {
               title: 'A simple weekly system that keeps you moving',
-              preview: 'Tweet 1: Plan on Sunday, execute in short blocks, review on Friday. Here is the exact template =ƒº¦',
+              preview: 'Tweet 1: Plan on Sunday, execute in short blocks, review on Friday. Here is the exact template ğŸ‘‡',
             },
             {
               title: 'How to start when you feel overwhelmed',
@@ -1740,14 +1740,14 @@
             },
             {
               title: 'Decision fatigue fixes',
-              preview: 'Tweet 1: Defaults, batches, and GÇ£good enoughGÇ¥ rules so your brain stops renegotiating every hour.',
+              preview: 'Tweet 1: Defaults, batches, and â€œgood enoughâ€ rules so your brain stops renegotiating every hour.',
             },
             {
               title: 'What I would do with a clean-slate week',
               preview: 'Tweet 1: Sleep, one deep project, one relationship, one admin block. Ruthless simplicity.',
             },
             {
-              title: 'Myths about GÇ£disciplineGÇ¥ that do more harm than good',
+              title: 'Myths about â€œdisciplineâ€ that do more harm than good',
               preview: 'Tweet 1: Shame is not a strategy. Here are five reframes that actually change behavior.',
             },
           ],
@@ -1759,7 +1759,7 @@
             '"Stop collecting advice. Run a two-week experiment."',
             '[Cold open]\n"Three priorities. Everything else is optional this week."',
             '"Design your environment so the good choice is the easy choice."',
-            '"Finished beats perfect. Here is why that is not lazy GÇö it is smart."',
+            '"Finished beats perfect. Here is why that is not lazy â€” it is smart."',
           ],
           hashtags: [
             '#DailyInspiration', '#LifeTips', '#PersonalGrowth', '#Mindset', '#Motivation',
@@ -1767,10 +1767,10 @@
             '#Inspiration', '#SuccessHabits', '#LevelUp', '#StayConsistent', '#Progress',
           ],
           termCaptions: [
-            'Interested in {term}? Ignore the noise and define what GÇ£betterGÇ¥ means for you in one sentence GÇö then act on that.',
+            'Interested in {term}? Ignore the noise and define what â€œbetterâ€ means for you in one sentence â€” then act on that.',
             'A practical way into {term}: learn one idea, apply it the same day, note what changed.',
             'People exploring {term} often overcomplicate step one. Make step one obvious and small.',
-            'If {term} matters to you this season, schedule it like an appointment GÇö not like a wish.',
+            'If {term} matters to you this season, schedule it like an appointment â€” not like a wish.',
           ],
           termThreads: [
             {
@@ -1779,13 +1779,13 @@
             },
             {
               title: 'Questions to ask before you go deeper',
-              preview: 'Tweet 1: Goals, constraints, and success metrics GÇö so {term} does not become an expensive hobby by accident.',
+              preview: 'Tweet 1: Goals, constraints, and success metrics â€” so {term} does not become an expensive hobby by accident.',
             },
           ],
           termHooks: [
             '"Curious about {term}? Here is the honest first step."',
             '[Direct to camera]\n"What I wish I knew before diving into {term}."',
-            '"Three mistakes beginners make with {term} GÇö and what to do instead."',
+            '"Three mistakes beginners make with {term} â€” and what to do instead."',
           ],
           termTags: ['{Term}Tips', '{Term}Life', '{Term}Community', '{Term}Goals', '{Term}Daily'],
         },
@@ -1809,7 +1809,7 @@
         return bestScore > 0 ? best : 'general';
       }
 
-      /** One distinctive word for rare natural mentions GÇö never the full multi-word dump. */
+      /** One distinctive word for rare natural mentions â€” never the full multi-word dump. */
       function pickTerm(keywords, pack) {
         const match = (pack && pack.match) || [];
         // Prefer keywords that define the domain (fitness over motivation, restaurant over marketing)
@@ -1951,7 +1951,7 @@
         };
       }
 
-      /* GöÇGöÇ Render GöÇGöÇ */
+      /* â”€â”€ Render â”€â”€ */
       function escapeHtml(str) {
         const div = document.createElement('div');
         div.textContent = str;
@@ -1965,8 +1965,8 @@
             <span class="item-num">${index + 1}</span>
             <div class="item-text">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
             <div class="item-actions">
-              <button class="item-btn" data-copy="${type}" data-index="${index}" title="Copy" aria-label="Copy">=ƒôï</button>
-              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="${type}" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'Gÿà' : 'Gÿå'}</button>
+              <button class="item-btn" data-copy="${type}" data-index="${index}" title="Copy" aria-label="Copy">ğŸ“‹</button>
+              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="${type}" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'â˜…' : 'â˜†'}</button>
             </div>
           </div>`;
       }
@@ -1981,8 +1981,8 @@
               <div class="thread-preview">${escapeHtml(thread.preview)}</div>
             </div>
             <div class="item-actions">
-              <button class="item-btn" data-copy="threads" data-index="${index}" title="Copy" aria-label="Copy">=ƒôï</button>
-              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="threads" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'Gÿà' : 'Gÿå'}</button>
+              <button class="item-btn" data-copy="threads" data-index="${index}" title="Copy" aria-label="Copy">ğŸ“‹</button>
+              <button class="item-btn ${starred ? 'favorited' : ''}" data-fav="threads" data-index="${index}" title="Favorite" aria-label="Save to favorites">${starred ? 'â˜…' : 'â˜†'}</button>
             </div>
           </div>`;
       }
@@ -2049,7 +2049,7 @@
       function getSectionText(section) {
         if (!currentContent) return '';
         const c = currentContent;
-        const lines = [`ContentSpark GÇö ${c.topic}`, ''];
+        const lines = [`ContentSpark â€” ${c.topic}`, ''];
 
         if (section === 'captions' || section === 'all') {
           lines.push('=== SOCIAL MEDIA CAPTIONS ===', '');
@@ -2085,7 +2085,7 @@
         showToast('Exported as text file!');
       }
 
-      /* GöÇGöÇ Generate flow GöÇGöÇ */
+      /* â”€â”€ Generate flow â”€â”€ */
       async function handleGenerate() {
         const topic = topicInput.value.trim();
         if (!topic) {
@@ -2155,19 +2155,19 @@
         if (e.key === 'Escape') closeProModal();
       });
 
-      /* GöÇGöÇ Init GöÇGöÇ */
+      /* â”€â”€ Init â”€â”€ */
       updateFavCount();
       renderFavoritesPanel();
     })();
   </script>
 <div style="text-align: center; margin: 40px 0; padding: 24px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; color: white;">
   <p style="font-size: 1.1rem; margin-bottom: 16px;"><strong>Ready for unlimited generations?</strong></p>
-  <a href="https://thadventure8.gumroad.com/l/tfoikx" target="_blank" style="background: #22c55e; color: #0f172a; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block;">Get ContentSpark Pro ?</a>
+  <a href="https://thadventure8.gumroad.com/l/tfoikx" target="_blank" style="background: #22c55e; color: #0f172a; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block;">Get ContentSpark Pro â†’</a>
   
   <p style="margin-top: 20px; font-size: 0.95rem;">
     Also in the suite: 
-<a href="https://thadwaugh-dev.github.io/dailyboost_new2/" target="_blank" style="color: #6366f1;">DailyBoost</a> · 
-<a href="https://thadwaugh-dev.github.io/cateringquote/" target="_blank" style="color: #6366f1;">CateringQuote</a> · 
+<a href="https://thadwaugh-dev.github.io/dailyboost_new2/" target="_blank" style="color: #6366f1;">DailyBoost</a> Â· 
+<a href="https://thadwaugh-dev.github.io/cateringquote/" target="_blank" style="color: #6366f1;">CateringQuote</a> Â· 
 <a href="https://thadwaugh-dev.github.io/quickinvoice/" target="_blank" style="color: #6366f1;">QuickInvoice</a>
   </p>
 </div>
