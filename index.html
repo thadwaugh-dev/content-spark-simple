@@ -975,8 +975,8 @@
 
       /**
        * Domain packs: useful topic-area content, not generic creator advice.
-       * {term} = one distinctive word (carnivore, yoga) used sparingly when natural.
-       * Most lines never insert the full user phrase.
+       * {term} = one distinctive word used sparingly when natural.
+       * Food also has FOOD_STYLES so mediterranean / vegan / carnivore etc. do not share one voice.
        */
       const DOMAIN_PACKS = {
         food: {
@@ -986,23 +986,25 @@
             'kitchen', 'eat', 'eating', 'protein', 'smoothie', 'dessert', 'lunch', 'dinner',
             'breakfast', 'snack', 'snacks', 'chef', 'ingredient', 'ingredients', 'macros',
             'intermittent', 'fasting', 'whole30', 'gluten', 'dairy', 'organic', 'mealprep',
+            'mediterranean', 'pescatarian', 'plantbased', 'flexitarian', 'macros',
           ],
+          // Balanced default kitchen voice — NOT carnivore/meat-default
           captions: [
-            'Ribeye, salt, and a hot pan. Dinner in 15 minutes — no fancy techniques required. 🔥',
-            'Meal prep that actually lasts the week:\n\n• batch-cook protein once\n• pre-portion fats\n• keep seasoning simple\n\nFuture-you will be grateful.',
-            'Bored of the same plate every night? Rotate your cooking fats — butter, tallow, ghee, olive oil. Same cut, new flavor.',
-            'Grocery list rule I live by: if it needs a long label, it stays on the shelf. Whole food first.',
-            'The underrated kitchen skill: resting meat. Pull it early, tent it, wait. Juicier every time.',
-            'Three weeknight wins under 20 minutes:\n\n1. Pan-seared steaks\n2. Scrambled eggs in leftover drippings\n3. Bone broth + leftover roast\n\nSave this for busy nights.',
-            'Unpopular kitchen opinion: you do not need 12 spices. Salt, pepper, and good heat do most of the work. ✨',
-            'If your energy crashes mid-afternoon, look at lunch before you look at willpower. More protein, fewer empty carbs.',
-            'Sunday reset plate: protein-heavy, simple sides, zero stress. This is how consistency sticks.',
-            'Stop overcomplicating dinner. One protein, one fat, one optional side. That is a complete meal.',
-            'What I wish someone told me earlier: buy the best quality meat you can afford, then cook it simply. Quality beats complexity.',
-            'Leftovers strategy: cook once, reheat smart. Slice cold roast thin, re-sear in butter — tastes new again.',
-            'Hydration matters as much as the plate. Salt your food, drink water, notice how much better you feel by day three.',
-            'POV: you open the fridge and everything is already cooked. That is the real flex. 👇',
-            'Comment “LIST” if you want my simple weekly shopping list — protein, pantry staples, nothing weird. 👇',
+            'Weeknight dinner formula: one colorful veg, one satisfying base, one simple protein you actually like. Done in under 30. 🔥',
+            'Meal prep that survives real life:\n\n• cook a grain or bean once\n• roast a tray of vegetables\n• portion sauces separately\n\nMix and match all week.',
+            'Bored of the same plate? Change the herb, citrus, or crunch — not the entire recipe. Small swaps, new energy.',
+            'Grocery rule: fill half the cart with produce before anything else. The rest gets easier.',
+            'Underrated skill: seasoning in layers. Salt the water, the pan, and the finish. Flavor shows up.',
+            'Three fast dinners under 25 minutes:\n\n1. Sheet-pan veg + whatever protein you keep on hand\n2. Big salad with beans, olive oil, and good bread\n3. Stir-fry with frozen veg and a simple sauce\n\nSave this for busy nights.',
+            'Unpopular kitchen opinion: you do not need a new gadget. A sharp knife and a hot pan cover most nights. ✨',
+            'If energy crashes mid-afternoon, look at lunch balance — fiber, protein, and actual food — before you blame willpower.',
+            'Sunday reset plate: leftovers remixed, a fresh side of greens, zero stress. Consistency beats perfection.',
+            'Stop overcomplicating dinner. Build around what is already in the fridge, then add one bright finish (lemon, herbs, chili).',
+            'What I wish someone told me earlier: buy fewer ingredients, cook them well, and repeat the hits. Quality beats complexity.',
+            'Leftovers strategy: cook once, reheat with a fresh element — herbs, a fried egg, a squeeze of citrus. Feels new again.',
+            'Hydration and sleep change how food feels as much as the recipe does. Notice that by day three.',
+            'POV: you open the fridge and prepped components are ready to assemble. That is the real flex. 👇',
+            'Comment “LIST” if you want a simple weekly shopping template — produce first, pantry staples, flexible proteins. 👇',
           ],
           threads: [
             {
@@ -1010,48 +1012,48 @@
               preview: 'Tweet 1: Here is a 7-day dinner rotation that stays interesting without a 40-ingredient shopping list. Bookmark this 👇',
             },
             {
-              title: 'Mistakes that ruin a good piece of meat',
-              preview: 'Tweet 1: Crowding the pan, skipping the rest, fear of salt — fix these three and your steaks jump a level.',
-            },
-            {
               title: 'Pantry staples that make cooking effortless',
               preview: 'Tweet 1: If these 8 things are always in your kitchen, dinner decisions get easy. Free list inside.',
             },
             {
-              title: 'How I batch-cook protein for the whole week',
+              title: 'How I batch-cook for the whole week',
               preview: 'Tweet 1: One afternoon, multiple meals. Exact order of operations so nothing dries out or goes to waste.',
             },
             {
-              title: 'Myths about this way of eating that waste your time',
+              title: 'Myths about healthy eating that waste your time',
               preview: 'Tweet 1: “You need endless variety or you will fail.” Not true. Here are 5 myths and what to do instead.',
             },
             {
               title: 'Flavor without complicated recipes',
-              preview: 'Tweet 1: Char, fat, acid, salt. Master these four and you stop needing 20-step recipes.',
+              preview: 'Tweet 1: Fat, acid, salt, heat. Master these four and you stop needing 20-step recipes.',
             },
             {
               title: 'What I would do if I was starting over tomorrow',
               preview: 'Tweet 1: Three habits only — shopping, batch cooking, and a default emergency meal. That is the whole system.',
             },
+            {
+              title: 'How to use leftovers without boredom',
+              preview: 'Tweet 1: Remix rules for grains, roasted veg, and proteins so night two feels intentional.',
+            },
           ],
           hooks: [
-            '[Close-up of sizzling pan]\n"You have been overcomplicating dinner. Watch this."',
+            '[Close-up of colorful pan]\n"You have been overcomplicating dinner. Watch this."',
             '"Stop boiling flavor out of your food. Here is the 20-second fix."',
             '[Text on screen: "3 meals. 5 ingredients. Full week."]\n*Quick cuts of plated food*',
-            '"If your steak is dry, it is probably one of these three mistakes."',
-            '[Open fridge — fully prepped containers]\n"This is what actually makes healthy eating stick."',
-            '"Nobody told me this about salt until year two. Game changer."',
-            '[Cold open, no music]\n"Throw out half your spice rack. Keep these four."',
+            '"If weeknight cooking feels chaotic, try this simple plate formula."',
+            '[Open fridge — prepped containers]\n"This is what actually makes healthy eating stick."',
+            '"Nobody told me this about seasoning until year two. Game changer."',
+            '[Cold open, no music]\n"Throw out half your random sauces. Keep these four."',
             '"15-minute dinner that tastes like you tried. Full details in the caption."',
           ],
           hashtags: [
             '#HomeCooking', '#MealPrep', '#EasyRecipes', '#HealthyEating', '#FoodIdeas',
-            '#WeeknightDinner', '#HighProtein', '#CleanEating', '#CookingTips', '#RealFood',
-            '#DinnerIdeas', '#FoodTok', '#KitchenHacks', '#NutritionTips', '#EatWell',
+            '#WeeknightDinner', '#CleanEating', '#CookingTips', '#RealFood', '#DinnerIdeas',
+            '#FoodTok', '#KitchenHacks', '#NutritionTips', '#EatWell', '#SimpleMeals',
           ],
           termCaptions: [
-            'If you are exploring {term} meals, start boring on purpose: one protein, salt, heat. Master that, then get creative.',
-            'What a solid {term} plate looks like for me: generous protein, enough fat to stay full, zero guilt about simplicity.',
+            'If you are exploring {term}, start simple: repeat a few solid plates before you chase novelty.',
+            'What a solid {term} plate looks like for me: color, satisfaction, and zero guilt about keeping it basic.',
             'New to {term}? Your first two weeks are about consistency, not Instagram-worthy plating.',
           ],
           termThreads: [
@@ -1791,6 +1793,485 @@
         },
       };
 
+      /**
+       * Food style packs: override the generic food voice when the topic names a diet/cuisine.
+       * Specific styles win over the balanced default so mediterranean ≠ carnivore ≠ vegan.
+       */
+      const FOOD_STYLES = {
+        mediterranean: {
+          match: ['mediterranean', 'mediterranian', 'greek', 'levantine'],
+          phrases: ['mediterranean diet', 'med diet', 'greek diet'],
+          label: 'Mediterranean',
+          captions: [
+            'Mediterranean dinner in 20 minutes: olive oil, garlic, lemon, herbs, and whatever fish or beans you have. Bright and simple. 🔥',
+            'Build a Mediterranean plate:\n\n• olive oil as the main fat\n• vegetables taking half the plate\n• fish, legumes, or yogurt for staying power\n• herbs over heavy sauces\n\nThat is the whole vibe.',
+            'Pantry staples that make Mediterranean cooking easy: extra-virgin olive oil, canned tomatoes, chickpeas, olives, oregano, lemons.',
+            'Weeknight win: roasted vegetables with oregano, a can of white beans, and a drizzle of olive oil. Bread optional, satisfaction required.',
+            'Unpopular take: Mediterranean eating is not a “cheat day diet.” It is olive oil, produce, and meals you actually want to repeat. ✨',
+            'Three Mediterranean lunches under 15 minutes:\n\n1. Greek-style salad with chickpeas\n2. Tuna + white beans + lemon + parsley\n3. Hummus bowl with cucumber, tomato, and warm pita\n\nSave this.',
+            'If your “Mediterranean” plate is mostly pasta and cheese, add color first — greens, tomatoes, peppers — then the rest follows.',
+            'Flavor stack that never fails: olive oil + lemon + garlic + fresh herbs. Works on fish, beans, and vegetables.',
+            'Sunday prep: roast a tray of peppers and zucchini, cook a pot of lentils, wash greens. Assemblies all week.',
+            'POV: your fridge has olives, feta, greens, and leftover grilled fish. Dinner is 10 minutes away. 👇',
+            'Snack upgrade: fruit, a handful of nuts, and sparkling water with lemon. Simple Mediterranean habit that sticks.',
+            'Comment “MED” if you want a 5-item Mediterranean shopping list for beginners. 👇',
+            'Fish two times this week beats overthinking macros. Salmon, sardines, or any white fish with olive oil and herbs.',
+            'Legumes are not a side note — chickpeas, lentils, and beans are core Mediterranean fuel.',
+            'Stop chasing “superfoods.” Olive oil, vegetables, herbs, and shared meals do more than a powder ever will.',
+          ],
+          threads: [
+            {
+              title: 'A beginner Mediterranean week of meals',
+              preview: 'Tweet 1: Seven simple dinners built on olive oil, plants, legumes, and fish — no fancy restaurant techniques. 👇',
+            },
+            {
+              title: 'Mediterranean pantry staples worth buying once',
+              preview: 'Tweet 1: The short list that makes weeknight plates taste intentional instead of random.',
+            },
+            {
+              title: 'Myths about the Mediterranean diet',
+              preview: 'Tweet 1: “It is just pizza and pasta.” Five myths, five better defaults.',
+            },
+            {
+              title: 'How to meal prep the Mediterranean way',
+              preview: 'Tweet 1: Components, not identical containers: roasted veg, beans, a grain, a sauce, fresh herbs.',
+            },
+            {
+              title: 'Flavor without complicated recipes',
+              preview: 'Tweet 1: Olive oil, acid, herbs, and heat. Master these and you stop needing 20-step “Med” recipes.',
+            },
+          ],
+          hooks: [
+            '"Mediterranean diet is not pasta every night. Here is the real plate formula."',
+            '[Drizzle of olive oil on vegetables]\n"This is the flavor base most people skip."',
+            '[Text: "5 Mediterranean staples"]\n*Quick pantry pull shots*',
+            '"If you want Mediterranean results, start with olive oil and vegetables — not a supplement."',
+            '[Direct to camera]\n"Three Mediterranean lunches you can make in 15 minutes."',
+            '"Stop overcomplicating fish. Lemon, herbs, olive oil. Watch."',
+            '[Cold open]\n"Chickpeas are a Mediterranean main, not a sad side."',
+            '"The Mediterranean shopping list I wish I had on day one."',
+          ],
+          hashtags: [
+            '#MediterraneanDiet', '#MediterraneanFood', '#HealthyEating', '#OliveOil',
+            '#EatTheRainbow', '#SeafoodRecipes', '#PlantForward', '#SimpleMeals',
+            '#MealPrep', '#CleanEating', '#GreekFood', '#WholeFoods', '#NutritionTips',
+          ],
+          termCaptions: [
+            'Exploring {term}? Lead with olive oil, vegetables, herbs, and legumes — then add fish or yogurt if it fits you.',
+            'A solid {term} day for me looks colorful: plants first, simple proteins, and meals that feel calm rather than extreme.',
+          ],
+          termThreads: [
+            {
+              title: 'Getting started with {term} without overwhelm',
+              preview: 'Tweet 1: Ignore influencer extremes. Here is a plain Mediterranean-style framework you can keep.',
+            },
+          ],
+          termHooks: [
+            '"Curious about {term}? Start with this plate — not a 30-page rulebook."',
+          ],
+          termTags: ['MediterraneanDiet', 'MedDiet', 'MediterraneanMeals', 'OliveOilLife', 'EatMediterranean'],
+        },
+
+        vegan: {
+          match: ['vegan', 'plantbased', 'plant'],
+          phrases: ['vegan meal', 'vegan diet', 'plant based', 'plant-based', 'vegan prep', 'vegan recipes'],
+          label: 'vegan',
+          captions: [
+            'Vegan weeknight formula: beans or tofu + a big pile of vegetables + a sauce you love. Filling without the drama. 🔥',
+            'Meal prep that actually works on a vegan week:\n\n• cook a pot of lentils or chickpeas\n• roast two trays of vegetables\n• blend one sauce (tahini, peanut, or tomato)\n\nMix all week.',
+            'Protein is not a mystery: tofu, tempeh, lentils, beans, seitan, and soy yogurt cover most days without powders.',
+            'Three vegan dinners under 25 minutes:\n\n1. Chickpea curry with frozen spinach\n2. Tofu stir-fry with garlic and greens\n3. Black bean tacos with lime and cabbage\n\nSave this.',
+            'Unpopular vegan take: you do not need 14 specialty products. Pantry beans, frozen veg, and spices do the heavy lifting. ✨',
+            'Flavor first: salt, acid, chili, and toasted spices. Bland plant food is a seasoning problem, not a destiny.',
+            'Sunday reset: wash greens, cook grains, press tofu, make a jar of dressing. Future-you eats better.',
+            'POV: your fridge is full of colorful prepped components and dinner is assembly, not a project. 👇',
+            'If energy dips, check whether meals have enough calories and protein — not just “more salad.”',
+            'Snack stack: fruit + nuts, hummus + veg, or leftover tofu with hot sauce. Simple wins.',
+            'Comment “VEGAN” for a beginner grocery list that is not 40 weird ingredients. 👇',
+            'Stop apologizing for easy meals. Rice, beans, salsa, and avocado is a complete plate.',
+            'Batch-cook tofu once: cube, toss with soy and spices, bake. Use in bowls, wraps, and stir-fries.',
+            'Greens tip: cook some, keep some raw. Texture variety keeps vegan meals interesting.',
+            'What I wish I knew earlier: sauces and textures matter more than pretending every meal needs a new recipe.',
+          ],
+          threads: [
+            {
+              title: 'A simple vegan meal prep system',
+              preview: 'Tweet 1: Components over identical containers — beans, grains, roasted veg, sauce. Steal this setup. 👇',
+            },
+            {
+              title: 'Vegan protein without the overwhelm',
+              preview: 'Tweet 1: Everyday foods first. Powders last. A practical list for busy people.',
+            },
+            {
+              title: 'Myths that make vegan cooking harder than it is',
+              preview: 'Tweet 1: “You need expensive meat substitutes.” Five myths, five better defaults.',
+            },
+            {
+              title: 'Flavor formulas for plant-based plates',
+              preview: 'Tweet 1: Fat + acid + heat + crunch. How to stop serving sad plain vegetables.',
+            },
+            {
+              title: 'What I would do if I went vegan again tomorrow',
+              preview: 'Tweet 1: Three habits only — shopping template, one batch cook, one emergency meal.',
+            },
+          ],
+          hooks: [
+            '"Vegan cooking is not sad steamed broccoli. Watch this plate formula."',
+            '[Tofu press + hot pan]\n"The 10-minute tofu method that actually tastes good."',
+            '[Text: "3 vegan dinners / 25 min"]\n*Fast cooking cuts*',
+            '"If your vegan meals taste bland, you are missing this step."',
+            '[Direct to camera]\n"Plant-based protein without a $200 grocery haul."',
+            '"Batch-cook once. Eat well all week. Here is the system."',
+            '[Cold open]\n"Throw out the idea that vegan means complicated."',
+            '"The beginner vegan grocery list I wish I had."',
+          ],
+          hashtags: [
+            '#Vegan', '#VeganRecipes', '#PlantBased', '#VeganMealPrep', '#VeganFood',
+            '#MeatlessMeals', '#PlantBasedDiet', '#VeganLife', '#EasyVegan', '#HealthyEating',
+            '#VeganDinner', '#TofuRecipes', '#DairyFree', '#GoVegan', '#VeganTips',
+          ],
+          termCaptions: [
+            'New to {term}? Anchor the week with beans, tofu, vegetables, and one great sauce before you buy specialty products.',
+            'A practical {term} plate: colorful plants, a clear protein, and enough seasoning to make you look forward to leftovers.',
+          ],
+          termThreads: [
+            {
+              title: 'A realistic starter week for {term}',
+              preview: 'Tweet 1: Shopping list, three dinners, and one prep session — no perfection required.',
+            },
+          ],
+          termHooks: [
+            '"Thinking about {term}? Avoid this expensive beginner trap."',
+          ],
+          termTags: ['VeganLife', 'VeganRecipes', 'PlantBased', 'VeganMealPrep', 'VeganFood'],
+        },
+
+        vegetarian: {
+          match: ['vegetarian', 'veggie', 'lacto', 'ovo'],
+          phrases: ['vegetarian diet', 'vegetarian meals', 'vegetarian recipes'],
+          label: 'vegetarian',
+          captions: [
+            'Vegetarian weeknight formula: eggs or dairy if you use them, beans, vegetables, and a grain. Comfort without meat on autopilot. 🔥',
+            'Prep once, eat well:\n\n• frittata or baked eggs for the fridge\n• a pot of beans\n• roasted vegetables\n• a punchy sauce\n\nAssemblies > identical boxes.',
+            'Three vegetarian dinners under 25 minutes:\n\n1. Shakshuka with crusty bread\n2. Paneer or halloumi with peppers\n3. Lentil pasta with spinach and garlic\n\nSave this.',
+            'Unpopular take: vegetarian food gets boring when you only remove meat. Add spices, textures, and acid. ✨',
+            'Cheese is a tool, not the whole personality of the plate. Lead with vegetables and legumes first.',
+            'POV: you have eggs, beans, greens, and yogurt ready. Dinner anxiety drops to zero. 👇',
+            'Comment “VEG” for a simple vegetarian shopping template for busy weeks. 👇',
+            'Sunday habit: cook a pot of dal or chili, wash salad greens, grate cheese once. Weeknights get easy.',
+            'Protein options that actually show up in real kitchens: eggs, Greek yogurt, beans, tofu, paneer, cheese, tempeh.',
+            'If lunch is just a salad and you are starving by 3pm, add beans, nuts, or eggs. Volume is not the same as fuel.',
+            'Flavor trick: toast spices in oil before the vegetables go in. Instant restaurant energy.',
+            'Leftover remix: last night’s roasted veg + eggs + hot sauce. Ten minutes, zero waste.',
+            'Stop treating vegetarian cooking like a compromise. Build plates you would choose even if meat were free.',
+            'Snack idea: yogurt with fruit and honey, or hummus with carrots. Simple, repeatable, satisfying.',
+            'What beginners miss: a few reliable sauces (pesto, yogurt-herb, tomato) make the same veg feel new.',
+          ],
+          threads: [
+            {
+              title: 'A no-stress vegetarian week',
+              preview: 'Tweet 1: Seven dinners that use eggs, dairy (optional), legumes, and produce — no mystery meat substitutes required. 👇',
+            },
+            {
+              title: 'Vegetarian meal prep that does not taste sad',
+              preview: 'Tweet 1: Components, sauces, and one tray bake that covers multiple meals.',
+            },
+            {
+              title: 'Protein ideas beyond “just cheese”',
+              preview: 'Tweet 1: Everyday options and how to combine them so meals actually keep you full.',
+            },
+            {
+              title: 'Myths about vegetarian eating',
+              preview: 'Tweet 1: “You will be hungry forever.” Five myths, five better defaults.',
+            },
+          ],
+          hooks: [
+            '"Vegetarian dinners do not have to be boring. Watch this formula."',
+            '[Eggs hitting a pan]\n"One pan, full meal, 15 minutes."',
+            '"If your vegetarian plate is just pasta and cheese, try this upgrade."',
+            '[Text: "3 vegetarian dinners"]\n*Fast cooking montage*',
+            '"Bean-based meals that actually satisfy. Here is how."',
+            '[Cold open]\n"The vegetarian prep system that ends takeout spirals."',
+          ],
+          hashtags: [
+            '#Vegetarian', '#VegetarianRecipes', '#MeatlessMeals', '#VegetarianFood',
+            '#EasyVegetarian', '#PlantForward', '#HealthyEating', '#MealPrep',
+            '#VeggieDinner', '#MeatlessMonday', '#HomeCooking', '#SimpleMeals',
+          ],
+          termCaptions: [
+            'Exploring {term}? Build around eggs, dairy if you use them, legumes, and vegetables — not only meat substitutes.',
+          ],
+          termThreads: [
+            {
+              title: 'Starter ideas for {term} cooking',
+              preview: 'Tweet 1: A short list of dinners and prep habits that keep meals interesting.',
+            },
+          ],
+          termHooks: [
+            '"Going {term}? Start with these three dinners."',
+          ],
+          termTags: ['VegetarianLife', 'VegetarianRecipes', 'MeatlessMeals', 'VeggieFood', 'VegetarianDiet'],
+        },
+
+        carnivore: {
+          match: ['carnivore', 'zerocarb', 'animalbased', 'lion'],
+          phrases: ['carnivore diet', 'animal based', 'meat only', 'meat based', 'healthy carnivore'],
+          label: 'carnivore',
+          captions: [
+            'Ribeye, salt, and a hot pan. Dinner in 15 minutes — no fancy techniques required. 🔥',
+            'Carnivore meal prep that lasts:\n\n• batch-cook protein once\n• pre-portion fats\n• keep seasoning simple\n\nFuture-you will be grateful.',
+            'Rotate cooking fats — butter, tallow, ghee — for the same cut with a new feel.',
+            'Underrated skill: resting meat. Pull it early, tent it, wait. Juicier every time.',
+            'Three weeknight wins under 20 minutes:\n\n1. Pan-seared steaks\n2. Scrambled eggs in leftover drippings\n3. Bone broth + leftover roast\n\nSave this for busy nights.',
+            'Unpopular kitchen opinion: you do not need 12 spices. Salt, pepper, and good heat do most of the work. ✨',
+            'If energy crashes mid-afternoon, look at lunch protein and fat before you look at willpower.',
+            'Sunday reset plate: protein-heavy, simple sides (or none), zero stress. Consistency sticks.',
+            'Stop overcomplicating dinner. One protein, one fat, optional eggs. That is a complete carnivore meal.',
+            'Buy the best quality meat you can afford, then cook it simply. Quality beats complexity.',
+            'Leftovers strategy: slice cold roast thin, re-sear in butter — tastes new again.',
+            'Hydration matters. Salt your food, drink water, notice how you feel by day three.',
+            'POV: you open the fridge and everything is already cooked. That is the real flex. 👇',
+            'Comment “LIST” if you want a simple carnivore shopping list — protein, pantry fats, nothing weird. 👇',
+            'Egg-heavy days are not failure days. They are how busy carnivore weeks stay sustainable.',
+          ],
+          threads: [
+            {
+              title: 'A simple carnivore week of dinners',
+              preview: 'Tweet 1: Meat, eggs, and salt in a rotation that stays interesting without a 40-ingredient list. 👇',
+            },
+            {
+              title: 'Mistakes that ruin a good piece of meat',
+              preview: 'Tweet 1: Crowding the pan, skipping the rest, fear of salt — fix these three and steaks jump a level.',
+            },
+            {
+              title: 'How I batch-cook protein for the whole week',
+              preview: 'Tweet 1: One afternoon, multiple meals. Order of operations so nothing dries out.',
+            },
+            {
+              title: 'Myths about carnivore eating that waste time',
+              preview: 'Tweet 1: “You need endless variety or you will fail.” Five myths, five better defaults.',
+            },
+            {
+              title: 'What I would do if I was starting carnivore tomorrow',
+              preview: 'Tweet 1: Shopping, batch cooking, and a default emergency meal. That is the whole system.',
+            },
+          ],
+          hooks: [
+            '[Close-up of sizzling pan]\n"Carnivore dinner does not need a recipe book. Watch this."',
+            '"If your steak is dry, it is probably one of these three mistakes."',
+            '[Open fridge — prepped meat containers]\n"This is what makes a meat-based week stick."',
+            '"Salt, heat, rest. The only steak lesson most people need."',
+            '[Cold open]\n"Throw out half your spice rack. Keep it simple."',
+            '"15-minute carnivore dinner that tastes like you tried."',
+            '"Egg meals that keep you full when steak is not in the budget tonight."',
+            '[Direct to camera]\n"Starting carnivore? Avoid this shopping mistake."',
+          ],
+          hashtags: [
+            '#Carnivore', '#CarnivoreDiet', '#MeatBased', '#HighProtein', '#CarnivoreLife',
+            '#AnimalBased', '#SteakDinner', '#LionDiet', '#MeatHeals', '#SimpleMeals',
+            '#CarnivoreMeals', '#EatMeat', '#KetoCarnivore', '#ProteinFirst', '#NoseToTail',
+          ],
+          termCaptions: [
+            'If you are exploring {term}, start boring on purpose: one protein, salt, heat. Master that, then get creative.',
+            'What a solid {term} plate looks like for me: generous protein, enough fat to stay full, zero guilt about simplicity.',
+          ],
+          termThreads: [
+            {
+              title: 'Getting started with {term} without the noise',
+              preview: 'Tweet 1: Plain-English starter framework — shopping, cooking, and expectations for week one.',
+            },
+          ],
+          termHooks: [
+            '"Thinking about trying {term}? Watch this before you overbuy random cuts."',
+          ],
+          termTags: ['CarnivoreDiet', 'CarnivoreLife', 'MeatBased', 'CarnivoreMeals', 'AnimalBased'],
+        },
+
+        keto: {
+          match: ['keto', 'ketogenic', 'lowcarb', 'lchf'],
+          phrases: ['keto diet', 'ketogenic diet', 'low carb', 'low-carb'],
+          label: 'keto',
+          captions: [
+            'Keto plate formula: protein + non-starchy vegetables + a satisfying fat. Skip the “keto junk food” spiral. 🔥',
+            'Prep that keeps you in a groove:\n\n• cook proteins in bulk\n• wash salad greens\n• portion olive oil, butter, or avocado\n\nAssembly > willpower.',
+            'Three keto dinners under 25 minutes:\n\n1. Salmon with asparagus and butter\n2. Eggs, spinach, and cheese skillet\n3. Chicken thighs with broccoli and olive oil\n\nSave this.',
+            'Unpopular keto take: more products labeled “keto” usually means more cravings. Whole food wins. ✨',
+            'Electrolytes matter. Salt your food, consider magnesium, and do not confuse a rough week-one with permanent failure.',
+            'POV: lunch is leftovers that still fit your macros and you do not need a drive-thru. 👇',
+            'Comment “KETO” for a simple beginner shopping list without 20 novelty snacks. 👇',
+            'Vegetable volume is your friend. Broccoli, zucchini, cauliflower, greens — they keep meals human.',
+            'If progress stalls, look at hidden carbs and mindless “keto desserts” before you rewrite the whole plan.',
+            'Fat is a tool to satiety, not a challenge to drink oil. Eat until satisfied, not stuffed.',
+            'Sunday habit: bake chicken, hard-boil eggs, chop veg. Weeknights become mix-and-match.',
+            'Restaurant order pattern: protein + vegetables, butter or olive oil, skip the bun and sugar sauces.',
+            'Snack default: cheese, leftovers, or olives — not a procession of packaged bars.',
+            'What I wish I knew earlier: sleep and stress mess with keto adherence as much as recipes do.',
+            'Track how you feel after two weeks of simple plates. Boring consistency beats clever hacks.',
+          ],
+          threads: [
+            {
+              title: 'A simple keto week without specialty products',
+              preview: 'Tweet 1: Real food dinners, easy prep, and a shopping list that fits a normal grocery store. 👇',
+            },
+            {
+              title: 'Keto mistakes that stall people early',
+              preview: 'Tweet 1: Hidden carbs, too little protein, and snack traps — plus fixes.',
+            },
+            {
+              title: 'Electrolytes and energy on low-carb',
+              preview: 'Tweet 1: Why you feel flat in week one and what actually helps.',
+            },
+            {
+              title: 'Meal prep for keto that does not get boring',
+              preview: 'Tweet 1: Components and sauces that remix cleanly for five days.',
+            },
+          ],
+          hooks: [
+            '"Keto is not keto cookies. Here is the real plate formula."',
+            '[Salmon hitting a pan]\n"15-minute keto dinner. No specialty flour."',
+            '"If you are tired on keto, watch this before you quit."',
+            '[Text: "3 keto dinners"]\n*Quick cooking cuts*',
+            '"Stop buying 40 keto snacks. Buy these staples instead."',
+            '[Cold open]\n"The beginner keto grocery list that is actually short."',
+          ],
+          hashtags: [
+            '#Keto', '#Ketogenic', '#LowCarb', '#KetoDiet', '#KetoRecipes',
+            '#KetoMealPrep', '#LCHF', '#KetoLife', '#LowCarbLife', '#HealthyFats',
+            '#KetoDinner', '#KetoTips', '#HighFat', '#KetoFood', '#CarbConscious',
+          ],
+          termCaptions: [
+            'Exploring {term}? Prioritize protein, non-starchy veg, and simple fats before any packaged “keto” product.',
+          ],
+          termThreads: [
+            {
+              title: 'A practical intro to {term}',
+              preview: 'Tweet 1: What to eat, what to ignore, and a first-week template that is doable.',
+            },
+          ],
+          termHooks: [
+            '"Starting {term}? Avoid this common product trap."',
+          ],
+          termTags: ['KetoLife', 'KetoDiet', 'LowCarb', 'KetoRecipes', 'KetoMeals'],
+        },
+
+        paleo: {
+          match: ['paleo', 'primal', 'whole30'],
+          phrases: ['paleo diet', 'paleo recipes', 'whole30'],
+          label: 'paleo',
+          captions: [
+            'Paleo weeknight formula: protein + vegetables + fruit or root veg as needed + olive oil or avocado. Simple food, clear ingredients. 🔥',
+            'Prep backbone:\n\n• roast a protein\n• big tray of vegetables\n• a compliant sauce (herb, citrus, avocado)\n\nMix all week without boredom.',
+            'Three paleo dinners under 25 minutes:\n\n1. Chicken and vegetable skillet\n2. Salmon with salad and olive oil\n3. Beef and zucchini stir-fry\n\nSave this.',
+            'Unpopular paleo take: you do not need specialty “paleo desserts” to succeed. Fruit and square meals work. ✨',
+            'Read labels for sneaky sugars and seed-oil sauces if that matters for your version of paleo.',
+            'POV: fridge full of real ingredients, zero ultra-processed backups, still easy dinners. 👇',
+            'Comment “PALEO” for a short shopping list that is not a specialty store scavenger hunt. 👇',
+            'Batch-cook once, reheat with fresh herbs or citrus so leftovers feel intentional.',
+            'If whole30 or paleo feels restrictive, shrink rules to ingredients you understand — not a product aisle.',
+            'Eggs, meat, fish, vegetables, fruit, nuts: boring on paper, excellent in practice.',
+          ],
+          threads: [
+            {
+              title: 'A simple paleo week of meals',
+              preview: 'Tweet 1: Grocery list and dinners that stay inside paleo guardrails without specialty products. 👇',
+            },
+            {
+              title: 'Paleo meal prep without burnout',
+              preview: 'Tweet 1: Components, sauces, and how to remix for five days.',
+            },
+            {
+              title: 'Myths that make paleo harder than it needs to be',
+              preview: 'Tweet 1: Five myths, five calmer defaults.',
+            },
+          ],
+          hooks: [
+            '"Paleo dinners without the specialty aisle. Watch."',
+            '[Sheet pan of veg + protein]\n"One pan. Full meal. Clean ingredients."',
+            '"If paleo feels expensive, start with this shopping list."',
+            '[Text: "3 paleo dinners"]\n*Fast cooking montage*',
+          ],
+          hashtags: [
+            '#Paleo', '#PaleoDiet', '#PaleoRecipes', '#Whole30', '#Primal',
+            '#RealFood', '#CleanEating', '#PaleoLife', '#HealthyEating', '#MealPrep',
+          ],
+          termCaptions: [
+            'Exploring {term}? Keep plates built from meat or fish, vegetables, fruit, and simple fats — skip the novelty snacks.',
+          ],
+          termThreads: [
+            {
+              title: 'Getting started with {term}',
+              preview: 'Tweet 1: Guardrails, shopping, and a first-week plan that is realistic.',
+            },
+          ],
+          termHooks: [
+            '"Trying {term}? Here is the simple plate formula."',
+          ],
+          termTags: ['PaleoDiet', 'PaleoLife', 'PaleoRecipes', 'Whole30', 'PrimalEating'],
+        },
+
+        mealprep: {
+          match: ['mealprep', 'batchcook', 'batchcooking'],
+          phrases: ['meal prep', 'mealprep', 'batch cook', 'batch cooking', 'prep meals'],
+          label: 'meal prep',
+          captions: [
+            'Meal prep that lasts the week:\n\n• cook a base (grain, potato, or legumes)\n• roast a protein or tofu\n• tray of vegetables\n• sauce on the side\n\nAssemble fresh each day. 🔥',
+            'Stop prepping five identical sad boxes. Prep components. Remix with different sauces and toppings.',
+            'Sunday timeline that works: 90 minutes, music on, three trays, one pot, done.',
+            'Containers matter less than cooling food fully before sealing. Soggy leftovers are a process problem.',
+            'POV: Wednesday still has good food and you did not order takeout. That is the win. 👇',
+            'Comment “PREP” for a printable-style checklist of what to batch vs. what to keep fresh. 👇',
+            'Sauces in jars: change the personality of the same chicken and broccoli four ways.',
+            'Leave one night unplanned on purpose. Flexibility keeps prep sustainable.',
+            'Label dates. Future-you should not play fridge roulette.',
+            'Unpopular prep take: washing and chopping is half the battle. Cook less if needed — still a win. ✨',
+          ],
+          threads: [
+            {
+              title: 'A component meal-prep system',
+              preview: 'Tweet 1: Bases, proteins, veg, sauces — how to prep once and eat differently all week. 👇',
+            },
+            {
+              title: 'Food safety and texture tips people skip',
+              preview: 'Tweet 1: Cooling, reheating, and what to pack dry vs. wet.',
+            },
+            {
+              title: '90-minute Sunday prep plan',
+              preview: 'Tweet 1: Exact order of operations from oven preheat to containers sealed.',
+            },
+          ],
+          hooks: [
+            '"Stop meal prepping the sad way. Try components instead."',
+            '[Fridge full of containers]\n"This is what a realistic prep day looks like."',
+            '"90 minutes. Whole week of easier dinners. Watch the order."',
+            '[Text: "Prep once / remix daily"]\n*Assembly cuts*',
+          ],
+          hashtags: [
+            '#MealPrep', '#MealPrepSunday', '#BatchCooking', '#MealPrepIdeas',
+            '#HealthyMealPrep', '#PrepAhead', '#WeeklyPrep', '#EasyMealPrep',
+            '#FoodPrep', '#HomeCooking',
+          ],
+          termCaptions: [
+            'If you are into {term}, prioritize components and sauces over five identical boxed meals.',
+          ],
+          termThreads: [
+            {
+              title: 'A practical {term} routine',
+              preview: 'Tweet 1: Timing, shopping, and what to cook first for less stress.',
+            },
+          ],
+          termHooks: [
+            '"Want better {term}? Fix this one workflow mistake."',
+          ],
+          termTags: ['MealPrep', 'MealPrepSunday', 'BatchCooking', 'PrepLife', 'WeeklyPrep'],
+        },
+      };
+
+      // Words that name a food style strongly — prefer these as {term}
+      const FOOD_STYLE_PRIORITY = [
+        'mediterranean', 'mediterranian', 'vegan', 'vegetarian', 'carnivore',
+        'keto', 'ketogenic', 'paleo', 'pescatarian', 'plantbased', 'whole30', 'primal',
+      ];
+
       function detectDomain(keywords, fullLower) {
         let best = 'general';
         let bestScore = 0;
@@ -1809,13 +2290,105 @@
         return bestScore > 0 ? best : 'general';
       }
 
+      // Diet/cuisine styles beat process styles (mealprep) when both match
+      const FOOD_DIET_STYLES = new Set([
+        'mediterranean', 'vegan', 'vegetarian', 'carnivore', 'keto', 'paleo',
+      ]);
+
+      /**
+       * Detect a specific food/diet style from the full topic.
+       * Phrases and strong keywords beat the generic food pack.
+       * Diet styles (vegan, mediterranean, etc.) win over mealprep when both apply.
+       */
+      function detectFoodStyle(keywords, fullLower) {
+        const normalized = fullLower.replace(/-/g, ' ').replace(/\s+/g, ' ');
+        const scores = {};
+
+        for (const [id, style] of Object.entries(FOOD_STYLES)) {
+          let score = 0;
+          for (const phrase of style.phrases || []) {
+            if (normalized.includes(phrase.toLowerCase())) score += 10;
+          }
+          for (const m of style.match || []) {
+            // Avoid matching short generic tokens like "plant" inside unrelated words
+            if (m.length <= 4 && !keywords.includes(m)) continue;
+            if (keywords.includes(m)) score += 5;
+            else if (normalized.includes(m)) score += 2;
+          }
+          if (id === 'vegan' && (normalized.includes('plant based') || normalized.includes('plantbased'))) {
+            score += 8;
+          }
+          if (id === 'mealprep' && (normalized.includes('meal prep') || normalized.includes('mealprep'))) {
+            score += 6;
+          }
+          scores[id] = score;
+        }
+
+        // Prefer any diet/cuisine style with a hit over mealprep-only process matches
+        let bestDiet = null;
+        let bestDietScore = 0;
+        for (const id of FOOD_DIET_STYLES) {
+          if ((scores[id] || 0) > bestDietScore) {
+            bestDietScore = scores[id];
+            bestDiet = id;
+          }
+        }
+        if (bestDietScore > 0) return bestDiet;
+
+        let best = null;
+        let bestScore = 0;
+        for (const [id, score] of Object.entries(scores)) {
+          if (score > bestScore) {
+            bestScore = score;
+            best = id;
+          }
+        }
+        return bestScore > 0 ? best : null;
+      }
+
+      /** Merge base domain pack with a style pack (style content wins). */
+      function resolvePack(domain, foodStyle) {
+        const base = DOMAIN_PACKS[domain] || DOMAIN_PACKS.general;
+        if (domain !== 'food' || !foodStyle || !FOOD_STYLES[foodStyle]) return base;
+        const style = FOOD_STYLES[foodStyle];
+        return {
+          ...base,
+          captions: style.captions || base.captions,
+          threads: style.threads || base.threads,
+          hooks: style.hooks || base.hooks,
+          hashtags: [...(style.hashtags || []), ...(base.hashtags || [])],
+          termCaptions: style.termCaptions || base.termCaptions,
+          termThreads: style.termThreads || base.termThreads,
+          termHooks: style.termHooks || base.termHooks,
+          termTags: style.termTags || base.termTags,
+          match: base.match,
+          styleId: foodStyle,
+          styleLabel: style.label || foodStyle,
+        };
+      }
+
       /** One distinctive word for rare natural mentions — never the full multi-word dump. */
-      function pickTerm(keywords, pack) {
+      function pickTerm(keywords, pack, foodStyle) {
+        // Prefer explicit diet/style words when present
+        for (const w of FOOD_STYLE_PRIORITY) {
+          if (keywords.includes(w)) {
+            if (w === 'mediterranian') return 'mediterranean';
+            if (w === 'ketogenic') return 'keto';
+            if (w === 'plantbased') return 'vegan';
+            return w;
+          }
+        }
+        if (foodStyle && FOOD_STYLES[foodStyle] && FOOD_STYLES[foodStyle].label) {
+          // Use style label as term when keywords were only packaging words (diet, ideas)
+          const styleWord = (FOOD_STYLES[foodStyle].match || [])[0];
+          if (styleWord) return styleWord === 'plant' ? 'vegan' : styleWord;
+        }
+
         const match = (pack && pack.match) || [];
-        // Prefer keywords that define the domain (fitness over motivation, restaurant over marketing)
         const domainHits = keywords.filter(
           (w) => match.includes(w) && !NOISE_WORDS.has(w) && w.length > 1
         );
+        // Prefer longer, more specific domain hits
         if (domainHits.length) {
           return [...domainHits].sort((a, b) => b.length - a.length)[0];
         }
@@ -1834,26 +2407,39 @@
         const core = keywords.length ? keywords : words.length ? words : ['topic'];
         const fullLower = full.toLowerCase();
         const domain = detectDomain(core, fullLower);
-        const pack = DOMAIN_PACKS[domain] || DOMAIN_PACKS.general;
-        const term = pickTerm(core, pack);
+        const foodStyle = domain === 'food' ? detectFoodStyle(core, fullLower) : null;
+        const pack = resolvePack(domain, foodStyle);
+        const term = pickTerm(core, pack, foodStyle);
         const Term = capitalize(term);
-        return { full, words, keywords: core, domain, term, Term, pack };
+        return {
+          full,
+          words,
+          keywords: core,
+          domain,
+          foodStyle,
+          term,
+          Term,
+          pack,
+        };
       }
 
       function applyTerm(str, ctx) {
         if (!str) return str;
-        return fill(str, { term: ctx.term || 'this', Term: ctx.Term || 'This' });
+        return fill(str, {
+          term: ctx.term || 'this',
+          Term: ctx.Term || 'This',
+        });
       }
 
       function generateCaptions(ctx) {
         const pack = ctx.pack;
-        const pure = shuffle(pack.captions.map((c) => applyTerm(c, ctx)));
+        const pure = shuffle((pack.captions || []).map((c) => applyTerm(c, ctx)));
         const withTerm =
           ctx.term
             ? shuffle((pack.termCaptions || []).map((c) => applyTerm(c, ctx)))
             : [];
         const mixed = [];
-        // Mostly domain-specific lines; sprinkle a few natural term mentions
+        // Style-specific lines first; sprinkle natural term mentions
         while (mixed.length < 10) {
           if (mixed.length % 4 === 3 && withTerm.length) {
             mixed.push(withTerm.pop());
@@ -1870,7 +2456,7 @@
 
       function generateThreads(ctx) {
         const pack = ctx.pack;
-        const base = pack.threads.map((t) => ({
+        const base = (pack.threads || []).map((t) => ({
           title: applyTerm(t.title, ctx),
           preview: applyTerm(t.preview, ctx),
         }));
@@ -1885,7 +2471,7 @@
 
       function generateHooks(ctx) {
         const pack = ctx.pack;
-        const pure = shuffle(pack.hooks.map((h) => applyTerm(h, ctx)));
+        const pure = shuffle((pack.hooks || []).map((h) => applyTerm(h, ctx)));
         const withTerm = ctx.term
           ? shuffle((pack.termHooks || []).map((h) => applyTerm(h, ctx)))
           : [];
@@ -1933,11 +2519,25 @@
           });
         }
 
+        // Style-specific boost tags already in pack.hashtags via merge
+        if (ctx.foodStyle === 'mediterranean') {
+          tags.add('#MediterraneanDiet');
+          tags.add('#OliveOil');
+        } else if (ctx.foodStyle === 'vegan') {
+          tags.add('#Vegan');
+          tags.add('#PlantBased');
+        } else if (ctx.foodStyle === 'carnivore') {
+          tags.add('#CarnivoreDiet');
+        } else if (ctx.foodStyle === 'keto') {
+          tags.add('#Keto');
+          tags.add('#LowCarb');
+        }
+
         const combined = [...tags].filter((h) => h.length > 2 && h.length < 32);
         const domainSet = new Set(pack.hashtags || []);
         const niche = combined.filter((h) => !domainSet.has(h));
-        const domain = combined.filter((h) => domainSet.has(h));
-        return [...shuffle(niche), ...shuffle(domain)].slice(0, 18);
+        const domainTags = combined.filter((h) => domainSet.has(h));
+        return [...shuffle(niche), ...shuffle(domainTags)].slice(0, 18);
       }
 
       function generateContent(topic) {
