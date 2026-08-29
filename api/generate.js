@@ -72,25 +72,34 @@ async function chatComplete(topic) {
 
   let url;
   let headers;
+  let models;
   if (xai) {
     url = 'https://api.x.ai/v1/chat/completions';
     headers = { Authorization: `Bearer ${xai}`, 'Content-Type': 'application/json' };
-    payload.model = 'grok-4';
+    models = ['grok-4', 'grok-4.3', 'grok-4-fast-non-reasoning'];
   } else {
     url = 'https://api.groq.com/openai/v1/chat/completions';
     headers = { Authorization: `Bearer ${groq}`, 'Content-Type': 'application/json' };
-    payload.model = 'llama-3.1-8b-instant';
+    models = ['llama-3.1-8b-instant'];
   }
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(payload),
-  });
+  let res;
+  let lastStatus = 502;
+  for (const model of models) {
+    payload.model = model;
+    res = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) break;
+    lastStatus = res.status;
+    res = null;
+  }
 
-  if (!res.ok) {
+  if (!res) {
     const err = new Error('upstream');
-    err.status = res.status >= 500 ? 503 : 502;
+    err.status = lastStatus >= 500 ? 503 : 502;
     throw err;
   }
 
