@@ -99,6 +99,7 @@ async function chatComplete(topic) {
 
   if (!res) {
     const err = new Error('upstream');
+    err.upstream = lastStatus;
     err.status = lastStatus >= 500 ? 503 : 502;
     throw err;
   }
@@ -145,12 +146,13 @@ module.exports = async function handler(req, res) {
     res.status(200).json(out);
   } catch (err) {
     const status = err && err.status ? err.status : 503;
-    const reason = status === 401 || status === 403
+    const upstream = err && err.upstream ? err.upstream : status;
+    const reason = upstream === 401 || upstream === 403
       ? 'unauthorized'
-      : status === 404
+      : upstream === 404
         ? 'model'
         : 'upstream';
-    res.status(status >= 400 && status < 600 ? (status >= 500 ? 503 : 502) : 503).json({
+    res.status(status).json({
       error: 'AI unavailable',
       reason,
     });
