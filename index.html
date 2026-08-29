@@ -647,6 +647,7 @@
             <span class="btn-text">Generate Content</span>
             <span class="spinner" aria-hidden="true"></span>
           </button>
+          <p id="aiFallbackNote" hidden style="margin: 8px 0 0; font-size: 0.85rem; opacity: 0.75;">AI unavailable — using local generator</p>
         </div>
       </div>
     </section>
@@ -748,6 +749,11 @@
 
       const STORAGE_THEME = 'contentspark-theme';
       const STORAGE_FAVORITES = 'contentspark-favorites';
+      const STORAGE_PRO = 'contentspark_pro';
+      const STORAGE_PRO_USES = 'contentspark_pro_uses';
+      const PRO_DAILY_CAP = 30;
+      const PRO_GENERATE_URL = 'https://contentspark-generate.thadwaugh-dev.workers.dev/api/generate';
+      const PRO_CHECKOUT_URL = 'https://contentsparkpro.lemonsqueezy.com/checkout/buy/ca205280-0116-4e4e-a5d6-37b4ab667652';
 
       let currentContent = null;
       let favorites = loadFavorites();
@@ -2685,6 +2691,109 @@
         showToast('Exported as text file!');
       }
 
+      /* ── Pro AI gate ── */
+      function isProUnlocked() {
+        return !!localStorage.getItem(STORAGE_PRO);
+      }
+
+      function captureProFromUrl() {
+        const q = new URLSearchParams(window.location.search);
+        const key = q.get('license_key') || q.get('license');
+        if (key) {
+          localStorage.setItem(STORAGE_PRO, key);
+        } else if (q.get('pro') === '1' && !localStorage.getItem(STORAGE_PRO)) {
+          localStorage.setItem(STORAGE_PRO, '1');
+        }
+      }
+
+      function todayKey() {
+        const d = new Date();
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      }
+
+      function readProUses() {
+        try {
+          const raw = JSON.parse(localStorage.getItem(STORAGE_PRO_USES) || '{}');
+          if (raw.date !== todayKey()) return { date: todayKey(), count: 0 };
+          return { date: raw.date, count: Number(raw.count) || 0 };
+        } catch {
+          return { date: todayKey(), count: 0 };
+        }
+      }
+
+      function recordProUse() {
+        const uses = readProUses();
+        localStorage.setItem(STORAGE_PRO_USES, JSON.stringify({
+          date: todayKey(),
+          count: uses.count + 1,
+        }));
+      }
+
+      function proCapReached() {
+        return readProUses().count >= PRO_DAILY_CAP;
+      }
+
+      function normalizeThreads(threads) {
+        return (threads || []).map((t) => {
+          if (t && typeof t === 'object' && t.title) {
+            return { title: String(t.title), preview: String(t.preview || '') };
+          }
+          const s = String(t || '').trim();
+          const nl = s.indexOf('\n');
+          if (nl > 0) return { title: s.slice(0, nl).trim(), preview: s.slice(nl + 1).trim() };
+          const dash = s.indexOf(' — ');
+          if (dash > 0) return { title: s.slice(0, dash).trim(), preview: s.slice(dash + 3).trim() };
+          return { title: s, preview: '' };
+        });
+      }
+
+      function showAiFallbackNote() {
+        const note = $('#aiFallbackNote');
+        if (note) note.hidden = false;
+      }
+
+      function hideAiFallbackNote() {
+        const note = $('#aiFallbackNote');
+        if (note) note.hidden = true;
+      }
+
+      function updateProCta() {
+        const buy = $('#proBuyBtn');
+        const on = $('#proOnLabel');
+        const lead = $('#proCtaLead');
+        if (!buy || !on) return;
+        if (isProUnlocked()) {
+          buy.hidden = true;
+          on.hidden = false;
+          if (lead) lead.textContent = 'Pro AI is on for this browser.';
+        } else {
+          buy.hidden = false;
+          on.hidden = true;
+          if (lead) lead.innerHTML = '<strong>Unlock Pro AI</strong>';
+        }
+      }
+
+      async function fetchProGenerate(topic) {
+        const res = await fetch(PRO_GENERATE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic,
+            license_key: localStorage.getItem(STORAGE_PRO),
+          }),
+        });
+        if (!res.ok) throw new Error('api');
+        const data = await res.json();
+        if (!data || !Array.isArray(data.captions) || !data.captions.length) throw new Error('shape');
+        return {
+          topic,
+          captions: data.captions,
+          threads: normalizeThreads(data.threads),
+          hashtags: Array.isArray(data.hashtags) ? data.hashtags : [],
+          hooks: Array.isArray(data.hooks) ? data.hooks : [],
+        };
+      }
+
       /* ── Generate flow ── */
       async function handleGenerate() {
         const topic = topicInput.value.trim();
@@ -2698,10 +2807,28 @@
 
         generateBtn.disabled = true;
         generateBtn.classList.add('loading');
+        hideAiFallbackNote();
 
-        await new Promise((r) => setTimeout(r, 900 + Math.random() * 600));
+        let content;
+        if (isProUnlocked()) {
+          if (proCapReached()) {
+            content = generateContent(topic);
+            showAiFallbackNote();
+            showToast('Daily Pro AI cap reached — using local generator');
+          } else {
+            try {
+              content = await fetchProGenerate(topic);
+              recordProUse();
+            } catch (err) {
+              content = generateContent(topic);
+              showAiFallbackNote();
+            }
+          }
+        } else {
+          await new Promise((r) => setTimeout(r, 900 + Math.random() * 600));
+          content = generateContent(topic);
+        }
 
-        const content = generateContent(topic);
         renderResults(content);
 
         generateBtn.disabled = false;
@@ -2756,13 +2883,16 @@
       });
 
       /* ── Init ── */
+      captureProFromUrl();
+      updateProCta();
       updateFavCount();
       renderFavoritesPanel();
     })();
   </script>
 <div style="text-align: center; margin: 40px 0; padding: 24px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; color: white;">
-  <p style="font-size: 1.1rem; margin-bottom: 16px;"><strong>Ready for unlimited generations?</strong></p>
-  <a href="https://contentsparkpro.lemonsqueezy.com/checkout/buy/ca205280-0116-4e4e-a5d6-37b4ab667652" target="_blank" style="background: #22c55e; color: #0f172a; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block;">Get ContentSpark Pro →</a>
+  <p id="proCtaLead" style="font-size: 1.1rem; margin-bottom: 16px;"><strong>Unlock Pro AI</strong></p>
+  <a id="proBuyBtn" href="https://contentsparkpro.lemonsqueezy.com/checkout/buy/ca205280-0116-4e4e-a5d6-37b4ab667652" target="_blank" style="background: #22c55e; color: #0f172a; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block;">Unlock Pro AI</a>
+  <p id="proOnLabel" hidden style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">Pro AI on</p>
   
   <p style="margin-top: 20px; font-size: 0.95rem;">
     Also in the suite: 

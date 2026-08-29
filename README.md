@@ -114,3 +114,52 @@ This entire project was planned in Grok Plan Mode and implemented as a complete,
 ---
 
 Enjoy building with ContentSpark! Feedback and feature ideas welcome.
+
+## Pro AI generate path
+
+The GitHub Pages site stays static. Pro calls a Cloudflare Worker so the model API key never ships to the browser.
+
+Free users still use the built-in template generator. If the Worker is down or the daily Pro cap is hit (30 generations per browser per day), the page falls back to that same local generator.
+
+### Environment variables (Worker only)
+
+| Name | Required | Purpose |
+|---|---|---|
+| `XAI_API_KEY` | Preferred | xAI chat key. Worker uses `grok-4`. |
+| `GROQ_API_KEY` | Fallback | Used only when `XAI_API_KEY` is missing. Worker uses `llama-3.1-8b-instant`. |
+
+If both keys are missing, `POST /api/generate` returns `503` and the client uses templates.
+
+Do not commit keys. Set them as Wrangler secrets (or Vercel env vars if you deploy the function there instead).
+
+### Deploy the function (Cloudflare Worker)
+
+From this repo:
+
+```bash
+npx wrangler login
+npx wrangler secret put XAI_API_KEY
+npx wrangler deploy
+```
+
+`wrangler.toml` names the Worker `contentspark-generate`. After deploy, Wrangler prints a URL like:
+
+`https://contentspark-generate.<your-subdomain>.workers.dev`
+
+If that URL is not `https://contentspark-generate.thadwaugh-dev.workers.dev/api/generate`, update `PRO_GENERATE_URL` in `index.html` to the printed URL plus `/api/generate`.
+
+The Worker accepts `POST /`, `POST /generate`, and `POST /api/generate`.
+
+Body: `{ "topic": string, "license_key": string | null }`
+
+### Lemon Squeezy return URL
+
+In the ContentSpark Pro product, set the confirmation / receipt button to:
+
+`https://thadwaugh-dev.github.io/content-spark-simple/?pro=1`
+
+If Lemon Squeezy can append the license, use:
+
+`https://thadwaugh-dev.github.io/content-spark-simple/?pro=1&license_key=[license_key]`
+
+The page stores `license_key` or `?pro=1` in `localStorage` as `contentspark_pro`.

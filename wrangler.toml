@@ -1,0 +1,3 @@
+name = "contentspark-generate"
+main = "api/generate.js"
+compatibility_date = "2026-08-29"
