@@ -2764,10 +2764,12 @@
         if (!buy || !on) return;
         if (isProUnlocked()) {
           buy.hidden = true;
+          buy.style.display = 'none';
           on.hidden = false;
           if (lead) lead.textContent = 'Pro AI is on for this browser.';
         } else {
           buy.hidden = false;
+          buy.style.display = '';
           on.hidden = true;
           if (lead) lead.innerHTML = '<strong>Unlock Pro AI</strong>';
         }
