@@ -1,5 +1,6 @@
 {
   "framework": null,
   "installCommand": "echo skip",
-  "buildCommand": "echo skip"
+  "buildCommand": "mkdir -p public && printf ok > public/.keep",
+  "outputDirectory": "public"
 }
