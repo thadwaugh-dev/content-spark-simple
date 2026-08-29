@@ -67,7 +67,6 @@ async function chatComplete(topic) {
       { role: 'system', content: SYSTEM_PROMPT },
       { role: 'user', content: `Topic or niche:\n${topic}` },
     ],
-    temperature: 0.7,
   };
 
   let url;
@@ -76,7 +75,7 @@ async function chatComplete(topic) {
   if (xai) {
     url = 'https://api.x.ai/v1/chat/completions';
     headers = { Authorization: `Bearer ${xai}`, 'Content-Type': 'application/json' };
-    models = ['grok-4', 'grok-4.3', 'grok-4-fast-non-reasoning'];
+    models = ['grok-4.6', 'grok-4.3', 'grok-4.5'];
   } else {
     url = 'https://api.groq.com/openai/v1/chat/completions';
     headers = { Authorization: `Bearer ${groq}`, 'Content-Type': 'application/json' };
@@ -85,6 +84,7 @@ async function chatComplete(topic) {
 
   let res;
   let lastStatus = 502;
+  let lastDetail = '';
   for (const model of models) {
     payload.model = model;
     res = await fetch(url, {
@@ -94,12 +94,20 @@ async function chatComplete(topic) {
     });
     if (res.ok) break;
     lastStatus = res.status;
+    try {
+      const errBody = await res.json();
+      const msg = errBody && errBody.error && (errBody.error.message || errBody.error);
+      lastDetail = String(msg || '').slice(0, 160);
+    } catch {
+      lastDetail = '';
+    }
     res = null;
   }
 
   if (!res) {
     const err = new Error('upstream');
     err.upstream = lastStatus;
+    err.detail = lastDetail;
     err.status = lastStatus >= 500 ? 503 : 502;
     throw err;
   }
@@ -156,6 +164,7 @@ module.exports = async function handler(req, res) {
       error: 'AI unavailable',
       reason,
       upstream,
+      detail: err && err.detail ? String(err.detail).slice(0, 160) : '',
     });
   }
 };
