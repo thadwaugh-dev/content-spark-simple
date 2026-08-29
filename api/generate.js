@@ -1,5 +1,5 @@
 /**
- * ContentSpark Pro generate Worker.
+ * ContentSpark Pro generate — Vercel serverless function.
  * Secrets: XAI_API_KEY (preferred) or GROQ_API_KEY.
  * Never log full prompts or topics.
  */
@@ -8,7 +8,7 @@ const ALLOW_ORIGINS = [
   'https://thadwaugh-dev.github.io',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
-  'http://localhost:8787',
+  'http://localhost:5173',
 ];
 
 const SYSTEM_PROMPT = [
@@ -21,26 +21,17 @@ const SYSTEM_PROMPT = [
   'Do not mention that you are an AI.',
 ].join(' ');
 
-function corsHeaders(request) {
-  const origin = request.headers.get('Origin') || '';
-  const allow = ALLOW_ORIGINS.includes(origin) ? origin : ALLOW_ORIGINS[0];
-  return {
-    'Access-Control-Allow-Origin': allow,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Max-Age': '86400',
-    'Vary': 'Origin',
-  };
+function allowOrigin(origin) {
+  return ALLOW_ORIGINS.includes(origin) ? origin : ALLOW_ORIGINS[0];
 }
 
-function json(request, body, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      ...corsHeaders(request),
-    },
-  });
+function setCors(req, res) {
+  const origin = req.headers.origin || '';
+  res.setHeader('Access-Control-Allow-Origin', allowOrigin(origin));
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Max-Age', '86400');
+  res.setHeader('Vary', 'Origin');
 }
 
 function stripFence(text) {
@@ -52,25 +43,29 @@ function stripFence(text) {
 function asStringArray(value, max) {
   if (!Array.isArray(value)) return [];
   return value
-    .map((v) => (typeof v === 'string' ? v : (v && (v.title || v.text)) ? String(v.title || v.text) : ''))
+    .map((v) => {
+      if (typeof v === 'string') return v;
+      if (v && (v.title || v.text)) return String(v.title || v.text);
+      return '';
+    })
     .map((s) => s.trim())
     .filter(Boolean)
     .slice(0, max);
 }
 
-async function chatComplete(env, userTopic) {
-  const xai = env.XAI_API_KEY;
-  const groq = env.GROQ_API_KEY;
+async function chatComplete(topic) {
+  const xai = process.env.XAI_API_KEY;
+  const groq = process.env.GROQ_API_KEY;
   if (!xai && !groq) {
     const err = new Error('missing_key');
-    err.code = 503;
+    err.status = 503;
     throw err;
   }
 
   const payload = {
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: `Topic or niche:\n${userTopic}` },
+      { role: 'user', content: `Topic or niche:\n${topic}` },
     ],
     temperature: 0.7,
   };
@@ -95,7 +90,7 @@ async function chatComplete(env, userTopic) {
 
   if (!res.ok) {
     const err = new Error('upstream');
-    err.code = res.status >= 500 ? 503 : 502;
+    err.status = res.status >= 500 ? 503 : 502;
     throw err;
   }
 
@@ -112,44 +107,35 @@ async function chatComplete(env, userTopic) {
   };
 }
 
-export default {
-  async fetch(request, env) {
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: corsHeaders(request) });
-    }
+module.exports = async function handler(req, res) {
+  setCors(req, res);
 
-    const url = new URL(request.url);
-    const path = url.pathname.replace(/\/+$/, '') || '/';
-    const isGenerate = path === '/api/generate' || path === '/generate' || path === '/';
+  if (req.method === 'OPTIONS') {
+    res.status(204).end();
+    return;
+  }
 
-    if (request.method !== 'POST' || !isGenerate) {
-      return json(request, { error: 'Not found' }, 404);
-    }
+  if (req.method !== 'POST') {
+    res.status(404).json({ error: 'Not found' });
+    return;
+  }
 
-    let body;
-    try {
-      body = await request.json();
-    } catch {
-      return json(request, { error: 'Invalid JSON' }, 400);
-    }
+  const body = req.body && typeof req.body === 'object' ? req.body : {};
+  const topic = typeof body.topic === 'string' ? body.topic.trim() : '';
+  if (!topic) {
+    res.status(400).json({ error: 'topic is required' });
+    return;
+  }
 
-    const topic = body && typeof body.topic === 'string' ? body.topic.trim() : '';
-    if (!topic) {
-      return json(request, { error: 'topic is required' }, 400);
+  try {
+    const out = await chatComplete(topic);
+    if (!out.captions.length || !out.threads.length || !out.hooks.length) {
+      res.status(502).json({ error: 'Model returned empty copy' });
+      return;
     }
-
-    try {
-      const out = await chatComplete(env, topic);
-      if (!out.captions.length || !out.threads.length || !out.hooks.length) {
-        return json(request, { error: 'Model returned empty copy' }, 502);
-      }
-      return json(request, out, 200);
-    } catch (err) {
-      const status = err && err.code ? err.code : 503;
-      if (err && err.message === 'missing_key') {
-        return json(request, { error: 'AI unavailable' }, 503);
-      }
-      return json(request, { error: 'AI unavailable' }, status);
-    }
-  },
+    res.status(200).json(out);
+  } catch (err) {
+    const status = err && err.status ? err.status : 503;
+    res.status(status).json({ error: 'AI unavailable' });
+  }
 };

@@ -117,38 +117,31 @@ Enjoy building with ContentSpark! Feedback and feature ideas welcome.
 
 ## Pro AI generate path
 
-The GitHub Pages site stays static. Pro calls a Cloudflare Worker so the model API key never ships to the browser.
+The GitHub Pages site stays static. Pro calls a Vercel serverless function so the model API key never ships to the browser.
 
-Free users still use the built-in template generator. If the Worker is down or the daily Pro cap is hit (30 generations per browser per day), the page falls back to that same local generator.
+Free users still use the built-in template generator. If the function is down or the daily Pro cap is hit (30 generations per browser per day), the page falls back to that same local generator.
 
-### Environment variables (Worker only)
+### Environment variables (Vercel only)
 
 | Name | Required | Purpose |
 |---|---|---|
-| `XAI_API_KEY` | Preferred | xAI chat key. Worker uses `grok-4`. |
-| `GROQ_API_KEY` | Fallback | Used only when `XAI_API_KEY` is missing. Worker uses `llama-3.1-8b-instant`. |
+| `XAI_API_KEY` | Preferred | xAI chat key. Function uses `grok-4`. |
+| `GROQ_API_KEY` | Fallback | Used only when `XAI_API_KEY` is missing. Function uses `llama-3.1-8b-instant`. |
 
 If both keys are missing, `POST /api/generate` returns `503` and the client uses templates.
 
-Do not commit keys. Set them as Wrangler secrets (or Vercel env vars if you deploy the function there instead).
+Do not commit keys. Set them in the Vercel project: Settings → Environment Variables.
 
-### Deploy the function (Cloudflare Worker)
+### Deploy the function (Vercel)
 
-From this repo:
+1. Import `thadwaugh-dev/content-spark-simple` at [vercel.com/new](https://vercel.com/new).
+2. `vercel.json` disables the Next.js build so this project only serves `api/generate.js`.
+3. Add `XAI_API_KEY` (or `GROQ_API_KEY`) for Production.
+4. Deploy. The endpoint is:
 
-```bash
-npx wrangler login
-npx wrangler secret put XAI_API_KEY
-npx wrangler deploy
-```
+`https://content-spark-simple.vercel.app/api/generate`
 
-`wrangler.toml` names the Worker `contentspark-generate`. After deploy, Wrangler prints a URL like:
-
-`https://contentspark-generate.<your-subdomain>.workers.dev`
-
-If that URL is not `https://contentspark-generate.thadwaugh-dev.workers.dev/api/generate`, update `PRO_GENERATE_URL` in `index.html` to the printed URL plus `/api/generate`.
-
-The Worker accepts `POST /`, `POST /generate`, and `POST /api/generate`.
+If Vercel assigns a different host, update `PRO_GENERATE_URL` in `index.html` to that host plus `/api/generate`.
 
 Body: `{ "topic": string, "license_key": string | null }`
 
