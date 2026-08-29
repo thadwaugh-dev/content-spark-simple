@@ -2884,9 +2884,13 @@
 
       /* ── Init ── */
       captureProFromUrl();
-      updateProCta();
       updateFavCount();
       renderFavoritesPanel();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateProCta);
+      } else {
+        updateProCta();
+      }
     })();
   </script>
 <div style="text-align: center; margin: 40px 0; padding: 24px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; color: white;">
