@@ -130,6 +130,26 @@
       gap: 10px;
     }
 
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .site-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .site-nav a:hover {
+      color: var(--text);
+      background: var(--accent-soft);
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -213,7 +233,107 @@
       color: var(--text-muted);
       font-size: 1.05rem;
       max-width: 520px;
-      margin: 0 auto 32px;
+      margin: 0 auto 12px;
+    }
+
+    .hero .product-summary {
+      color: var(--text);
+      font-size: 1.05rem;
+      max-width: 42rem;
+      margin: 0 auto 12px;
+    }
+
+    .hero .hero-support {
+      margin-bottom: 28px;
+    }
+
+    .pricing {
+      margin: 8px auto 48px;
+    }
+
+    .pricing h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .pricing-lead {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 40rem;
+      margin: 0 auto 24px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-card-pro {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow-sm);
+    }
+
+    .price-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .price-card .amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin: 8px 0 4px;
+    }
+
+    .price-card .amount span {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
+
+    .price-card .blurb {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .price-card li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .price-card li::before {
+      content: "✓ ";
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .price-card .btn {
+      width: 100%;
+      margin-top: auto;
+      text-decoration: none;
     }
 
     .input-group {
@@ -629,19 +749,40 @@
 
     /* Footer */
     footer {
-      text-align: center;
-      margin-top: 48px;
-      padding-top: 24px;
+      max-width: 920px;
+      margin: 48px auto 0;
+      padding: 24px 20px 48px;
       border-top: 1px solid var(--border);
       color: var(--text-faint);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
+      text-align: center;
+      line-height: 1.6;
     }
+
+    footer p { margin: 6px 0; }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      justify-content: center;
+      margin: 12px 0;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    footer a:hover { color: var(--text); }
 
     /* Responsive */
     @media (max-width: 600px) {
       .app { padding: 16px 16px 48px; }
       header { margin-bottom: 32px; }
       .header-actions .btn-pro span.label { display: none; }
+      .pricing-grid { grid-template-columns: 1fr; }
       .results-toolbar { flex-direction: column; align-items: stretch; }
       .toolbar-actions { justify-content: stretch; }
       .toolbar-actions .btn { flex: 1; }
@@ -669,13 +810,17 @@
         </div>
       </div>
       <div class="header-actions">
+        <nav class="site-nav" aria-label="On this page">
+          <a href="#pricing">Pricing</a>
+        </nav>
         <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
       </div>
     </header>
 
     <section class="hero">
       <h2>Spark your next <span>viral post</span></h2>
-      <p>Generate captions, thread ideas, hashtags, and video hooks tailored to your niche — in seconds.</p>
+      <p class="product-summary">ContentSpark is a free browser-based social caption, hook, and hashtag generator for social media creators, and ContentSpark Pro is a $9/month digital subscription for AI generation.</p>
+      <p class="hero-support">Type a topic to generate captions, thread ideas, hashtags, and a video hook in your browser.</p>
       <div class="input-group">
         <textarea
           class="topic-input"
@@ -691,6 +836,35 @@
           </button>
           <p id="aiFallbackNote" hidden style="margin: 8px 0 0; font-size: 0.85rem; opacity: 0.75;">AI unavailable — using local generator</p>
         </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing" aria-labelledby="pricing-heading">
+      <h2 id="pricing-heading">Pricing</h2>
+      <p class="pricing-lead">Free runs in your browser. Pro is a $9/month digital subscription sold by Lemon Squeezy, the merchant of record.</p>
+      <div class="pricing-grid">
+        <article class="price-card">
+          <h3>Free</h3>
+          <p class="amount">$0</p>
+          <p class="blurb">Browser-based templates. No subscription.</p>
+          <ul>
+            <li>Social captions, thread ideas, hashtags, and video hooks from built-in templates</li>
+            <li>Runs in this browser — your topic is not sent to a server</li>
+            <li>Copy, export, and save favorites on this device</li>
+          </ul>
+          <a class="btn" href="#topicInput">Use the free generator</a>
+        </article>
+        <article class="price-card price-card-pro">
+          <h3>Pro</h3>
+          <p class="amount">$9<span>/month</span></p>
+          <p class="blurb">Digital subscription. Cancel anytime.</p>
+          <ul>
+            <li>AI generation of captions, thread ideas, hashtags, and video hooks</li>
+            <li>Unlocked in this browser with a Lemon Squeezy license key</li>
+            <li>Cancel anytime from your Lemon Squeezy receipt or customer portal</li>
+          </ul>
+          <a id="pricingProBtn" class="btn btn-pro" href="https://contentsparkpro.lemonsqueezy.com/checkout/buy/ca205280-0116-4e4e-a5d6-37b4ab667652" target="_blank" rel="noopener noreferrer">Get Pro — $9/month</a>
+        </article>
       </div>
     </section>
 
@@ -762,9 +936,6 @@
       </div>
     </section>
 
-    <footer>
-      ContentSpark &copy; 2026 — Built for creators, no API keys required.
-    </footer>
   </div>
 
   <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
@@ -3218,5 +3389,16 @@
 <a href="https://thadwaugh-dev.github.io/quickinvoice/" target="_blank" style="color: #6366f1;">QuickInvoice</a>
   </p>
 </div>
+  <!-- THAD: replace every {{CONTACT_EMAIL}} with your real contact email before sending these pages to Lemon Squeezy. -->
+  <footer>
+    <p>ContentSpark is operated by Thad Waugh.</p>
+    <nav class="footer-nav" aria-label="Legal">
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="refund.html">Refund &amp; Cancellation Policy</a>
+    </nav>
+    <p>Contact: <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+    <p>ContentSpark &copy; 2026</p>
+  </footer>
 </body>
 </html>

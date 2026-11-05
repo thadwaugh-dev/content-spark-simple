@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — ContentSpark</title>
+  <meta name="description" content="Privacy Policy for ContentSpark, operated by Thad Waugh. What stays in your browser, what Pro sends to the AI endpoint, and how Lemon Squeezy handles payment.">
+  <link rel="stylesheet" href="policy.css">
+</head>
+<body>
+  <!-- THAD: replace every {{CONTACT_EMAIL}} with your real contact email before sending these pages to Lemon Squeezy. -->
+  <div class="app">
+    <header>
+      <a class="logo" href="index.html">
+        <div class="logo-icon" aria-hidden="true">✦</div>
+        <div>
+          <h1>ContentSpark</h1>
+          <p>Social content, instantly</p>
+        </div>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Site">
+          <a href="index.html">Home</a>
+          <a href="index.html#pricing">Pricing</a>
+        </nav>
+        <button class="btn btn-icon" id="themeToggle" type="button" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <main>
+      <h1>Privacy Policy</h1>
+      <p class="notice">Last updated November 5, 2026. This page describes how ContentSpark works in plain language. It is not legal advice.</p>
+
+      <h2>Who this covers</h2>
+      <p>ContentSpark is operated by Thad Waugh. This policy explains what the website stores on your device, what ContentSpark Pro sends to generate AI text, and who handles payment. Privacy questions go to <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</p>
+
+      <h2>Free tier stays in the browser</h2>
+      <p>The free generator runs in your browser from built-in templates. The topic you type for a free generation is not sent to ContentSpark’s server. There is no ContentSpark account to create.</p>
+
+      <h2>What is stored in this browser</h2>
+      <p>ContentSpark uses localStorage on your device. These values stay in the browser until you remove them or clear site data:</p>
+      <ul>
+        <li>License key (<code>contentspark_license_key</code>), after you activate ContentSpark Pro.</li>
+        <li>Lemon Squeezy instance id (<code>contentspark_license_instance</code>), which ties that key to this browser.</li>
+        <li>Favorites you star (<code>contentspark-favorites</code>).</li>
+        <li>Light or dark theme (<code>contentspark-theme</code>).</li>
+        <li>A count of Pro AI generations for the daily cap (<code>contentspark_pro_uses</code>).</li>
+      </ul>
+      <p>Use “Remove key” on the homepage to delete the license key and instance id from this browser. Clearing this site’s data in your browser removes the rest.</p>
+
+      <h2>What Pro sends</h2>
+      <p>When you save a license key, the page sends the key and instance id to ContentSpark’s server so the server can check them with Lemon Squeezy.</p>
+      <p>When you generate with Pro, the page sends the topic you typed, the license key, and the instance id to ContentSpark’s server. The server checks the license and sends the topic to an AI provider to write the captions, threads, hashtags, and hooks. The provider is xAI, or Groq when an xAI key is not configured. The AI provider receives the topic. It does not receive your card number.</p>
+      <p>ContentSpark does not keep a customer account or a public profile from these requests.</p>
+
+      <h2>Payments</h2>
+      <p>Lemon Squeezy is the merchant of record for ContentSpark Pro. Lemon Squeezy collects the email and payment details needed to take payment, calculate tax, email your receipt and license key, and host the customer portal. ContentSpark does not collect your card number.</p>
+
+      <h2>ContentSpark does not sell personal information</h2>
+      <p>ContentSpark does not sell your personal information and does not run third-party advertising trackers on this site. Information is used to run the free tool in your browser, to check a Pro license, and to generate the text you asked for.</p>
+
+      <h2>Contact</h2>
+      <p>Thad Waugh, operating ContentSpark — <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</p>
+    </main>
+
+    <footer>
+      <p>ContentSpark is operated by Thad Waugh.</p>
+      <nav class="footer-nav" aria-label="Legal">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="refund.html">Refund &amp; Cancellation Policy</a>
+      </nav>
+      <p>Contact: <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+      <p>ContentSpark &copy; 2026</p>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var key = 'contentspark-theme';
+      var saved = null;
+      try { saved = localStorage.getItem(key); } catch (e) {}
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      var btn = document.getElementById('themeToggle');
+      function apply(next) {
+        document.documentElement.setAttribute('data-theme', next);
+        if (btn) btn.textContent = next === 'dark' ? '🌙' : '☀️';
+      }
+      apply(theme);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(theme);
+        try { localStorage.setItem(key, theme); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

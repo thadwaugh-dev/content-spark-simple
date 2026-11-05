@@ -409,7 +409,7 @@ test('generate options preflight echoes a contentspark.fyi origin', async () => 
 test('page removes the any-value unlock and keeps the checkout URL', () => {
   const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
   const checkout = 'https://contentsparkpro.lemonsqueezy.com/checkout/buy/ca205280-0116-4e4e-a5d6-37b4ab667652';
-  assert.equal(html.split(checkout).length - 1, 2);
+  assert.equal(html.split(checkout).length - 1, 3);
   assert.equal(/localStorage\.setItem\(STORAGE_PRO[^\w_]/.test(html), false);
   assert.equal(html.includes("q.get('pro') === '1'"), false);
   assert.match(html, /id="licenseKeyInput"/);

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refund and Cancellation Policy — ContentSpark</title>
+  <meta name="description" content="Cancel ContentSpark Pro anytime in the Lemon Squeezy customer portal. Request a refund within 14 days of a charge.">
+  <link rel="stylesheet" href="policy.css">
+</head>
+<body>
+  <!-- THAD: replace every {{CONTACT_EMAIL}} with your real contact email before sending these pages to Lemon Squeezy. Confirm you will honor the 14-day refund window below, or edit it before publishing. -->
+  <div class="app">
+    <header>
+      <a class="logo" href="index.html">
+        <div class="logo-icon" aria-hidden="true">✦</div>
+        <div>
+          <h1>ContentSpark</h1>
+          <p>Social content, instantly</p>
+        </div>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Site">
+          <a href="index.html">Home</a>
+          <a href="index.html#pricing">Pricing</a>
+        </nav>
+        <button class="btn btn-icon" id="themeToggle" type="button" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <main>
+      <h1>Refund and Cancellation Policy</h1>
+      <p class="notice">Last updated November 5, 2026. This page describes how ContentSpark works in plain language. It is not legal advice.</p>
+
+      <h2>What you are paying for</h2>
+      <p>ContentSpark Pro is a digital subscription at $9 per month. It unlocks AI generation in the browser with a Lemon Squeezy license key. The free generator is $0. There is no charge to refund on the free tool.</p>
+      <p>Lemon Squeezy is the merchant of record. Lemon Squeezy takes payment, calculates tax, and emails the receipt. Thad Waugh, who operates ContentSpark, provides the software.</p>
+
+      <h2>Cancel anytime</h2>
+      <p>You can cancel ContentSpark Pro anytime. Open the receipt email from Lemon Squeezy and use the customer portal link in that email. Cancellation stops future renewal charges. Lemon Squeezy applies the cancellation to the subscription.</p>
+
+      <h2>Refunds within 14 days</h2>
+      <p>You can request a refund within 14 days of a charge. Email <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a> from, or with, the email address on your Lemon Squeezy receipt, and say you want that charge refunded. Thad Waugh will refund the charge through Lemon Squeezy. A refunded license can stop unlocking Pro.</p>
+      <p>Charges older than 14 days are not refunded under this policy. You can still cancel so the subscription does not renew.</p>
+
+      <h2>How to ask</h2>
+      <ul>
+        <li>Open the Lemon Squeezy receipt email for ContentSpark Pro.</li>
+        <li>Use the customer portal in that email if you want to cancel renewal.</li>
+        <li>For a refund inside 14 days, email <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>Thad Waugh, operating ContentSpark — <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>. The <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a> describe the product and the data it uses.</p>
+    </main>
+
+    <footer>
+      <p>ContentSpark is operated by Thad Waugh.</p>
+      <nav class="footer-nav" aria-label="Legal">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="refund.html">Refund &amp; Cancellation Policy</a>
+      </nav>
+      <p>Contact: <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+      <p>ContentSpark &copy; 2026</p>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var key = 'contentspark-theme';
+      var saved = null;
+      try { saved = localStorage.getItem(key); } catch (e) {}
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      var btn = document.getElementById('themeToggle');
+      function apply(next) {
+        document.documentElement.setAttribute('data-theme', next);
+        if (btn) btn.textContent = next === 'dark' ? '🌙' : '☀️';
+      }
+      apply(theme);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(theme);
+        try { localStorage.setItem(key, theme); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
