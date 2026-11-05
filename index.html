@@ -585,6 +585,48 @@
 
     .modal-actions .btn { flex: 1; }
 
+    #licenseKeyInput {
+      min-width: min(100%, 260px);
+      flex: 1 1 220px;
+      max-width: 420px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #0f172a;
+      color: #fff;
+      font: inherit;
+    }
+
+    #licenseSaveBtn,
+    #licenseRemoveBtn {
+      border-radius: 12px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    #licenseSaveBtn {
+      background: #22c55e;
+      color: #0f172a;
+      border: 0;
+      padding: 12px 18px;
+      font-weight: 700;
+    }
+
+    #licenseRemoveBtn {
+      margin-top: 12px;
+      background: transparent;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 8px 16px;
+    }
+
+    #licenseSaveBtn:focus-visible,
+    #licenseRemoveBtn:focus-visible,
+    #licenseKeyInput:focus-visible {
+      outline: 2px solid #86efac;
+      outline-offset: 2px;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -730,15 +772,11 @@
   <div class="modal-overlay" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proModalTitle">
     <div class="modal">
       <div class="pro-badge">Pro</div>
-      <h3 id="proModalTitle">Unlock ContentSpark Pro</h3>
-      <p>Supercharge your content workflow with premium features.</p>
-      <ul class="pro-features">
-        <li>Unlimited generations per day</li>
-        <li>AI tone matching &amp; brand voice</li>
-        <li>Multi-platform scheduling export</li>
-        <li>Competitor content analysis</li>
-        <li>Priority templates &amp; trending topics</li>
-      </ul>
+      <h3 id="proModalTitle">Enter the key from your receipt</h3>
+      <p id="proModalLead">This browser had Pro turned on from an old link. That link no longer unlocks Pro AI. Enter the license key from your Lemon Squeezy receipt email.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="proModalGo">Enter license key</button>
+        <button type="button" class="btn" id="proModalClose">Close</button>
       </div>
     </div>
   </div>
@@ -751,12 +789,22 @@
       const STORAGE_FAVORITES = 'contentspark-favorites';
       const STORAGE_PRO = 'contentspark_pro';
       const STORAGE_PRO_USES = 'contentspark_pro_uses';
+      const STORAGE_LICENSE_KEY = 'contentspark_license_key';
+      const STORAGE_LICENSE_INSTANCE = 'contentspark_license_instance';
       const PRO_DAILY_CAP = 30;
-      const PRO_GENERATE_URL = 'https://content-spark-simple.vercel.app/api/generate';
+      const PRO_API_ORIGIN = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+        ? location.origin
+        : 'https://content-spark-simple.vercel.app';
+      const PRO_GENERATE_URL = PRO_API_ORIGIN + '/api/generate';
+      const PRO_LICENSE_URL = PRO_API_ORIGIN + '/api/license';
       const PRO_CHECKOUT_URL = 'https://contentsparkpro.lemonsqueezy.com/checkout/buy/ca205280-0116-4e4e-a5d6-37b4ab667652';
 
       let currentContent = null;
       let favorites = loadFavorites();
+      let proOn = false;
+      let licenseReady = Promise.resolve(false);
+      let licenseBusy = false;
+      let promptLegacy = false;
 
       const $ = (sel) => document.querySelector(sel);
       const $$ = (sel) => document.querySelectorAll(sel);
@@ -2693,17 +2741,61 @@
 
       /* ── Pro AI gate ── */
       function isProUnlocked() {
-        return !!localStorage.getItem(STORAGE_PRO);
+        return proOn;
       }
 
-      function captureProFromUrl() {
-        const q = new URLSearchParams(window.location.search);
-        const key = q.get('license_key') || q.get('license');
-        if (key) {
-          localStorage.setItem(STORAGE_PRO, key);
-        } else if (q.get('pro') === '1' && !localStorage.getItem(STORAGE_PRO)) {
-          localStorage.setItem(STORAGE_PRO, '1');
+      function setLicenseStatus(message, tone) {
+        const el = $('#licenseStatus');
+        if (!el) return;
+        el.textContent = message || '';
+        el.style.color = tone === 'error' ? '#fecaca' : '#cbd5e1';
+        const input = $('#licenseKeyInput');
+        if (input) input.setAttribute('aria-invalid', tone === 'error' ? 'true' : 'false');
+      }
+
+      function showLegacyNote() {
+        const note = $('#licenseLegacyNote');
+        if (note) note.hidden = false;
+      }
+
+      function openLegacyModal() {
+        const modal = $('#proModal');
+        if (!modal) return;
+        const title = $('#proModalTitle');
+        const lead = $('#proModalLead');
+        if (title) title.textContent = 'Enter the key from your receipt';
+        if (lead) lead.textContent = 'This browser had Pro turned on from an old link. That link no longer unlocks Pro AI. Enter the license key from your Lemon Squeezy receipt email.';
+        modal.classList.add('open');
+      }
+
+      function closeProModal() {
+        const modal = $('#proModal');
+        if (modal) modal.classList.remove('open');
+      }
+
+      function looksLikeKey(value) {
+        return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(value || '').trim());
+      }
+
+      function stripLicenseParams() {
+        try {
+          const url = new URL(window.location.href);
+          let changed = false;
+          ['license_key', 'license', 'pro'].forEach((name) => {
+            if (url.searchParams.has(name)) {
+              url.searchParams.delete(name);
+              changed = true;
+            }
+          });
+          if (changed) history.replaceState({}, '', url.pathname + url.search + url.hash);
+        } catch {
+          /* keep the current URL */
         }
+      }
+
+      function rememberKeyInField(key) {
+        const input = $('#licenseKeyInput');
+        if (input && !input.value && key) input.value = key;
       }
 
       function todayKey() {
@@ -2749,7 +2841,9 @@
 
       function showAiFallbackNote() {
         const note = $('#aiFallbackNote');
-        if (note) note.hidden = false;
+        if (!note) return;
+        note.hidden = false;
+        note.textContent = 'AI unavailable — using local generator';
       }
 
       function hideAiFallbackNote() {
@@ -2761,18 +2855,181 @@
         const buy = $('#proBuyBtn');
         const on = $('#proOnLabel');
         const lead = $('#proCtaLead');
-        if (!buy || !on) return;
-        if (isProUnlocked()) {
-          buy.hidden = true;
-          buy.style.display = 'none';
-          on.hidden = false;
+        const form = $('#licenseForm');
+        const remove = $('#licenseRemoveBtn');
+        if (proOn) {
+          if (buy) {
+            buy.hidden = true;
+            buy.style.display = 'none';
+          }
+          if (on) on.hidden = false;
           if (lead) lead.textContent = 'Pro AI is on for this browser.';
+          if (form) form.hidden = true;
+          if (remove) remove.hidden = false;
         } else {
-          buy.hidden = false;
-          buy.style.display = '';
-          on.hidden = true;
+          if (buy) {
+            buy.hidden = false;
+            buy.style.display = 'inline-block';
+          }
+          if (on) on.hidden = true;
           if (lead) lead.innerHTML = '<strong>Unlock Pro AI</strong>';
+          if (form) form.hidden = false;
+          if (remove) remove.hidden = true;
         }
+      }
+
+      async function refreshLicense() {
+        const key = localStorage.getItem(STORAGE_LICENSE_KEY);
+        if (!key) {
+          proOn = false;
+          updateProCta();
+          return false;
+        }
+        licenseBusy = true;
+        const saveBtn = $('#licenseSaveBtn');
+        if (saveBtn) saveBtn.disabled = true;
+        setLicenseStatus('Checking license…');
+        proOn = false;
+        updateProCta();
+        try {
+          const res = await fetch(PRO_LICENSE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              license_key: key,
+              instance_id: localStorage.getItem(STORAGE_LICENSE_INSTANCE),
+            }),
+          });
+          let data = {};
+          try { data = await res.json(); } catch { data = {}; }
+          const code = data && data.code ? String(data.code) : '';
+          const keepStored = res.status === 429
+            || res.status === 503
+            || code === 'license_limit'
+            || code === 'license_unavailable';
+          if (!res.ok || !data.ok) {
+            proOn = false;
+            rememberKeyInField(key);
+            if (!keepStored) {
+              localStorage.removeItem(STORAGE_LICENSE_KEY);
+              localStorage.removeItem(STORAGE_LICENSE_INSTANCE);
+            }
+            setLicenseStatus((data && data.error) || 'That license key is not valid.', 'error');
+            updateProCta();
+            if (promptLegacy && !keepStored) openLegacyModal();
+            return false;
+          }
+          proOn = true;
+          promptLegacy = false;
+          if (data.instance_id) localStorage.setItem(STORAGE_LICENSE_INSTANCE, data.instance_id);
+          localStorage.setItem(STORAGE_LICENSE_KEY, key);
+          const input = $('#licenseKeyInput');
+          if (input) input.value = '';
+          const note = $('#licenseLegacyNote');
+          if (note) note.hidden = true;
+          setLicenseStatus('');
+          updateProCta();
+          closeProModal();
+          return true;
+        } catch {
+          proOn = false;
+          setLicenseStatus('Could not reach the license check. Try again.', 'error');
+          updateProCta();
+          return false;
+        } finally {
+          licenseBusy = false;
+          if (saveBtn) saveBtn.disabled = false;
+        }
+      }
+
+      function initLicense() {
+        const params = new URLSearchParams(window.location.search);
+        const fromUrl = (params.get('license_key') || params.get('license') || '').trim();
+        const legacyLink = params.get('pro') === '1';
+        stripLicenseParams();
+
+        const legacyStoredRaw = localStorage.getItem(STORAGE_PRO);
+        const legacyStored = legacyStoredRaw == null ? '' : String(legacyStoredRaw).trim();
+        if (legacyStoredRaw != null) localStorage.removeItem(STORAGE_PRO);
+
+        if (!fromUrl && legacyStored && legacyStored !== '1' && !localStorage.getItem(STORAGE_LICENSE_KEY) && looksLikeKey(legacyStored)) {
+          localStorage.setItem(STORAGE_LICENSE_KEY, legacyStored);
+        }
+
+        if (fromUrl) {
+          if (localStorage.getItem(STORAGE_LICENSE_KEY) !== fromUrl) {
+            localStorage.removeItem(STORAGE_LICENSE_INSTANCE);
+          }
+          localStorage.setItem(STORAGE_LICENSE_KEY, fromUrl);
+        }
+
+        const hadLegacy = legacyLink || legacyStoredRaw != null;
+        promptLegacy = hadLegacy;
+        const hasKey = !!localStorage.getItem(STORAGE_LICENSE_KEY);
+        if (hadLegacy && !hasKey) {
+          showLegacyNote();
+          openLegacyModal();
+        } else if (hadLegacy && !fromUrl) {
+          showLegacyNote();
+        }
+
+        if (hasKey) return refreshLicense();
+        updateProCta();
+        return Promise.resolve(false);
+      }
+
+      function onLicenseSubmit(event) {
+        event.preventDefault();
+        if (licenseBusy) return;
+        const input = $('#licenseKeyInput');
+        const value = input ? input.value.trim() : '';
+        if (!value) {
+          setLicenseStatus('Enter the license key from your Lemon Squeezy receipt email.', 'error');
+          if (input) input.focus();
+          return;
+        }
+        const prev = localStorage.getItem(STORAGE_LICENSE_KEY);
+        if (prev !== value) localStorage.removeItem(STORAGE_LICENSE_INSTANCE);
+        localStorage.setItem(STORAGE_LICENSE_KEY, value);
+        licenseReady = refreshLicense();
+      }
+
+      async function onLicenseRemove() {
+        const key = localStorage.getItem(STORAGE_LICENSE_KEY);
+        const instanceId = localStorage.getItem(STORAGE_LICENSE_INSTANCE);
+        proOn = false;
+        localStorage.removeItem(STORAGE_LICENSE_KEY);
+        localStorage.removeItem(STORAGE_LICENSE_INSTANCE);
+        const input = $('#licenseKeyInput');
+        if (input) input.value = '';
+        updateProCta();
+        setLicenseStatus('License key removed on this browser.');
+        showToast('License key removed');
+        if (!key || !instanceId) return;
+        try {
+          const res = await fetch(PRO_LICENSE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'deactivate',
+              license_key: key,
+              instance_id: instanceId,
+            }),
+          });
+          if (!res.ok) {
+            setLicenseStatus('Key removed on this browser. It may still count as an activation until Lemon Squeezy releases it.');
+          }
+        } catch {
+          setLicenseStatus('Key removed on this browser. It may still count as an activation until Lemon Squeezy releases it.');
+        }
+      }
+
+      function bootLicense() {
+        const form = $('#licenseForm');
+        if (form) form.addEventListener('submit', onLicenseSubmit);
+        const removeBtn = $('#licenseRemoveBtn');
+        if (removeBtn) removeBtn.addEventListener('click', onLicenseRemove);
+        licenseReady = initLicense();
       }
 
       async function fetchProGenerate(topic) {
@@ -2781,11 +3038,20 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             topic,
-            license_key: localStorage.getItem(STORAGE_PRO),
+            license_key: localStorage.getItem(STORAGE_LICENSE_KEY),
+            instance_id: localStorage.getItem(STORAGE_LICENSE_INSTANCE),
           }),
         });
-        if (!res.ok) throw new Error('api');
-        const data = await res.json();
+        let data = {};
+        try { data = await res.json(); } catch { data = {}; }
+        if (!res.ok) {
+          const err = new Error((data && data.error) || 'AI unavailable');
+          const code = data && data.code ? String(data.code) : '';
+          if (code === 'rate_limited' || res.status === 429) err.rateLimit = true;
+          else if (code.indexOf('license_') === 0 && code !== 'license_unavailable') err.license = true;
+          throw err;
+        }
+        if (data.instance_id) localStorage.setItem(STORAGE_LICENSE_INSTANCE, data.instance_id);
         if (!data || !Array.isArray(data.captions) || !data.captions.length) throw new Error('shape');
         return {
           topic,
@@ -2811,8 +3077,9 @@
         generateBtn.classList.add('loading');
         hideAiFallbackNote();
 
+        const unlocked = await licenseReady;
         let content;
-        if (isProUnlocked()) {
+        if (unlocked && isProUnlocked()) {
           if (proCapReached()) {
             content = generateContent(topic);
             showAiFallbackNote();
@@ -2823,7 +3090,24 @@
               recordProUse();
             } catch (err) {
               content = generateContent(topic);
-              showAiFallbackNote();
+              if (err && err.license) {
+                proOn = false;
+                localStorage.removeItem(STORAGE_LICENSE_KEY);
+                localStorage.removeItem(STORAGE_LICENSE_INSTANCE);
+                updateProCta();
+                setLicenseStatus(err.message, 'error');
+                showToast(err.message);
+                const note = $('#aiFallbackNote');
+                if (note) {
+                  note.hidden = false;
+                  note.textContent = 'Pro license was not accepted — using local generator';
+                }
+              } else if (err && err.rateLimit) {
+                showAiFallbackNote();
+                showToast(err.message);
+              } else {
+                showAiFallbackNote();
+              }
             }
           }
         } else {
@@ -2885,20 +3169,47 @@
       });
 
       /* ── Init ── */
-      captureProFromUrl();
       updateFavCount();
       renderFavoritesPanel();
+      const proModalEl = $('#proModal');
+      if (proModalEl) {
+        proModalEl.addEventListener('click', (e) => {
+          if (e.target === proModalEl) closeProModal();
+        });
+      }
+      const proModalCloseBtn = $('#proModalClose');
+      if (proModalCloseBtn) proModalCloseBtn.addEventListener('click', closeProModal);
+      const proModalGo = $('#proModalGo');
+      if (proModalGo) {
+        proModalGo.addEventListener('click', () => {
+          closeProModal();
+          const input = $('#licenseKeyInput');
+          if (!input) return;
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          input.focus();
+        });
+      }
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', updateProCta);
+        document.addEventListener('DOMContentLoaded', bootLicense);
       } else {
-        updateProCta();
+        bootLicense();
       }
     })();
   </script>
 <div style="text-align: center; margin: 40px 0; padding: 24px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; color: white;">
   <p id="proCtaLead" style="font-size: 1.1rem; margin-bottom: 16px;"><strong>Unlock Pro AI</strong></p>
   <a id="proBuyBtn" href="https://contentsparkpro.lemonsqueezy.com/checkout/buy/ca205280-0116-4e4e-a5d6-37b4ab667652" target="_blank" style="background: #22c55e; color: #0f172a; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block;">Unlock Pro AI</a>
-  <p id="proOnLabel" hidden style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">Pro AI on</p>
+  <p id="proOnLabel" hidden style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">Pro AI is on</p>
+  <button type="button" id="licenseRemoveBtn" hidden>Remove key</button>
+  <form id="licenseForm" style="margin-top: 18px;">
+    <p id="licenseLegacyNote" hidden style="font-size: 0.95rem; line-height: 1.45; margin: 0 auto 12px; max-width: 520px;">This browser had Pro turned on from an old link. That link no longer unlocks Pro AI. Enter the license key from your Lemon Squeezy receipt email.</p>
+    <label for="licenseKeyInput" style="display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 8px;">Enter license key</label>
+    <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+      <input id="licenseKeyInput" name="license_key" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="128" placeholder="Paste the key from your receipt" aria-describedby="licenseStatus">
+      <button type="submit" id="licenseSaveBtn">Activate key</button>
+    </div>
+    <p id="licenseStatus" role="status" style="min-height: 1.2em; font-size: 0.9rem; margin: 10px auto 0; max-width: 520px;"></p>
+  </form>
   
   <p style="margin-top: 20px; font-size: 0.95rem;">
     Also in the suite: 
