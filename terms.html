@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — ContentSpark</title>
+  <meta name="description" content="Terms of Service for ContentSpark, operated by Thad Waugh. ContentSpark Pro is a $9/month digital subscription sold by Lemon Squeezy.">
+  <link rel="stylesheet" href="policy.css">
+</head>
+<body>
+  <!-- THAD: replace every {{CONTACT_EMAIL}} with your real contact email before sending these pages to Lemon Squeezy. -->
+  <div class="app">
+    <header>
+      <a class="logo" href="index.html">
+        <div class="logo-icon" aria-hidden="true">✦</div>
+        <div>
+          <h1>ContentSpark</h1>
+          <p>Social content, instantly</p>
+        </div>
+      </a>
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Site">
+          <a href="index.html">Home</a>
+          <a href="index.html#pricing">Pricing</a>
+        </nav>
+        <button class="btn btn-icon" id="themeToggle" type="button" aria-label="Toggle dark/light mode" title="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <main>
+      <h1>Terms of Service</h1>
+      <p class="notice">Last updated November 5, 2026. This page describes how ContentSpark works in plain language. It is not legal advice.</p>
+
+      <h2>Who operates ContentSpark</h2>
+      <p>ContentSpark is operated by Thad Waugh. These terms cover the free browser tool and the optional ContentSpark Pro subscription. Questions about the product go to <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</p>
+
+      <h2>The product</h2>
+      <p>ContentSpark is a free browser-based social caption, hook, and hashtag generator for social media creators. You type a topic. The free tool builds captions, thread ideas, hashtags, and video hooks from templates that run in your browser. The free tool does not require an account.</p>
+      <p>ContentSpark Pro is an optional digital subscription at $9 per month. Pro is unlocked in the browser when you enter a license key from Lemon Squeezy. While Pro is active, the topic you type is sent to a ContentSpark server so an AI model can write the content. If that request fails, the page uses the free template generator instead. The browser also stops Pro AI at 30 generations per day and then uses the free templates until the next day.</p>
+
+      <h2>Who sells Pro</h2>
+      <p>Thad Waugh provides the software. Lemon Squeezy is the merchant of record for ContentSpark Pro. Lemon Squeezy processes the payment, calculates tax, and emails your receipt and license key. ContentSpark does not collect your card number. The price shown on the homepage is $9 per month.</p>
+
+      <h2>The license key</h2>
+      <p>The key is for your own use of ContentSpark Pro. The page stores the key and a Lemon Squeezy instance id in this browser so Pro stays unlocked there. Do not publish the key or resell it. Removing the key on the homepage turns Pro off in that browser.</p>
+
+      <h2>Cancellation and refunds</h2>
+      <p>You can cancel the subscription anytime from the Lemon Squeezy customer portal linked in your receipt email. Cancellation stops future renewal charges. Refund requests are described in the <a href="refund.html">Refund and Cancellation Policy</a>, including a refund within 14 days of a charge on request.</p>
+
+      <h2>Your posts</h2>
+      <p>You may use the text you generate. You are responsible for checking it before you publish it. AI text can be inaccurate, incomplete, or similar to other output. ContentSpark does not promise likes, sales, or any particular result.</p>
+
+      <h2>Acceptable use</h2>
+      <p>Use ContentSpark for lawful social content. Do not attack the site, probe or bypass the license check, overload the generation endpoint, or use the product to break the law.</p>
+
+      <h2>Availability</h2>
+      <p>ContentSpark is provided as-is. The free templates can change. Pro AI depends on the server and on an outside AI provider, so it can be unavailable. When it is unavailable, the page falls back to the free templates.</p>
+
+      <h2>Changes</h2>
+      <p>Thad Waugh may update these terms. The date at the top of this page will change when that happens. Continuing to use ContentSpark after the date changes means you accept the updated terms.</p>
+
+      <h2>Contact</h2>
+      <p>Thad Waugh, operating ContentSpark — <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</p>
+    </main>
+
+    <footer>
+      <p>ContentSpark is operated by Thad Waugh.</p>
+      <nav class="footer-nav" aria-label="Legal">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="refund.html">Refund &amp; Cancellation Policy</a>
+      </nav>
+      <p>Contact: <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+      <p>ContentSpark &copy; 2026</p>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var key = 'contentspark-theme';
+      var saved = null;
+      try { saved = localStorage.getItem(key); } catch (e) {}
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      var btn = document.getElementById('themeToggle');
+      function apply(next) {
+        document.documentElement.setAttribute('data-theme', next);
+        if (btn) btn.textContent = next === 'dark' ? '🌙' : '☀️';
+      }
+      apply(theme);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(theme);
+        try { localStorage.setItem(key, theme); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
