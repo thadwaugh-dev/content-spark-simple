@@ -32,16 +32,18 @@ test('homepage states the product, shows pricing, and links Pro to the existing 
   assert.match(html, /href="privacy\.html"/);
   assert.match(html, /href="refund\.html"/);
   assert.match(html, /Thad Waugh/);
-  assert.match(html, /\{\{CONTACT_EMAIL\}\}/);
+  assert.match(html, /mailto:thad\.waugh@gmail\.com/);
+  assert.equal(html.includes('{{CONTACT_EMAIL}}'), false);
   assert.match(html, /id="licenseKeyInput"/);
   assert.match(html, /id="proBuyBtn"/);
 });
 
-test('policy pages name the seller, the placeholder email, and the plain-language notice', () => {
+test('policy pages name the seller, the contact email, and the plain-language notice', () => {
   for (const name of ['terms.html', 'privacy.html', 'refund.html']) {
     const html = read(name);
     assert.match(html, /Thad Waugh/);
-    assert.match(html, /\{\{CONTACT_EMAIL\}\}/);
+    assert.match(html, /mailto:thad\.waugh@gmail\.com/);
+    assert.equal(html.includes('{{CONTACT_EMAIL}}'), false);
     assert.equal(html.includes(NOTICE), true, name);
     assert.match(html, /href="terms\.html"/);
     assert.match(html, /href="privacy\.html"/);
