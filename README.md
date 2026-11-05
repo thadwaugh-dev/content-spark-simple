@@ -119,16 +119,20 @@ Enjoy building with ContentSpark! Feedback and feature ideas welcome.
 
 The GitHub Pages site stays static. Pro calls a Vercel serverless function so the model API key never ships to the browser.
 
-Free users still use the built-in template generator. If the function is down or the daily Pro cap is hit (30 generations per browser per day), the page falls back to that same local generator.
+Free users still use the built-in template generator. Pro calls are rejected without a valid Lemon Squeezy license, and the page falls back to that same local generator. The browser also stops at 30 Pro generations per day. The API adds a shorter in-memory limit (8 per minute and 30 per hour, per key and per IP, on each warm serverless instance).
 
 ### Environment variables (Vercel only)
 
 | Name | Required | Purpose |
 |---|---|---|
-| `XAI_API_KEY` | Preferred | xAI chat key. Function uses `grok-4`. |
+| `XAI_API_KEY` | Preferred | xAI chat key. Function tries `grok-4.6`, then `grok-4.3`, then `grok-4.5`. |
 | `GROQ_API_KEY` | Fallback | Used only when `XAI_API_KEY` is missing. Function uses `llama-3.1-8b-instant`. |
+| `LEMONSQUEEZY_PRODUCT_ID` | No | Product id the license must belong to. Default `1325795`. Comma-separate ids if test and live products differ. |
+| `LEMONSQUEEZY_STORE_ID` | No | When set, `meta.store_id` must match. Leave unset to skip the store check. |
 
-If both keys are missing, `POST /api/generate` returns `503` and the client uses templates.
+No Lemon Squeezy API key is used. The public License API accepts test-mode keys and live keys on the same URLs. Variant id is not checked, so test variant `2072002` and a later live variant both work.
+
+If both model keys are missing, a valid license still gets `503` from `POST /api/generate` and the client uses templates. A missing or rejected license never calls the model.
 
 Do not commit keys. Set them in the Vercel project: Settings → Environment Variables.
 
@@ -143,16 +147,16 @@ Do not commit keys. Set them in the Vercel project: Settings → Environment Var
 
 If Vercel assigns a different host, update `PRO_GENERATE_URL` in `index.html` to that host plus `/api/generate`.
 
-Body: `{ "topic": string, "license_key": string | null }`
+Body: `{ "topic": string, "license_key": string, "instance_id": string | null }`
 
-### Lemon Squeezy return URL
+`POST /api/license` with `{ "license_key", "instance_id" }` checks a key without calling the model. `action: "deactivate"` releases that browser's activation.
 
-In the ContentSpark Pro product, set the confirmation / receipt button to:
+### Lemon Squeezy confirmation button
 
-`https://thadwaugh-dev.github.io/content-spark-simple/?pro=1`
+In the ContentSpark Pro product, set the confirmation modal button link (and the receipt button, if it has its own link) to:
 
-If Lemon Squeezy can append the license, use:
+`https://thadwaugh-dev.github.io/content-spark-simple/?license_key=[license_key]`
 
-`https://thadwaugh-dev.github.io/content-spark-simple/?pro=1&license_key=[license_key]`
+Lemon Squeezy replaces `[license_key]` on the confirmation modal button and the receipt button. Do not use `?pro=1`. Customers who never click the button can paste the key from the receipt email into **Enter license key**.
 
-The page stores `license_key` or `?pro=1` in `localStorage` as `contentspark_pro`.
+The page stores the key and the Lemon Squeezy instance id only after `/api/license` accepts them. `?pro=1` does not unlock Pro.

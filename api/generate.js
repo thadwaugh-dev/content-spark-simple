@@ -1,17 +1,13 @@
 /**
  * ContentSpark Pro generate — Vercel serverless function.
+ * Requires a Lemon Squeezy license for product 1325795 (override with
+ * LEMONSQUEEZY_PRODUCT_ID). No Lemon Squeezy API key.
  * Secrets: XAI_API_KEY (preferred) or GROQ_API_KEY.
- * Never log full prompts or topics.
+ * Never log full prompts, topics, or license keys.
  */
 
-const ALLOW_ORIGINS = [
-  'https://thadwaugh-dev.github.io',
-  'https://contentspark.fyi',
-  'https://www.contentspark.fyi',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-  'http://localhost:5173',
-];
+const { applyCors, readJsonBody, clientIp } = require('../lib/pro-http');
+const { createLicenseGate } = require('../lib/pro-license');
 
 const SYSTEM_PROMPT = [
   'You write useful social copy. No fluff. No preamble.',
@@ -22,19 +18,6 @@ const SYSTEM_PROMPT = [
   'hooks: 6 strings. First-line video openers only.',
   'Do not mention that you are an AI.',
 ].join(' ');
-
-function allowOrigin(origin) {
-  return ALLOW_ORIGINS.includes(origin) ? origin : ALLOW_ORIGINS[0];
-}
-
-function setCors(req, res) {
-  const origin = req.headers.origin || '';
-  res.setHeader('Access-Control-Allow-Origin', allowOrigin(origin));
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Max-Age', '86400');
-  res.setHeader('Vary', 'Origin');
-}
 
 function stripFence(text) {
   const trimmed = String(text || '').trim();
@@ -55,9 +38,11 @@ function asStringArray(value, max) {
     .slice(0, max);
 }
 
-async function chatComplete(topic) {
-  const xai = process.env.XAI_API_KEY;
-  const groq = process.env.GROQ_API_KEY;
+async function chatComplete(topic, deps) {
+  const env = (deps && deps.env) || process.env;
+  const fetchImpl = (deps && deps.fetch) || fetch;
+  const xai = env.XAI_API_KEY;
+  const groq = env.GROQ_API_KEY;
   if (!xai && !groq) {
     const err = new Error('missing_key');
     err.status = 503;
@@ -89,7 +74,7 @@ async function chatComplete(topic) {
   let lastDetail = '';
   for (const model of models) {
     payload.model = model;
-    res = await fetch(url, {
+    res = await fetchImpl(url, {
       method: 'POST',
       headers,
       body: JSON.stringify(payload),
@@ -127,46 +112,96 @@ async function chatComplete(topic) {
   };
 }
 
-module.exports = async function handler(req, res) {
-  setCors(req, res);
-
-  if (req.method === 'OPTIONS') {
-    res.status(204).end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    res.status(404).json({ error: 'Not found' });
-    return;
-  }
-
-  const body = req.body && typeof req.body === 'object' ? req.body : {};
-  const topic = typeof body.topic === 'string' ? body.topic.trim() : '';
-  if (!topic) {
-    res.status(400).json({ error: 'topic is required' });
-    return;
-  }
-
-  try {
-    const out = await chatComplete(topic);
-    if (!out.captions.length || !out.threads.length || !out.hooks.length) {
-      res.status(502).json({ error: 'Model returned empty copy' });
-      return;
-    }
-    res.status(200).json(out);
-  } catch (err) {
-    const status = err && err.status ? err.status : 503;
-    const upstream = err && err.upstream ? err.upstream : status;
-    const reason = upstream === 401 || upstream === 403
-      ? 'unauthorized'
-      : upstream === 404
-        ? 'model'
-        : 'upstream';
-    res.status(status).json({
-      error: 'AI unavailable',
-      reason,
-      upstream,
-      detail: err && err.detail ? String(err.detail).slice(0, 160) : '',
+function send(res, status, body, extraHeaders) {
+  res.setHeader('Cache-Control', 'no-store');
+  if (extraHeaders) {
+    Object.keys(extraHeaders).forEach((key) => {
+      res.setHeader(key, extraHeaders[key]);
     });
   }
-};
+  res.status(status).json(body);
+}
+
+function createGenerateHandler(options = {}) {
+  const fetchImpl = options.fetch;
+  const gate = options.gate || createLicenseGate({ fetch: fetchImpl, now: options.now, limits: options.limits, cacheMs: options.cacheMs, productIds: options.productIds, storeIds: options.storeIds });
+
+  return async function handler(req, res) {
+    applyCors(req, res);
+
+    if (req.method === 'OPTIONS') {
+      res.status(204).end();
+      return;
+    }
+
+    if (req.method !== 'POST') {
+      res.status(404).json({ error: 'Not found' });
+      return;
+    }
+
+    const body = readJsonBody(req);
+    const topic = typeof body.topic === 'string' ? body.topic.trim() : '';
+    if (!topic) {
+      send(res, 400, { error: 'topic is required' });
+      return;
+    }
+
+    let decision;
+    try {
+      decision = await gate.check({
+        action: 'generate',
+        licenseKey: body.license_key,
+        instanceId: body.instance_id,
+        ip: clientIp(req),
+      });
+    } catch {
+      send(res, 503, {
+        error: 'License check is unavailable. Try again in a minute.',
+        code: 'license_unavailable',
+      });
+      return;
+    }
+
+    if (!decision.ok) {
+      const headers = decision.retryAfterMs
+        ? { 'Retry-After': String(Math.max(1, Math.ceil(decision.retryAfterMs / 1000))) }
+        : null;
+      send(res, decision.status, { error: decision.error, code: decision.code }, headers);
+      return;
+    }
+
+    try {
+      const out = await chatComplete(topic, { fetch: fetchImpl, env: options.env });
+      if (!out.captions.length || !out.threads.length || !out.hooks.length) {
+        send(res, 502, { error: 'Model returned empty copy' });
+        return;
+      }
+      const payload = {
+        captions: out.captions,
+        threads: out.threads,
+        hashtags: out.hashtags,
+        hooks: out.hooks,
+      };
+      if (decision.instanceId) payload.instance_id = decision.instanceId;
+      send(res, 200, payload);
+    } catch (err) {
+      const status = err && err.status ? err.status : 503;
+      const upstream = err && err.upstream ? err.upstream : status;
+      const reason = upstream === 401 || upstream === 403
+        ? 'unauthorized'
+        : upstream === 404
+          ? 'model'
+          : 'upstream';
+      send(res, status, {
+        error: 'AI unavailable',
+        reason,
+        upstream,
+        detail: err && err.detail ? String(err.detail).slice(0, 160) : '',
+      });
+    }
+  };
+}
+
+const handler = createGenerateHandler();
+module.exports = handler;
+module.exports.createGenerateHandler = createGenerateHandler;
