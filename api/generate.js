@@ -6,6 +6,8 @@
 
 const ALLOW_ORIGINS = [
   'https://thadwaugh-dev.github.io',
+  'https://contentspark.fyi',
+  'https://www.contentspark.fyi',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
   'http://localhost:5173',
